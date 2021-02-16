@@ -16,12 +16,12 @@ class AccountsController extends Controller
 
     public function signin(Request $request)
     {
-        return view('signin/signin.blade.php');
+        return view('signin.signin');
     }
 
 
     public function signout(Request $request)
     {
-        return view('signin/signin.blade.php');
+        return view('signin.signin');
     }
 }

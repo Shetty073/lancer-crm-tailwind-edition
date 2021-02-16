@@ -2,3 +2,23 @@
     font-family: 'Pacifico';
     src: url('/fonts/Pacifico-Regular.ttf') format('truetype');
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #c6c1ff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4d41da;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #DB2777;
+}
