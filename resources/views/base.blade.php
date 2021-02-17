@@ -13,7 +13,7 @@
 </head>
 
 <body class="subpixel-antialiased @if(!request()->is('account/signin')) lg:overflow-hidden @endif">
-    @if(!request()->is('account/signin'))
+    @if(!request()->is('account/signin') and !request()->is('account/signup'))
     {{-- Don't display this sidebar in signin page --}}
     <div class="flex justify-between bg-indigo-700">
         <div>
@@ -22,10 +22,10 @@
             </h5>
         </div>
         <div class="flex justify-end">
-            <a class="hidden lg:block rounded border border-gray-100 mx-1 my-1 px-2 py-1 border-opacity-100" href='{{ route('useraccount.index') }}'>
-                <img height="42" width="42" src='/img/profile.jpg' alt='profile image placeholder'
-                    class="inline rounded-full h-15 w-15 pr-1" />
-                <span class="text-white text-base">Ashish</span>
+            <a class="hidden lg:block rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 border-opacity-100" href='{{ route('useraccount.index') }}'>
+                <img height="42" width="42" src='/storage/profile_picture/{{ auth()->user()->photo_url }}' alt='profile photo'
+                    class="inline rounded-full w-9 h-9 pr-1" />
+                <span class="text-white text-base">{{ auth()->user()->firstName() }}</span>
             </a>
             <form method="POST" action="{{ route('signout') }}" class="p-0 m-0">
                 @csrf
@@ -70,6 +70,12 @@
                                 Clients
                             </a>
                         </li>
+                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('projects.index') }}">
+                                <i class="fas fa-calendar-check"></i>
+                                Projects
+                            </a>
+                        </li>
                         <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('services')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('services.index') }}">
                                 <i class="fas fa-cubes fa-sm"></i>
@@ -108,10 +114,10 @@
         <div id="mobileNavBar" class="bg-indigo-700 z-10 h-screen hidden">
             {{-- innerHTML will be dynamically copied from above navbar/sidebar --}}
             <div class="flex justify-between">
-                <a class="inline rounded border border-gray-100 mx-1 my-1 px-2 py-1 w-2/6 border-opacity-100" href='{{ route('useraccount.index') }}'>
-                    <img height="42" width="42" src='/img/profile.jpg' alt='profile image placeholder'
-                        class="inline rounded-full h-15 w-15 pr-1" />
-                    <span class="text-white text-base">Ashish</span>
+                <a class="inline rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 w-2/6 border-opacity-100" href='{{ route('useraccount.index') }}'>
+                    <img height="42" width="42" src='/storage/profile_picture/{{ auth()->user()->photo_url }}' alt='profile image placeholder'
+                        class="inline rounded-full h-8 w-8 pr-1" />
+                    <span class="text-white text-base">{{ auth()->user()->firstName() }}</span>
                 </a>
                 <form method="POST" action="{{ route('signout') }}">
                     @csrf
@@ -130,7 +136,7 @@
     </div>
     @endif
 
-    @section('signin-content')
+    @section('signin-signup-content')
     @show
 
     <script type="text/javascript" src="{{ asset('fa/all.min.js') }}"></script>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\Auth\AccountsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DuesController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UserAccountController;
@@ -27,56 +28,63 @@ use App\Http\Controllers\UserAccountController;
 // signup
 Route::group(['prefix' => '/account'], function () {
     Route::get('signin', [AccountsController::class, 'index'])->name('signin.index');
+    Route::get('signup', [AccountsController::class, 'signup'])->name('signup.index');
     Route::post('signin', [AccountsController::class, 'signin'])->name('signin');
-    Route::post('signout', [AccountsController::class, 'signout'])->name('signout');
+    Route::post('signup', [AccountsController::class, 'signup'])->name('signup');
+    Route::post('signout', [AccountsController::class, 'signout'])->name('signout')->middleware('auth');
 });
 
 // dashboard routes
-Route::group(['prefix' => '/'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 // enquiries routes
-Route::group(['prefix' => '/enquiries'], function () {
+Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::get('/', [EnquiriesController::class, 'index'])->name('enquiries.index');
 });
 
 // followups routes
-Route::group(['prefix' => '/followups'], function () {
+Route::group(['prefix' => '/followups', 'middleware' => 'auth'], function () {
     Route::get('/', [FollowupsController::class, 'index'])->name('followups.index');
 });
 
 // clients routes
-Route::group(['prefix' => '/clients'], function () {
+Route::group(['prefix' => '/clients', 'middleware' => 'auth'], function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
 });
 
+// projects routes
+Route::group(['prefix' => '/projects', 'middleware' => 'auth'], function () {
+    Route::get('/', [ProjectsController::class, 'index'])->name('projects.index');
+});
+
 // services routes
-Route::group(['prefix' => '/services'], function () {
+Route::group(['prefix' => '/services', 'middleware' => 'auth'], function () {
     Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 });
 
 // dues routes
-Route::group(['prefix' => '/dues'], function () {
+Route::group(['prefix' => '/dues', 'middleware' => 'auth'], function () {
     Route::get('/', [DuesController::class, 'index'])->name('dues.index');
 });
 
 // invoices routes
-Route::group(['prefix' => '/invoices'], function () {
+Route::group(['prefix' => '/invoices', 'middleware' => 'auth'], function () {
     Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
 });
 
 // expenses routes
-Route::group(['prefix' => '/expenses'], function () {
+Route::group(['prefix' => '/expenses', 'middleware' => 'auth'], function () {
     Route::get('/', [ExpensesController::class, 'index'])->name('expenses.index');
 });
 
 // reports routes
-Route::group(['prefix' => '/reports'], function () {
+Route::group(['prefix' => '/reports', 'middleware' => 'auth'], function () {
     Route::get('/', [ReportsController::class, 'index'])->name('reports.index');
 });
 
 // useraccount routes
-Route::group(['prefix' => '/useraccount'], function () {
+Route::group(['prefix' => '/useraccount', 'middleware' => 'auth'], function () {
     Route::get('/', [UserAccountController::class, 'index'])->name('useraccount.index');
 });
