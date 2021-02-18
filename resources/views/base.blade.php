@@ -72,7 +72,7 @@
                         </li>
                         <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('projects.index') }}">
-                                <i class="fas fa-calendar-check"></i>
+                                <i class="fas fa-project-diagram fa-xs"></i>
                                 Projects
                             </a>
                         </li>
@@ -86,6 +86,12 @@
                             <a href="{{ route('dues.index') }}">
                                 <i class="fas fa-file-invoice"></i>
                                 Dues
+                            </a>
+                        </li>
+                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('payments')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('payments.index') }}">
+                                <i class="fas fa-cash-register fa-xs"></i>
+                                Payments
                             </a>
                         </li>
                         <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('invoices')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
@@ -104,6 +110,12 @@
                             <a href="{{ route('reports.index') }}">
                                 <i class="fas fa-receipt"></i>
                                 Reports
+                            </a>
+                        </li>
+                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('bankaccounts')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('bankaccounts.index') }}">
+                                <i class="fas fa-piggy-bank fa-xs"></i>
+                                Bank Accounts
                             </a>
                         </li>
                     </ul>

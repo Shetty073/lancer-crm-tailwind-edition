@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AccountsController;
+use App\Http\Controllers\BankAccountsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DuesController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ServicesController;
@@ -69,6 +71,11 @@ Route::group(['prefix' => '/dues', 'middleware' => 'auth'], function () {
     Route::get('/', [DuesController::class, 'index'])->name('dues.index');
 });
 
+// bankaccount routes
+Route::group(['prefix' => '/payments', 'middleware' => 'auth'], function () {
+    Route::get('/', [PaymentsController::class, 'index'])->name('payments.index');
+});
+
 // invoices routes
 Route::group(['prefix' => '/invoices', 'middleware' => 'auth'], function () {
     Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
@@ -87,4 +94,9 @@ Route::group(['prefix' => '/reports', 'middleware' => 'auth'], function () {
 // useraccount routes
 Route::group(['prefix' => '/useraccount', 'middleware' => 'auth'], function () {
     Route::get('/', [UserAccountController::class, 'index'])->name('useraccount.index');
+});
+
+// bankaccount routes
+Route::group(['prefix' => '/bankaccounts', 'middleware' => 'auth'], function () {
+    Route::get('/', [BankAccountsController::class, 'index'])->name('bankaccounts.index');
 });

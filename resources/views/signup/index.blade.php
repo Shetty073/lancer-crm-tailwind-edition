@@ -10,18 +10,17 @@
         </h1>
     </header>
 
-    @if ($errors->any())
-    <div class="border border-red-300 bg-red-200 rounded px-2 py-1 mb-2 text-red-500 font-bold">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
     <div class='bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl'>
         <form class='flex flex-col' method="post" enctype="multipart/form-data" action="{{ route('signup') }}">
+            @if ($errors->any())
+            <div class="border border-red-300 bg-red-200 rounded px-2 py-1 mb-2 text-red-500 font-bold">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             @csrf
             <div class='mb-6 pt-3 rounded bg-gray-200'>
                 <label for='name' class='block text-indigo-600 text-sm font-bold mb-2 ml-3'>

@@ -25,4 +25,9 @@ class Client extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
