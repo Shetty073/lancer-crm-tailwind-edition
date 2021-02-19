@@ -16,7 +16,7 @@ class CreateDigitalDetailsTable extends Migration
         Schema::create('digital_details', function (Blueprint $table) {
             $table->id();
             $table->string('ref_id', 16);
-            $table->foreignId('payment_id');
+            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }

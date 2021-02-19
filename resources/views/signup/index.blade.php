@@ -65,7 +65,7 @@
             <div class="border border-red-300 bg-red-200 rounded px-2 py-1 mb-2 text-red-500 font-bold">{{ $message }}</div>
             @enderror
             <button type='submit'
-                class='bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200'>
+                class='bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 focus:outline-none'>
                 Signin
             </button>
         </form>

@@ -19,7 +19,7 @@ class CreateFollowUpsTable extends Migration
             $table->time('time');
             $table->string('remark', 100)->nullable();
             $table->string('outcome', 150)->nullable();
-            $table->foreignId('enquiry_id');
+            $table->foreignId('enquiry_id')->constrained('enquiries')->onDelete('cascade');
             $table->timestamps();
         });
     }

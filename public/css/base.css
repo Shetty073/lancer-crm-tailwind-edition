@@ -22,3 +22,8 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #DB2777;
 }
+
+/* dropdown btn */
+.dropdown:focus-within .dropdown-menu {
+    display: block;
+}

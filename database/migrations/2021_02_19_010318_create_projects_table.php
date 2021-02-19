@@ -18,8 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('name', 100);
             $table->string('details', 500);
             $table->double('price', 12, 2);
-            $table->foreignId('client_id');
-            $table->foreignId('service_id');
+            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,10 +13,10 @@ class CreateEnquiryServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('enquiry_status', function (Blueprint $table) {
+        Schema::create('enquiry_service', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id');
-            $table->foreignId('enquiry_id');
+            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->foreignId('enquiry_id')->constrained('enquiries')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateEnquiryServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enquiry_status');
+        Schema::dropIfExists('enquiry_service');
     }
 }

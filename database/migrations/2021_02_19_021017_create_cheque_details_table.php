@@ -18,7 +18,7 @@ class CreateChequeDetailsTable extends Migration
             $table->string('bank_name', 150);
             $table->string('cheque_no', 30);
             $table->string('status', 10);
-            $table->foreignId('payment_id');
+            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }

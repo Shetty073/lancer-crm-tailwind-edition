@@ -14,7 +14,13 @@ class Enquiry extends Model
         'business_name',
         'email',
         'contact_no',
+        'subject',
         'status',
+        'is_lost',
+    ];
+
+    protected $casts = [
+        'is_lost' => 'boolean'
     ];
 
     public function services()

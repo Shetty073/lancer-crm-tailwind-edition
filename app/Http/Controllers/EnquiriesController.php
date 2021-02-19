@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enquiry;
 use Illuminate\Http\Request;
 
 class EnquiriesController extends Controller
@@ -13,7 +14,8 @@ class EnquiriesController extends Controller
      */
     public function index()
     {
-        return view('enquiries.index');
+        $enquiries = Enquiry::all();
+        return view('enquiries.index', compact('enquiries'));
     }
 
     /**
@@ -23,7 +25,7 @@ class EnquiriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('enquiries.create');
     }
 
     /**
@@ -45,7 +47,8 @@ class EnquiriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $enquiry = Enquiry::where('id', $id)->first();
+        return view('enquiries.show', compact('enquiry'));
     }
 
     /**
@@ -56,7 +59,7 @@ class EnquiriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('enquiries.edit');
     }
 
     /**

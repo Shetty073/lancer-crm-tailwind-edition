@@ -44,11 +44,9 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
 // enquiries routes
 Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::get('/', [EnquiriesController::class, 'index'])->name('enquiries.index');
-});
-
-// followups routes
-Route::group(['prefix' => '/followups', 'middleware' => 'auth'], function () {
-    Route::get('/', [FollowupsController::class, 'index'])->name('followups.index');
+    Route::get('/{id}/show', [EnquiriesController::class, 'show'])->name('enquiries.show');
+    Route::get('/create', [EnquiriesController::class, 'create'])->name('enquiries.create');
+    Route::get('/{id}/edit', [EnquiriesController::class, 'edit'])->name('enquiries.edit');
 });
 
 // clients routes
