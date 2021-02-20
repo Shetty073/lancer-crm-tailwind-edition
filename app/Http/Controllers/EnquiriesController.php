@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lancer\Utilities;
 use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
 use App\Models\Service;
@@ -9,6 +10,14 @@ use Illuminate\Http\Request;
 
 class EnquiriesController extends Controller
 {
+    protected $utilities;
+
+    public function __construct(Utilities $utilities)
+    {
+        // For referencing the Utilities class from our blade templates
+        $this->utilities = $utilities;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +25,11 @@ class EnquiriesController extends Controller
      */
     public function index()
     {
+        // Reference to the Utilities class
+        $utilities = $this->utilities;
+
         $enquiries = Enquiry::all();
-        return view('enquiries.index', compact('enquiries'));
+        return view('enquiries.index', compact('enquiries', 'utilities'));
     }
 
     /**

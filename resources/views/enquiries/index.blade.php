@@ -62,152 +62,70 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="h-12">
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">1</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">Adam</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">858</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">858</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">858</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">858</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">
+                @foreach ($enquiries as $enquiry)
+                    <tr class="h-12">
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->id }}</td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->name }}</td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->business_name }}</td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->email }}</td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->contact_no }}</td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-center">
+                            <span class="{{ $utilities->getEnquiryStatusStyle($enquiry->enquiry_status->id) }}">
+                                {{ $enquiry->enquiry_status->status }}
+                            </span>
+                        </td>
+                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-center">
 
-                        <div class="dropdown inline-block relative p-2">
-                            <button
-                                class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
-                                <span class="mr-1 uppercase text-sm">Actions</span>
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </button>
-                            <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        View
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Edit
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Transfer to Client
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-yellow-600 hover:bg-yellow-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Mark as lost
-                                    </button>
-                                </li>
-                                <li id="enquiry_id_here">
-                                    <button class="uppercase text-sm font-semibold w-full rounded-b text-red-500 enquiry-delete-btn bg-white hover:bg-red-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Delete
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
+                            <div class="dropdown inline-block relative p-2">
+                                <button
+                                    class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
+                                    <span class="mr-1 uppercase text-sm">Actions</span>
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </button>
+                                <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
+                                    <li>
+                                        <button class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            View
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            Edit
+                                        </button>
+                                    </li>
+                                    <li id="{{ $enquiry->id }}">
+                                        <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            Transfer to Client
+                                        </button>
+                                    </li>
+                                    <li id="{{ $enquiry->id }}">
+                                        <button class="uppercase text-sm font-semibold w-full bg-white text-yellow-600 hover:bg-yellow-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            Mark as lost
+                                        </button>
+                                    </li>
+                                    <li id="{{ $enquiry->id }}">
+                                        <button class="uppercase text-sm font-semibold w-full rounded-b text-red-500 enquiry-delete-btn bg-white hover:bg-red-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            Delete
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
 
-                    </td>
-                </tr>
-                <tr class="h-12">
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">2</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">Adam</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">112</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">112</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">112</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">112</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">
+                        </td>
+                    </tr>
+                @endforeach
 
-                        <div class="dropdown inline-block relative p-2">
-                            <button
-                                class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
-                                <span class="mr-1 uppercase text-sm">Actions</span>
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </button>
-                            <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        View
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Edit
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Transfer to Client
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-yellow-600 hover:bg-yellow-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Mark as lost
-                                    </button>
-                                </li>
-                                <li id="enquiry_id_here">
-                                    <button class="uppercase text-sm font-semibold w-full rounded-b text-red-500 enquiry-delete-btn bg-white hover:bg-red-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Delete
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr class="h-12">
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">3</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">Chris</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">1,280</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">1,280</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">1,280</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">1,280</td>
-                    <td class="px-3 border-collapse border border-indigo-800 font-bold">
-
-                        <div class="dropdown inline-block relative p-2">
-                            <button
-                                class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
-                                <span class="mr-1 uppercase text-sm">Actions</span>
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </button>
-                            <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        View
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Edit
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Transfer to Client
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="uppercase text-sm font-semibold w-full bg-white text-yellow-600 hover:bg-yellow-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Mark as lost
-                                    </button>
-                                </li>
-                                <li id="enquiry_id_here">
-                                    <button class="uppercase text-sm font-semibold w-full rounded-b text-red-500 enquiry-delete-btn bg-white hover:bg-red-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                        Delete
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </td>
-                </tr>
             </tbody>
         </table>
+
+        @if (count($enquiries) < 1)
+            <div class="px-4 py-5 text-center text-gray-500">
+                No results found!
+            </div>
+        @endif
+
     </div>
 
 </main>

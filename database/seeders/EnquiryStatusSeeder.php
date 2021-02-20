@@ -23,13 +23,13 @@ class EnquiryStatusSeeder extends Seeder
 
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Cold',
+                'status' => 'Mild',
             )
         );
 
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Lost',
+                'status' => 'Cold',
             )
         );
 

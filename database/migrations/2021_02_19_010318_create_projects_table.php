@@ -18,6 +18,8 @@ class CreateProjectsTable extends Migration
             $table->string('name', 100);
             $table->string('details', 500);
             $table->double('price', 12, 2);
+            $table->date('start_date');
+            $table->double('delivery_date');
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });

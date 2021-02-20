@@ -13,16 +13,20 @@ class Project extends Model
         'name',
         'details',
         'price',
+        'start_date',
+        'delivery_date',
     ];
+
+    protected $dates = ['start_date', 'delivery_date'];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function tasks()
+    public function milestones()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Milestone::class);
     }
 
     public function services()

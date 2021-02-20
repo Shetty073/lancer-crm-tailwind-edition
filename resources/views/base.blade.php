@@ -13,6 +13,7 @@
 </head>
 
 <body class="subpixel-antialiased @if(!request()->is('account/signin')) lg:overflow-hidden @endif">
+
     @if(!request()->is('account/signin') and !request()->is('account/signup'))
     {{-- Don't display this sidebar in signin page --}}
     <div class="flex justify-between bg-indigo-700">
