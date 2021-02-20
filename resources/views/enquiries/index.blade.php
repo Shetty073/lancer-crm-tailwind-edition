@@ -3,7 +3,7 @@
 
 @section('main-content')
 
-<main class="px-1 lg:px-4 py-2 mx-2 ls:mx-10 my-5">
+<main class="px-1 lg:px-4 py-2 mx-2 ls:mx-10 my-5 h-screen">
 
     <div class="flex justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600">Enquiries</h1>
@@ -42,44 +42,44 @@
     </div>
 
     <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
-        <table class="w-full table-auto border-collapse border border-indigo-800">
+        <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         #</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         Name</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
                         Business Name</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
                         Email</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
                         Contact No.</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         Status</th>
-                    <th class="px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($enquiries as $enquiry)
                     <tr class="h-12">
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->id }}</td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->name }}</td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->business_name }}</td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->email }}</td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->contact_no }}</td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-center">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->id }}</td>
+                        <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left truncate">{{ $enquiry->name }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->business_name }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->email }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->contact_no }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
                             <span class="{{ $utilities->getEnquiryStatusStyle($enquiry->enquiry_status->id) }}">
                                 {{ $enquiry->enquiry_status->status }}
                             </span>
                         </td>
-                        <td class="px-3 border-collapse border border-indigo-800 font-bold text-center">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
 
                             <div class="dropdown inline-block relative p-2">
                                 <button
                                     class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
-                                    <span class="mr-1 uppercase text-sm">Actions</span>
+                                    <span class="mr-1 uppercase text-xs md:text-sm">Actions</span>
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                     </svg>
@@ -125,6 +125,8 @@
                 No results found!
             </div>
         @endif
+
+        {{-- TODO: Add Pagination --}}
 
     </div>
 
