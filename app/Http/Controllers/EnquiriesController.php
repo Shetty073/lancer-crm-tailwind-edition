@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enquiry;
+use App\Models\EnquiryStatus;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class EnquiriesController extends Controller
@@ -25,7 +27,10 @@ class EnquiriesController extends Controller
      */
     public function create()
     {
-        return view('enquiries.create');
+        $enquiry_statuses = EnquiryStatus::all();
+        $services = Service::all();
+
+        return view('enquiries.create', compact('enquiry_statuses', 'services'));
     }
 
     /**
@@ -36,7 +41,33 @@ class EnquiriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'business_name' => 'required',
+            'email' => 'unique:enquiries,email',
+            'contact_no' => 'unique:enquiries,contact_no',
+            'subject' => 'required',
+            'services' => 'required',
+            'enquiry_status' => 'required',
+        ]);
+
+        $request->flash();
+
+        $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
+
+        $enquiry = new Enquiry();
+        $enquiry->name = $request->input('name');
+        $enquiry->business_name = $request->input('business_name');
+        $enquiry->email = $request->input('email');
+        $enquiry->contact_no = $request->input('contact_no');
+        $enquiry->subject = $request->input('subject');
+
+        $enquiry->enquiry_status()->associate($status);
+        $enquiry->save();
+
+        $enquiry->services()->attach($request->input('services'));
+
+        return redirect(route('enquiries.index'));
     }
 
     /**
@@ -59,7 +90,9 @@ class EnquiriesController extends Controller
      */
     public function edit($id)
     {
-        return view('enquiries.edit');
+        $enquiry = Enquiry::where('id', $id)->first();
+
+        return view('enquiries.edit', compact('enquiry'));
     }
 
     /**

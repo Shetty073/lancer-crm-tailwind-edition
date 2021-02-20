@@ -47,6 +47,8 @@ Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::get('/{id}/show', [EnquiriesController::class, 'show'])->name('enquiries.show');
     Route::get('/create', [EnquiriesController::class, 'create'])->name('enquiries.create');
     Route::get('/{id}/edit', [EnquiriesController::class, 'edit'])->name('enquiries.edit');
+    Route::post('/store', [EnquiriesController::class, 'store'])->name('enquiries.store');
+    Route::post('/{id}/update', [EnquiriesController::class, 'update'])->name('enquiries.update');
 });
 
 // clients routes

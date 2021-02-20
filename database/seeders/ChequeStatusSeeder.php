@@ -17,25 +17,25 @@ class ChequeStatusSeeder extends Seeder
         // Insert the default statuses
         DB::table('cheque_statuses')->insert(
             array(
-                'status' => 'received',
+                'status' => 'Received',
             )
         );
 
         DB::table('cheque_statuses')->insert(
             array(
-                'status' => 'desposited',
+                'status' => 'Desposited',
             )
         );
 
         DB::table('cheque_statuses')->insert(
             array(
-                'status' => 'cleared',
+                'status' => 'Cleared',
             )
         );
 
         DB::table('cheque_statuses')->insert(
             array(
-                'status' => 'bounced',
+                'status' => 'Bounced',
             )
         );
     }
