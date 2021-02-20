@@ -15,7 +15,6 @@ class Enquiry extends Model
         'email',
         'contact_no',
         'subject',
-        'status',
         'is_lost',
     ];
 
@@ -31,5 +30,10 @@ class Enquiry extends Model
     public function follow_ups()
     {
         return $this->hasMany(FollowUp::class);
+    }
+
+    public function enquiry_status()
+    {
+        return $this->belongsTo(EnquiryStatus::class);
     }
 }

@@ -12,11 +12,15 @@ class ChequeDetails extends Model
     protected $fillable = [
         'bank_name',
         'cheque_no',
-        'status',
     ];
 
     public function payment()
     {
         return $this->belongsTo(Payment::class);
+    }
+
+    public function cheque_status()
+    {
+        return $this->belongsTo(ChequeStatus::class);
     }
 }
