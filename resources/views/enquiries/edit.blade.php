@@ -18,8 +18,8 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('enquiries.update', ['id' => 1]) }}">
-        @include('enquiries.edit')
+    <form method="post" action="{{ route('enquiries.update', ['id' => $enquiry->id]) }}">
+        @include('enquiries.form')
     </form>
 
 </main>

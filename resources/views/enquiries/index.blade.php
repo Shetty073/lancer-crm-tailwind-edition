@@ -65,7 +65,7 @@
                 @foreach ($enquiries as $enquiry)
                     <tr class="h-12">
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->id }}</td>
-                        <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left truncate">{{ $enquiry->name }}</td>
+                        <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">{{ $enquiry->name }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->business_name }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->email }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->contact_no }}</td>
@@ -86,14 +86,14 @@
                                 </button>
                                 <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
                                     <li>
-                                        <button class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                        <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                             View
-                                        </button>
+                                        </a>
                                     </li>
                                     <li>
-                                        <button class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                        <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                             Edit
-                                        </button>
+                                        </a>
                                     </li>
                                     <li id="{{ $enquiry->id }}">
                                         <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">

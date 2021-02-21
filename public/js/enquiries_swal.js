@@ -1,3 +1,60 @@
+// enquiry delete button event
+const showEnquiryDeleteModal = document.querySelector(".enquiry-delete-modal");
+const closeEnquiryDeleteModal = document.querySelectorAll(
+    ".close-enquiry-delete-modal"
+);
+const showEnquiryDeleteBtnModal = document.querySelector(
+    ".enquiry-delete-btn-modal"
+);
+
+document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("enquiry-delete-btn")) {
+        let enquiryId = e.target.parentNode.id;
+        document.querySelector("#deleteEnquiryId").value = enquiryId;
+        showEnquiryDeleteModal.classList.remove("hidden");
+    }
+});
+
+closeEnquiryDeleteModal.forEach((close) => {
+    close.addEventListener("click", function () {
+        showEnquiryDeleteModal.classList.add("hidden");
+    });
+});
+
+showEnquiryDeleteBtnModal.addEventListener("click", function () {
+    // delete the follow up
+    // TODO: Complete this
+    console.log(document.querySelector("#deleteEnquiryId").value);
+    showEnquiryDeleteModal.classList.add("hidden");
+});
+
+// followups add button event
+const addFollowupModal = document.querySelector(".add-followup-modal");
+const closeAddFollowUpModal = document.querySelectorAll(
+    ".add-followup-close-modal"
+);
+const submitAddFollowUpBtnModal = document.querySelector(
+    ".submit-add-follow-up-modal"
+);
+
+document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("add-followup-btn")) {
+        addFollowupModal.classList.remove("hidden");
+    }
+});
+
+closeAddFollowUpModal.forEach((close) => {
+    close.addEventListener("click", function () {
+        addFollowupModal.classList.add("hidden");
+    });
+});
+
+submitAddFollowUpBtnModal.addEventListener("click", function () {
+    // create the followup
+    // TODO: Complete this
+    addFollowupModal.classList.add("hidden");
+});
+
 // followups edit button event
 const modal = document.querySelector(".modal");
 const closeModal = document.querySelectorAll(".close-modal");
@@ -48,34 +105,4 @@ deleteBtnModal.addEventListener("click", function () {
     // TODO: Complete this
     console.log(document.querySelector("#deleteFollowUpId").value);
     deleteModal.classList.add("hidden");
-});
-
-// enquiry delete button event
-const showEnquiryDeleteModal = document.querySelector(".enquiry-delete-modal");
-const closeEnquiryDeleteModal = document.querySelectorAll(
-    ".close-enquiry-delete-modal"
-);
-const showEnquiryDeleteBtnModal = document.querySelector(
-    ".enquiry-delete-btn-modal"
-);
-
-document.addEventListener("click", function (e) {
-    if (e.target && e.target.classList.contains("enquiry-delete-btn")) {
-        let followUpId = e.target.parentNode.id;
-        document.querySelector("#deleteEnquiryId").value = followUpId;
-        showEnquiryDeleteModal.classList.remove("hidden");
-    }
-});
-
-closeEnquiryDeleteModal.forEach((close) => {
-    close.addEventListener("click", function () {
-        showEnquiryDeleteModal.classList.add("hidden");
-    });
-});
-
-showEnquiryDeleteBtnModal.addEventListener("click", function () {
-    // delete the follow up
-    // TODO: Complete this
-    console.log(document.querySelector("#deleteEnquiryId").value);
-    showEnquiryDeleteModal.classList.add("hidden");
 });

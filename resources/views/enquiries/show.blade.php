@@ -7,12 +7,12 @@
 
     <div class="flex md:justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600 hidden sm:inline">Enquiry details</h1>
-        <div id="enquiry_id_here" class="mt-5 mr-5 mb-5 md:mt-0 md:mr-0 md:mb-0">
+        <div id="{{ $enquiry->id }}" class="mt-5 mr-5 mb-5 md:mt-0 md:mr-0 md:mb-0">
             <a href="{{ route('enquiries.create') }}" class="uppercase rounded bg-green-500 hover:bg-green-600 text-white outline-none h-9 px-2 py-2 mt-4 mr-2 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-plus"></i> add new enquiry
             </a>
-            <a href="{{ route('enquiries.edit', ['id' => 1]) }}" class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
-                <i class="fas fa-edit"></i> this enquiry
+            <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
+                <i class="fas fa-edit"></i> edit this enquiry
             </a>
             <button type="button" class="enquiry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                 <i class="fas fa-trash-alt"></i> Delete this enquiry
@@ -28,26 +28,26 @@
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         #
                     </th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Adam</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->id }}</td>
                 </tr>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Name</th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Adam</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->name }}</td>
                 </tr>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Business
                         Name</th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Adam</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->business_name }}</td>
                 </tr>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Email</th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Chris</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->email }}</td>
                 </tr>
             </tbody>
         </table>
@@ -59,29 +59,78 @@
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Contact No.
                     </th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Chris</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->contact_no }}</td>
                 </tr>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Subject
                     </th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Chris</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">{{ $enquiry->subject }}</td>
                 </tr>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Services
                     </th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold">Chris</td>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-14 break-words">
+                        @foreach ($enquiry->services as $service)
+                            {{ $service->name }}@if(!$loop->last),@endif
+                        @endforeach
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    {{-- Add followup modal --}}
+    <div class="z-10 add-followup-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        <!-- modal -->
+        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
+            <!-- modal header -->
+            <div class="border-b px-4 py-2 flex justify-between items-center">
+                <h3 class="font-semibold text-lg text-indigo-700 text-2xl font-bold">Add Follow Up</h3>
+            </div>
+            <!-- modal body -->
+            <div class="p-3">
+                <div class="py-1 bg-indigo-100 mb-1 rounded">
+                    <label class="block text-indigo-700 font-bold px-2">Date</label>
+                    <input
+                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
+                        id="addFollowupDate" type="date" />
+                </div>
+                <div class="py-1 bg-indigo-100 mb-1 rounded">
+                    <label class="block text-indigo-700 font-bold px-2">Time</label>
+                    <input
+                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
+                        id="addFollowupTime" type="time" />
+                </div>
+                <div class="py-1 bg-indigo-100 mb-1 rounded">
+                    <label class="block text-indigo-700 font-bold px-2">Remark</label>
+                    <input
+                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
+                        id="addFollowupRemark" type="text" />
+                </div>
+                <div class="py-1 bg-indigo-100 mb-1 rounded">
+                    <label class="block text-indigo-700 font-bold px-2">Outcome</label>
+                    <input
+                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
+                        id="addFollowupOutcome" type="text" />
+                </div>
+            </div>
+            <div class="flex justify-end items-center w-100 border-t p-3">
+                <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 add-followup-close-modal focus:outline-none">
+                    Cancel
+                </button>
+                <button class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white submit-add-follow-up-modal focus:outline-none">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
     {{-- Edit followup modal --}}
-    <div
-        class="z-10 modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <div class="z-10 modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
             <!-- modal header -->
@@ -177,8 +226,13 @@
         </div>
     </div>
 
-    <div class="mb-10 lg:mb-20 pt-3 pb-5 px-5 rounded shadow-lg bg-indigo-100">
-        <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
+    <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-20">
+        <div class="flex justify-between">
+            <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
+            <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 py-1 my-3 block md:inline">
+                <i class="fas fa-plus"></i> add follow up
+            </button>
+        </div>
 
         <div class="relative w-100 m-1">
             <div class="border-r-2 border-yellow-400 absolute h-full top-0" style="left: 15px"></div>
@@ -193,7 +247,7 @@
                     </div>
                     <div id="1" class="ml-12">
                         <button id="1" type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-green-500 broder border-green-500 text-white hover:bg-green-600 focus:outline-none">
+                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
                         <button type="button"
@@ -213,7 +267,7 @@
                     </div>
                     <div id="2" class="ml-12">
                         <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-green-500 broder border-green-500 text-white hover:bg-green-600 focus:outline-none">
+                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
                         <button type="button"
@@ -235,7 +289,7 @@
                     </div>
                     <div id="3" class="ml-12">
                         <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-green-500 broder border-green-500 text-white hover:bg-green-600 focus:outline-none">
+                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
                         <button type="button"
@@ -257,7 +311,7 @@
                     </div>
                     <div id="4" class="ml-12">
                         <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-green-500 broder border-green-500 text-white hover:bg-green-600 focus:outline-none">
+                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
                         <button type="button"

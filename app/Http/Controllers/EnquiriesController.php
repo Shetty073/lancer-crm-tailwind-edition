@@ -57,7 +57,7 @@ class EnquiriesController extends Controller
             'name' => 'required',
             'business_name' => 'required',
             'email' => 'unique:enquiries,email',
-            'contact_no' => 'unique:enquiries,contact_no',
+            'contact_no' => 'unique:enquiries,contact_no|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
             'services' => 'required',
             'enquiry_status' => 'required',
@@ -103,8 +103,10 @@ class EnquiriesController extends Controller
     public function edit($id)
     {
         $enquiry = Enquiry::where('id', $id)->first();
+        $enquiry_statuses = EnquiryStatus::all();
+        $services = Service::all();
 
-        return view('enquiries.edit', compact('enquiry'));
+        return view('enquiries.edit', compact('enquiry', 'enquiry_statuses', 'services'));
     }
 
     /**
@@ -116,7 +118,36 @@ class EnquiriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'business_name' => 'required',
+            'email' => 'email',
+            'contact_no' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+            'subject' => 'required',
+            'services' => 'required',
+            'enquiry_status' => 'required',
+        ]);
+
+        $request->flash();
+
+        $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
+
+        $enquiry = Enquiry::where('id', $id)->first();
+        $enquiry->name = $request->input('name');
+        $enquiry->business_name = $request->input('business_name');
+        $enquiry->email = $request->input('email');
+        $enquiry->contact_no = $request->input('contact_no');
+        $enquiry->subject = $request->input('subject');
+
+        $enquiry->enquiry_status()->associate($status);
+        $enquiry->save();
+
+        // remove all previously attached services
+        $enquiry->services()->detach();
+        // attach newly selected services
+        $enquiry->services()->attach($request->input('services'));
+
+        return redirect(route('enquiries.index'));
     }
 
     /**
