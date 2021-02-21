@@ -35,7 +35,7 @@ class EnquiryStatusSeeder extends Seeder
 
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Member',
+                'status' => 'Client',
             )
         );
     }

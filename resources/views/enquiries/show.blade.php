@@ -229,7 +229,7 @@
     <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-20">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
-            <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 py-1 my-3 block md:inline">
+            <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 mt-0 mb-4 sm:mt-1 sm:mb-5 block md:inline">
                 <i class="fas fa-plus"></i> add follow up
             </button>
         </div>
