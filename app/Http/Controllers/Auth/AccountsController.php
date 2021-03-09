@@ -52,7 +52,7 @@ class AccountsController extends Controller
             # register the user
             $this->validate(request(), [
                 'name' => 'required',
-                'email' => 'required|unique:users,photo_url|email',
+                'email' => 'required|unique:users,email|email',
                 'password' => 'required|confirmed',
                 'photo' => 'image|max:1999',
             ]);
