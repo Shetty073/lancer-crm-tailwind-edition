@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -58,7 +59,8 @@ class AccountsController extends Controller
             ]);
 
             // create user
-            $user = User::create(request(['name', 'email', 'password']));
+            $user = User::create(request(['name', 'email']));
+            $user->password = Hash::make($request->input('password'));
 
             // handle image if its present
             if ($request->hasFile('photo')) {
