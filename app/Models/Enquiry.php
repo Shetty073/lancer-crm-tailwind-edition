@@ -15,6 +15,7 @@ class Enquiry extends Model
         'email',
         'contact_no',
         'subject',
+        'is_lost',
     ];
 
     protected $casts = [

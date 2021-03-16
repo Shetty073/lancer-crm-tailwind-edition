@@ -22,8 +22,35 @@ closeEnquiryDeleteModal.forEach((close) => {
 });
 
 showEnquiryDeleteBtnModal.addEventListener("click", function () {
-    // delete the follow up
-    // TODO: Complete this
-    console.log(document.querySelector("#deleteEnquiryId").value);
+    // delete the enquiry
+    let enquiryId = document.querySelector("#deleteEnquiryId").value;
+    let url = `/enquiries/${enquiryId}/destroy`;
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            url: "/payment",
+            "X-CSRF-Token": csrfToken,
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .then(function (data) {
+            if (data === true) {
+                window.history.back();
+            } else {
+                // show error message if needed
+                alert("Request was unsuccessful. Try again later...");
+            }
+        });
+
     showEnquiryDeleteModal.classList.add("hidden");
 });

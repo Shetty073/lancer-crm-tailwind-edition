@@ -66,7 +66,7 @@
             @enderror
             <button type='submit'
                 class='bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 focus:outline-none'>
-                Signin
+                Signup & Signin
             </button>
         </form>
     </div>

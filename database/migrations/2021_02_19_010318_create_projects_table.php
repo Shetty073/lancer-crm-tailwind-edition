@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->double('price', 12, 2);
             $table->date('start_date');
             $table->double('delivery_date');
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
+            $table->foreignId('client_id')->nullable()->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }

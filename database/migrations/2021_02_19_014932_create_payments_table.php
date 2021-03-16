@@ -17,8 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->double('amount', 12, 2);
             $table->string('remark', 150)->nullable();
-            $table->foreignId('invoice_id')->constrained('invoices')->onDelete('cascade');
-            $table->foreignId('payment_mode_id')->constrained('payment_modes')->onDelete('restrict');
+            $table->foreignId('invoice_id')->nullable()->constrained('invoices')->onDelete('cascade');
+            $table->foreignId('payment_mode_id')->nullable()->constrained('payment_modes')->onDelete('restrict');
             $table->timestamps();
         });
     }

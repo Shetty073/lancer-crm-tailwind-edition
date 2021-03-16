@@ -18,7 +18,7 @@ class CreateMilestonesTable extends Migration
             $table->string('name', 100);
             $table->string('remark', 250)->nullable();
             $table->date('delivery_date')->nullable();
-            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

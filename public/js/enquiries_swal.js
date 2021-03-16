@@ -22,9 +22,36 @@ closeEnquiryDeleteModal.forEach((close) => {
 });
 
 showEnquiryDeleteBtnModal.addEventListener("click", function () {
-    // delete the follow up
-    // TODO: Complete this
-    console.log(document.querySelector("#deleteEnquiryId").value);
+    // delete the enquiry
+    let enquiryId = document.querySelector("#deleteEnquiryId").value;
+    let url = `/enquiries/${enquiryId}/destroy`;
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            url: "/payment",
+            "X-CSRF-Token": csrfToken,
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .then(function (data) {
+            if (data === true) {
+                window.history.back();
+            } else {
+                // show error message if needed
+                alert("Request was unsuccessful. Try again later...");
+            }
+        });
+
     showEnquiryDeleteModal.classList.add("hidden");
 });
 
@@ -50,8 +77,41 @@ closeAddFollowUpModal.forEach((close) => {
 });
 
 submitAddFollowUpBtnModal.addEventListener("click", function () {
-    // create the followup
-    // TODO: Complete this
+    let url = `/followups/store`;
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    let data = {
+        date_time: document.querySelector("#addFollowupDateTime").value,
+        remark: document.querySelector("#addFollowupRemark").value,
+        outcome: document.querySelector("#addFollowupOutcome").value,
+        enquiry_id: document.querySelector("#deleteEnquiryId").value,
+    };
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            url: "/payment",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .then(function (data) {
+            if (data === true) {
+                window.location.reload();
+            } else {
+                // show error message if needed
+                alert("Request was unsuccessful. Try again later...");
+            }
+        });
     addFollowupModal.classList.add("hidden");
 });
 
@@ -64,6 +124,16 @@ document.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("follow-up-edit-btn")) {
         let followUpId = e.target.parentNode.id;
         document.querySelector("#followUpId").value = followUpId;
+        document.querySelector(
+            "#followupDateTime"
+        ).value = document.querySelector(`#date_time${followUpId}`).value;
+        document.querySelector(
+            "#followupRemark"
+        ).value = document.querySelector(`#remark${followUpId}`).value;
+        document.querySelector(
+            "#followupOutcome"
+        ).value = document.querySelector(`#outcome${followUpId}`).value;
+
         modal.classList.remove("hidden");
     }
 });
@@ -76,8 +146,42 @@ closeModal.forEach((close) => {
 
 submitBtnModal.addEventListener("click", function () {
     // submit the followup edit
-    // TODO: Complete this
-    console.log(document.querySelector("#followUpId").value);
+    let followUpId = document.querySelector("#followUpId").value;
+    let url = `/followups/${followUpId}/update`;
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    let data = {
+        date_time: document.querySelector("#followupDateTime").value,
+        remark: document.querySelector("#followupRemark").value,
+        outcome: document.querySelector("#followupOutcome").value,
+    };
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            url: "/payment",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .then(function (data) {
+            if (data === true) {
+                window.location.reload();
+            } else {
+                // show error message if needed
+                alert("Request was unsuccessful. Try again later...");
+            }
+        });
+
     modal.classList.add("hidden");
 });
 
@@ -102,7 +206,34 @@ closeDeleteModal.forEach((close) => {
 
 deleteBtnModal.addEventListener("click", function () {
     // delete the follow up
-    // TODO: Complete this
-    console.log(document.querySelector("#deleteFollowUpId").value);
+    let followUpId = document.querySelector("#deleteFollowUpId").value;
+    let url = `/followups/${followUpId}/destroy`;
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            url: "/payment",
+            "X-CSRF-Token": csrfToken,
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .then(function (data) {
+            if (data === true) {
+                window.location.reload();
+            } else {
+                // show error message if needed
+                alert("Request was unsuccessful. Try again later...");
+            }
+        });
+
     deleteModal.classList.add("hidden");
 });

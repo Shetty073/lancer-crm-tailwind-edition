@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->double('amount_paid', 12, 2);
-            $table->foreignId('expense_category_id')->constrained('expense_categories')->onDelete('restrict');
+            $table->foreignId('expense_category_id')->nullable()->constrained('expense_categories')->onDelete('restrict');
             $table->timestamps();
         });
     }

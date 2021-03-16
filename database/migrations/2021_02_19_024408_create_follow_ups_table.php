@@ -15,11 +15,10 @@ class CreateFollowUpsTable extends Migration
     {
         Schema::create('follow_ups', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('time');
+            $table->dateTime('date_time')->nullable();
             $table->string('remark', 100)->nullable();
             $table->string('outcome', 150)->nullable();
-            $table->foreignId('enquiry_id')->constrained('enquiries')->onDelete('cascade');
+            $table->foreignId('enquiry_id')->nullable()->constrained('enquiries')->onDelete('cascade');
             $table->timestamps();
         });
     }

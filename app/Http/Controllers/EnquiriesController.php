@@ -91,7 +91,9 @@ class EnquiriesController extends Controller
     public function show($id)
     {
         $enquiry = Enquiry::where('id', $id)->first();
-        return view('enquiries.show', compact('enquiry'));
+        $followups = $enquiry->follow_ups;
+
+        return view('enquiries.show', compact('enquiry', 'followups'));
     }
 
     /**
@@ -158,6 +160,14 @@ class EnquiriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $enquiry = Enquiry::findorfail($id);
+        $status = EnquiryStatus::where('id', 3)->first();
+        $enquiry->update([
+            'is_lost' => true,
+        ]);
+        $enquiry->enquiry_status()->associate($status);
+        $enquiry->save();
+
+        return back();
     }
 }

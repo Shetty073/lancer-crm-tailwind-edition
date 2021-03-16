@@ -10,14 +10,17 @@ class FollowUp extends Model
     protected $table = 'follow_ups';
 
     protected $fillable = [
-        'date',
-        'time',
+        'date_time',
         'remark',
         'outcome',
     ];
 
+    protected $casts = [
+        'date_time' => 'datetime'
+    ];
+
     public function enquiry()
     {
-        return $this->belongsTo(Enquiry::class);
+        return $this->belongsTo(Enquiry::class, 'enquiry_id');
     }
 }

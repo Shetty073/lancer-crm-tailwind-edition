@@ -49,6 +49,14 @@ Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::get('/{id}/edit', [EnquiriesController::class, 'edit'])->name('enquiries.edit');
     Route::post('/store', [EnquiriesController::class, 'store'])->name('enquiries.store');
     Route::post('/{id}/update', [EnquiriesController::class, 'update'])->name('enquiries.update');
+    Route::post('/{id}/destroy', [EnquiriesController::class, 'destroy'])->name('enquiries.destroy');
+});
+
+// followups routes
+Route::group(['prefix' => '/followups', 'middleware' => 'auth'], function () {
+    Route::post('/store', [FollowupsController::class, 'store'])->name('followups.store');
+    Route::post('/{id}/update', [FollowupsController::class, 'update'])->name('followups.update');
+    Route::post('/{id}/destroy', [FollowupsController::class, 'destroy'])->name('followups.destroy');
 });
 
 // clients routes

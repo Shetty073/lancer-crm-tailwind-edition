@@ -21,7 +21,7 @@
             <!-- modal header -->
             <div class="border-b px-4 py-2 flex justify-between items-center">
                 <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to delete this enquiry? You can not recover this once deleted.
+                    Are you sure you want to mark this enquiry as lost? You can not undo this.
                 </h3>
             </div>
             <!-- modal body -->
@@ -35,7 +35,7 @@
                 </button>
                 <button
                     class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white enquiry-delete-btn-modal focus:outline-none">
-                    Delete
+                    Mark lost
                 </button>
             </div>
         </div>
@@ -85,31 +85,28 @@
                                     </svg>
                                 </button>
                                 <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
-                                    <li>
-                                        <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                            View
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                            Edit
-                                        </a>
-                                    </li>
-                                    <li id="{{ $enquiry->id }}">
-                                        <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                            Transfer to Client
-                                        </button>
-                                    </li>
-                                    <li id="{{ $enquiry->id }}">
-                                        <button class="uppercase text-sm font-semibold w-full bg-white text-yellow-600 hover:bg-yellow-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                            Mark as lost
-                                        </button>
-                                    </li>
-                                    <li id="{{ $enquiry->id }}">
-                                        <button class="uppercase text-sm font-semibold w-full rounded-b text-red-500 enquiry-delete-btn bg-white hover:bg-red-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                            Delete
-                                        </button>
-                                    </li>
+                                    @if (!$enquiry->is_lost)
+                                        <li>
+                                            <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                View
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                Edit
+                                            </a>
+                                        </li>
+                                        <li id="{{ $enquiry->id }}">
+                                            <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                Transfer to Client
+                                            </button>
+                                        </li>
+                                        <li id="{{ $enquiry->id }}">
+                                            <button class="enquiry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                Mark as lost
+                                            </button>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
 

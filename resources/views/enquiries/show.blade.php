@@ -15,7 +15,7 @@
                 <i class="fas fa-edit"></i> edit this enquiry
             </a>
             <button type="button" class="enquiry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
-                <i class="fas fa-trash-alt"></i> Delete this enquiry
+                <i class="fas fa-trash-alt"></i> Mark this as lost
             </button>
         </div>
     </div>
@@ -94,16 +94,10 @@
             <!-- modal body -->
             <div class="p-3">
                 <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Date</label>
+                    <label class="block text-indigo-700 font-bold px-2">Date & Time</label>
                     <input
                         class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="addFollowupDate" type="date" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Time</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="addFollowupTime" type="time" />
+                        id="addFollowupDateTime" type="datetime-local" />
                 </div>
                 <div class="py-1 bg-indigo-100 mb-1 rounded">
                     <label class="block text-indigo-700 font-bold px-2">Remark</label>
@@ -141,16 +135,10 @@
             <div class="p-3">
                 <input id="followUpId" type="hidden" value="" />
                 <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Date</label>
+                    <label class="block text-indigo-700 font-bold px-2">Date & Time</label>
                     <input
                         class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="followupDate" type="date" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Time</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="followupTime" type="time" />
+                        id="followupDateTime" type="datetime-local" />
                 </div>
                 <div class="py-1 bg-indigo-100 mb-1 rounded">
                     <label class="block text-indigo-700 font-bold px-2">Remark</label>
@@ -213,7 +201,7 @@
             </div>
             <!-- modal body -->
             <div class="p-3">
-                <input id="deleteEnquiryId" type="hidden" value="" />
+                <input id="deleteEnquiryId" type="hidden" value="{{ $enquiry->id }}" />
             </div>
             <div class="flex justify-end items-center w-100 border-t p-3">
                 <button class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-enquiry-delete-modal focus:outline-none">
@@ -237,89 +225,32 @@
         <div class="relative w-100 m-1">
             <div class="border-r-2 border-yellow-400 absolute h-full top-0" style="left: 15px"></div>
             <ul class="list-none m-0 p-0">
-                <li class="mb-10">
-                    <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full h-8 w-8 mb-3"></div>
-                        <div class="flex-1 ml-4 font-medium">Oct 2017 - First Release</div>
-                    </div>
-                    <div class="ml-12">
-                        First release of Tailwind CSS
-                    </div>
-                    <div id="1" class="ml-12">
-                        <button id="1" type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
-                            Edit
-                        </button>
-                        <button type="button"
-                            class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
-                            Delete
-                        </button>
-                    </div>
-                </li>
-
-                <li class="mb-10">
-                    <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
-                        <div class="flex-1 ml-4 font-medium">Nov 2017 - Multiple Releases</div>
-                    </div>
-                    <div class="ml-12">
-                        v0.1.0 - v0.2.2
-                    </div>
-                    <div id="2" class="ml-12">
-                        <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
-                            Edit
-                        </button>
-                        <button type="button"
-                            class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
-                            Delete
-                        </button>
-                    </div>
-                </li>
-
-                <li class="mb-10">
-                    <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
-                        <div class="flex-1 ml-4 font-medium">Feb 2018 - Other stuff happened</div>
-                    </div>
-                    <div class="ml-12">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus perspiciatis facilis deserunt
-                        excepturi sunt pariatur consequuntur eveniet molestias ea quia? Magni veniam illo optio tempora
-                        modi exercitationem qui adipisci ex.
-                    </div>
-                    <div id="3" class="ml-12">
-                        <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
-                            Edit
-                        </button>
-                        <button type="button"
-                            class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
-                            Delete
-                        </button>
-                    </div>
-                </li>
-
-                <li class="mb-10">
-                    <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
-                        <div class="flex-1 ml-4 font-medium">July 2018 - More stuff happened</div>
-                    </div>
-                    <div class="ml-12">
-                        Consequuntur odit explicabo officiis veniam incidunt non velit ex consectetur magnam minima vero
-                        hic impedit cumque, blanditiis autem distinctio facere dolor atque facilis, eos, labore sunt
-                        iusto. Beatae, quas, dolorem?
-                    </div>
-                    <div id="4" class="ml-12">
-                        <button type="button"
-                            class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
-                            Edit
-                        </button>
-                        <button type="button"
-                            class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
-                            Delete
-                        </button>
-                    </div>
-                </li>
+                @foreach ($followups as $followup)
+                    <input type="hidden" id="date_time{{ $followup->id }}" value="{{ $followup->date_time->format('Y-m-d') }}T{{ $followup->date_time->format('H:m') }}">
+                    <input type="hidden" id="remark{{ $followup->id }}" value="{{ $followup->remark }}">
+                    <input type="hidden" id="outcome{{ $followup->id }}" value="{{ $followup->outcome }}">
+                    <li class="mb-10">
+                        <div class="flex items-center">
+                            <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
+                            <div class="flex-1 ml-4 font-medium">{{ $followup->date_time->format('d M, Y') }} - {{ $followup->remark }}</div>
+                        </div>
+                        <div class="ml-12">
+                            @if ($followup->outcome)
+                                <b>Outcome: </b>{{ $followup->outcome }}
+                            @endif
+                        </div>
+                        <div id="{{ $followup->id }}" class="ml-12">
+                            <button type="button"
+                                class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
+                                Edit
+                            </button>
+                            <button type="button"
+                                class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
+                                Delete
+                            </button>
+                        </div>
+                    </li>
+                @endforeach
 
             </ul>
         </div>

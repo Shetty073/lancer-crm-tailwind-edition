@@ -18,8 +18,8 @@ class CreateInvoicesTable extends Migration
             $table->double('total_amount', 12, 2);
             $table->double('amount_paid', 12, 2);
             $table->boolean('is_fully_paid')->default(0);
-            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
-            $table->foreignId('tax_id')->constrained('taxes')->onDelete('cascade');
+            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
+            $table->foreignId('tax_id')->nullable()->constrained('taxes')->onDelete('cascade');
             $table->timestamps();
         });
     }
