@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -52,13 +53,17 @@ class AccountsController extends Controller
             # register the user
             $this->validate(request(), [
                 'name' => 'required',
-                'email' => 'required|unique:users,photo_url|email',
+                'email' => 'required|unique:users,email|email',
                 'password' => 'required|confirmed',
                 'photo' => 'image|max:1999',
             ]);
 
             // create user
-            $user = User::create(request(['name', 'email', 'password']));
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+            ]);
 
             // handle image if its present
             if ($request->hasFile('photo')) {
