@@ -40,7 +40,7 @@
                     <div>Monthly Earnings</div>
                 </div>
                 <div class="ml-8">
-                    <i class="fas fa-wallet fa-3x"></i>
+                    <i class="fas fa-dollar-sign fa-3x"></i>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                     <div>Monthly Expenses</div>
                 </div>
                 <div class="ml-8">
-                    <i class="fas fa-file-invoice fa-3x"></i>
+                    <i class="fas fa-file-invoice-dollar fa-3x"></i>
                 </div>
             </div>
         </div>

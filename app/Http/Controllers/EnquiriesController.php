@@ -29,6 +29,7 @@ class EnquiriesController extends Controller
         $utilities = $this->utilities;
 
         $enquiries = Enquiry::all();
+
         return view('enquiries.index', compact('enquiries', 'utilities'));
     }
 
@@ -91,6 +92,11 @@ class EnquiriesController extends Controller
     public function show($id)
     {
         $enquiry = Enquiry::where('id', $id)->first();
+
+        if($enquiry->enquiry_status->id === 4) {
+            return redirect(route('enquiries.index'));
+        }
+
         $followups = $enquiry->follow_ups;
 
         return view('enquiries.show', compact('enquiry', 'followups'));
@@ -105,6 +111,11 @@ class EnquiriesController extends Controller
     public function edit($id)
     {
         $enquiry = Enquiry::where('id', $id)->first();
+
+        if($enquiry->enquiry_status->id === 4) {
+            return redirect(route('enquiries.index'));
+        }
+
         $enquiry_statuses = EnquiryStatus::all();
         $services = Service::all();
 
@@ -161,7 +172,7 @@ class EnquiriesController extends Controller
     public function destroy($id)
     {
         $enquiry = Enquiry::findorfail($id);
-        $status = EnquiryStatus::where('id', 3)->first();
+        $status = EnquiryStatus::where('id', 4)->first();
         $enquiry->update([
             'is_lost' => true,
         ]);

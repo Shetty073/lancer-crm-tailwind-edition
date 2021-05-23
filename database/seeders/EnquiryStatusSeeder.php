@@ -35,6 +35,12 @@ class EnquiryStatusSeeder extends Seeder
 
         DB::table('enquiry_statuses')->insert(
             array(
+                'status' => 'Lost',
+            )
+        );
+
+        DB::table('enquiry_statuses')->insert(
+            array(
                 'status' => 'Client',
             )
         );

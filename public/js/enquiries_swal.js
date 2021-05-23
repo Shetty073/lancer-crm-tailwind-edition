@@ -28,14 +28,13 @@ showEnquiryDeleteBtnModal.addEventListener("click", function () {
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            url: "/payment",
-            "X-CSRF-Token": csrfToken,
-        },
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-Token": csrfToken,
+            },
+        })
         .then((response) => {
             if (response.ok) {
                 return true;
@@ -88,15 +87,14 @@ submitAddFollowUpBtnModal.addEventListener("click", function () {
     };
 
     fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            url: "/payment",
-            "X-CSRF-Token": csrfToken,
-        },
-        body: JSON.stringify(data),
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-Token": csrfToken,
+            },
+            body: JSON.stringify(data),
+        })
         .then((response) => {
             if (response.ok) {
                 return true;
@@ -157,15 +155,14 @@ submitBtnModal.addEventListener("click", function () {
     };
 
     fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            url: "/payment",
-            "X-CSRF-Token": csrfToken,
-        },
-        body: JSON.stringify(data),
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-Token": csrfToken,
+            },
+            body: JSON.stringify(data),
+        })
         .then((response) => {
             if (response.ok) {
                 return true;
@@ -211,14 +208,13 @@ deleteBtnModal.addEventListener("click", function () {
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            url: "/payment",
-            "X-CSRF-Token": csrfToken,
-        },
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-Token": csrfToken,
+            },
+        })
         .then((response) => {
             if (response.ok) {
                 return true;

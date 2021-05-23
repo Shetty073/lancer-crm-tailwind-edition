@@ -196,7 +196,7 @@
             <!-- modal header -->
             <div class="border-b px-4 py-2 flex justify-between items-center">
                 <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to delete this enquiry? You can not recover this once deleted.
+                    Are you sure you want to mark this enquiry as lost? You can not undo this.
                 </h3>
             </div>
             <!-- modal body -->
@@ -208,7 +208,7 @@
                     Cancel
                 </button>
                 <button class="enquiry-delete-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white enquiry-delete-btn-modal focus:outline-none">
-                    Delete
+                    Mark lost
                 </button>
             </div>
         </div>
