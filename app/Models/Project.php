@@ -35,6 +35,9 @@ class Project extends Model
 
     public function modules()
     {
+        // * NOTE: Each project comprises of multiple modules.
+        // * Each modulehas its own cost.
+        // * Total project cost = cost of each module + cost of each service
         return $this->hasMany(Module::class);
     }
 

@@ -19,7 +19,7 @@ class CreateEnquiriesTable extends Migration
             $table->string('business_name', 100)->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->string('contact_no', 22)->unique()->nullable();
-            $table->string('subject', 500);
+            $table->string('subject', 2048);
             $table->boolean('is_lost')->default(0);
             $table->foreignId('enquiry_status_id')->nullable()->constrained('enquiry_statuses')->onDelete('restrict');
             $table->timestamps();
