@@ -64,8 +64,6 @@ class EnquiriesController extends Controller
             'enquiry_status' => 'required',
         ]);
 
-        $request->flash();
-
         $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
 
         $enquiry = new Enquiry();
@@ -140,8 +138,6 @@ class EnquiriesController extends Controller
             'services' => 'required',
             'enquiry_status' => 'required',
         ]);
-
-        $request->flash();
 
         $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
 

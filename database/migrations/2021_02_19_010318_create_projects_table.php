@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('details', 500);
-            $table->double('price', 12, 2);
+            $table->double('total_cost', 12, 2);
             $table->date('start_date');
             $table->double('delivery_date');
             $table->foreignId('client_id')->nullable()->constrained('clients')->onDelete('cascade');

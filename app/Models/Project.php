@@ -12,9 +12,13 @@ class Project extends Model
     protected $fillable = [
         'name',
         'details',
-        'price',
+        'total_cost',
         'start_date',
         'delivery_date',
+    ];
+
+    protected $casts = [
+        'total_cost' => 'double'
     ];
 
     protected $dates = ['start_date', 'delivery_date'];
@@ -27,6 +31,11 @@ class Project extends Model
     public function milestones()
     {
         return $this->hasMany(Milestone::class);
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
     }
 
     public function services()

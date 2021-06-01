@@ -1,37 +1,33 @@
-// 'Transfer To Client' functionality
-// TODO: Complete this later
-
-
 // 'Mark As Lost' aka Delete enquiry functionality
 // enquiry delete button event
-const showEnquiryDeleteModal = document.querySelector(".enquiry-delete-modal");
-const closeEnquiryDeleteModal = document.querySelectorAll(
-    ".close-enquiry-delete-modal"
+const showDeleteModal = document.querySelector(".delete-modal");
+const closeDeleteModal = document.querySelectorAll(
+    ".close-delete-modal"
 );
-const showEnquiryDeleteBtnModal = document.querySelector(
-    ".enquiry-delete-btn-modal"
+const showDeleteBtnModal = document.querySelector(
+    ".delete-btn-modal"
 );
 
 // show the enquiry delete confirmation modal
 document.addEventListener("click", function (e) {
-    if (e.target && e.target.classList.contains("enquiry-delete-btn")) {
+    if (e.target && e.target.classList.contains("entry-delete-btn")) {
         let followUpId = e.target.parentNode.id;
-        document.querySelector("#deleteEnquiryId").value = followUpId;
-        showEnquiryDeleteModal.classList.remove("hidden");
+        document.querySelector("#deleteEntryId").value = followUpId;
+        showDeleteModal.classList.remove("hidden");
     }
 });
 
 // close the delete enquiry modal
-closeEnquiryDeleteModal.forEach((close) => {
+closeDeleteModal.forEach((close) => {
     close.addEventListener("click", function () {
-        showEnquiryDeleteModal.classList.add("hidden");
+        showDeleteModal.classList.add("hidden");
     });
 });
 
 // delete the enquiry
-showEnquiryDeleteBtnModal.addEventListener("click", function () {
-    let enquiryId = document.querySelector("#deleteEnquiryId").value;
-    let url = `/enquiries/${enquiryId}/destroy`;
+showDeleteBtnModal.addEventListener("click", function () {
+    let entryId = document.querySelector("#deleteEntryId").value;
+    let url = document.querySelector(`#delete${entryId}`).value;
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
@@ -58,5 +54,5 @@ showEnquiryDeleteBtnModal.addEventListener("click", function () {
             }
         });
 
-    showEnquiryDeleteModal.classList.add("hidden");
+    showDeleteModal.classList.add("hidden");
 });

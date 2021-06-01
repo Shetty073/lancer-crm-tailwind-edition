@@ -72,6 +72,11 @@ Route::group(['prefix' => '/projects', 'middleware' => 'auth'], function () {
 // services routes
 Route::group(['prefix' => '/services', 'middleware' => 'auth'], function () {
     Route::get('/', [ServicesController::class, 'index'])->name('services.index');
+    Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
+    Route::get('/{id}/edit', [ServicesController::class, 'edit'])->name('services.edit');
+    Route::post('/store', [ServicesController::class, 'store'])->name('services.store');
+    Route::post('/{id}/update', [ServicesController::class, 'update'])->name('services.update');
+    Route::post('/{id}/destroy', [ServicesController::class, 'destroy'])->name('services.destroy');
 });
 
 // dues routes

@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Module extends Model
 {
-    protected $table = 'services';
+    use HasFactory;
 
     protected $fillable = [
         'name',
+        'description',
         'price',
     ];
 
@@ -18,13 +19,8 @@ class Service extends Model
         'price' => 'double'
     ];
 
-    public function projects()
+    public function project()
     {
-        return $this->belongsToMany(Project::class);
-    }
-
-    public function enquiries()
-    {
-        return $this->belongsToMany(Enquiry::class);
+        return $this->belongsTo(Project::class);
     }
 }

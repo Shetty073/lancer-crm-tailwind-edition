@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServicesController extends Controller
@@ -13,7 +14,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        return view('services.index');
+        $services = Service::all();
+
+        return view('services.index', compact('services'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');
     }
 
     /**
@@ -34,18 +37,18 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $service = Service::create([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+        ]);
+        $service->save();
+
+        return redirect(route('services.index'));
     }
 
     /**
@@ -56,7 +59,9 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service = Service::where('id', $id)->first();
+
+        return view('services.edit', compact('service'));
     }
 
     /**
@@ -68,7 +73,18 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+
+        $service = Service::findorfail($id);
+        $service->update([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+        ]);
+
+        return redirect(route('services.index'));
     }
 
     /**
@@ -79,6 +95,9 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service = Service::findorfail($id);
+        $service->delete();
+
+        return redirect(route('services.index'));
     }
 }

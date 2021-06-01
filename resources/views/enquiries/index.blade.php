@@ -15,7 +15,7 @@
 
     {{-- Delete enquiry modal --}}
     <div
-        class="z-10 enquiry-delete-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        class="delete-modal z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
             <!-- modal header -->
@@ -26,15 +26,15 @@
             </div>
             <!-- modal body -->
             <div class="p-3">
-                <input id="deleteEnquiryId" type="hidden" value="" />
+                <input id="deleteEntryId" type="hidden" value="" />
             </div>
             <div class="flex justify-end items-center w-100 border-t p-3">
                 <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-enquiry-delete-modal focus:outline-none">
+                    class="close-delete-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
                     Cancel
                 </button>
                 <button
-                    class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white enquiry-delete-btn-modal focus:outline-none">
+                    class="delete-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
                     Mark lost
                 </button>
             </div>
@@ -102,7 +102,7 @@
                                             </button>
                                         </li>
                                         <li id="{{ $enquiry->id }}">
-                                            <button class="enquiry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                 Mark as lost
                                             </button>
                                         </li>
@@ -112,6 +112,7 @@
 
                         </td>
                     </tr>
+                    <input type="hidden" id="delete{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
                 @endforeach
 
             </tbody>
@@ -132,5 +133,6 @@
 @endsection
 
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/enquiries_index_swal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/index_swal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/transferToClient.js') }}"></script>
 @endsection
