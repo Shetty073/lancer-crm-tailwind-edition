@@ -62,8 +62,10 @@ class AccountsController extends Controller
             $user = User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
+                'password' => '',
             ]);
+            $user->setPasswordAttribute($request->input('password'));
+            $user->save();
 
             // handle image if its present
             if ($request->hasFile('photo')) {
