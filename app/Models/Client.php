@@ -23,10 +23,6 @@ class Client extends Model
         'is_active' => 'boolean',
     ];
 
-    protected $hidden = [
-        'password',
-    ];
-
     public function projects()
     {
         return $this->hasMany(Project::class);

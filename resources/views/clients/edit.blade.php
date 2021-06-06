@@ -25,3 +25,7 @@
 </main>
 
 @endsection
+
+@section('footer-scripts')
+    <script type="text/javascript" src="{{ asset('js/star.js') }}"></script>
+@endsection
