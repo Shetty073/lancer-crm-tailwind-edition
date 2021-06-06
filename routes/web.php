@@ -50,6 +50,8 @@ Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::post('/store', [EnquiriesController::class, 'store'])->name('enquiries.store');
     Route::post('/{id}/update', [EnquiriesController::class, 'update'])->name('enquiries.update');
     Route::post('/{id}/destroy', [EnquiriesController::class, 'destroy'])->name('enquiries.destroy');
+
+    Route::post('/{id}/transfer', [EnquiriesController::class, 'transfer'])->name('enquiries.transfer');
 });
 
 // followups routes

@@ -1,3 +1,7 @@
 // 'Transfer To Client' functionality
-// TODO: Complete this later
+document.addEventListener('click', function (e) {
+    if(e.target && e.target.classList.contains('transfer-to-client-btn')) {
+        //
+    }
+});
 

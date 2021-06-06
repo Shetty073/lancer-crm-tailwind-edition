@@ -97,7 +97,7 @@
                                             </a>
                                         </li>
                                         <li id="{{ $enquiry->id }}">
-                                            <button class="uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            <button class="transfer-to-client-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                 Transfer to Client
                                             </button>
                                         </li>

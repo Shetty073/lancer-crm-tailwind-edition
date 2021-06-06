@@ -1,41 +1,41 @@
 // 'Mark As Lost' aka Delete enquiry functionality
 // enquiry delete button event
-const showDeleteModal = document.querySelector(".delete-modal");
+const showDeleteModal = document.querySelector('.delete-modal');
 const closeDeleteModal = document.querySelectorAll(
-    ".close-delete-modal"
+    '.close-delete-modal'
 );
 const showDeleteBtnModal = document.querySelector(
-    ".delete-btn-modal"
+    '.delete-btn-modal'
 );
 
-// show the enquiry delete confirmation modal
-document.addEventListener("click", function (e) {
-    if (e.target && e.target.classList.contains("entry-delete-btn")) {
+// show the entry delete confirmation modal
+document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('entry-delete-btn')) {
         let followUpId = e.target.parentNode.id;
-        document.querySelector("#deleteEntryId").value = followUpId;
-        showDeleteModal.classList.remove("hidden");
+        document.querySelector('#deleteEntryId').value = followUpId;
+        showDeleteModal.classList.remove('hidden');
     }
 });
 
-// close the delete enquiry modal
+// close the delete entry modal
 closeDeleteModal.forEach((close) => {
-    close.addEventListener("click", function () {
-        showDeleteModal.classList.add("hidden");
+    close.addEventListener('click', function () {
+        showDeleteModal.classList.add('hidden');
     });
 });
 
-// delete the enquiry
-showDeleteBtnModal.addEventListener("click", function () {
-    let entryId = document.querySelector("#deleteEntryId").value;
+// delete the entry\
+showDeleteBtnModal.addEventListener('click', function () {
+    let entryId = document.querySelector('#deleteEntryId').value;
     let url = document.querySelector(`#delete${entryId}`).value;
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "X-CSRF-Token": csrfToken,
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-CSRF-Token': csrfToken,
             },
         })
         .then((response) => {
@@ -50,9 +50,9 @@ showDeleteBtnModal.addEventListener("click", function () {
                 window.location.reload();
             } else {
                 // show error message if needed
-                alert("Request was unsuccessful. Try again later...");
+                alert('Request was unsuccessful. Try again later...');
             }
         });
 
-    showDeleteModal.classList.add("hidden");
+    showDeleteModal.classList.add('hidden');
 });

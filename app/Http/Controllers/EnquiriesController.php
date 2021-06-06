@@ -159,6 +159,11 @@ class EnquiriesController extends Controller
         return redirect(route('enquiries.index'));
     }
 
+    public function transfer($request, $id)
+    {
+        // TODO: Implement this next
+    }
+
     /**
      * Remove the specified resource from storage.
      *
