@@ -19,8 +19,9 @@ class CreateClientsTable extends Migration
             $table->string('business_name', 100)->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->string('contact_no', 22)->unique()->nullable();
+            $table->string('subject', 2048)->nullable();
             $table->boolean('is_active')->default(1);
-            $table->string('rating', 100)->nullable();
+            $table->double('rating', 100)->nullable();
             $table->string('remark', 200)->nullable();
             $table->timestamps();
         });

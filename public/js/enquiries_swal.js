@@ -184,7 +184,7 @@ submitBtnModal.addEventListener('click', function () {
 
 // followups delete button event
 const deleteModal = document.querySelector('.delete-modal');
-const closeDeleteModal = document.querySelectorAll('.close-delete-modal');
+const closeDeleteModal = document.querySelectorAll('.close-delete-btn-modal');
 const deleteBtnModal = document.querySelector('.delete-follow-up-modal');
 
 document.addEventListener('click', function (e) {
@@ -208,28 +208,28 @@ deleteBtnModal.addEventListener('click', function () {
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'X-CSRF-Token': csrfToken,
-            },
-        })
-        .then((response) => {
-            if (response.ok) {
-                return true;
-            } else {
-                return false;
-            }
-        })
-        .then(function (data) {
-            if (data === true) {
-                window.location.reload();
-            } else {
-                // show error message if needed
-                alert('Request was unsuccessful. Try again later...');
-            }
-        });
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'X-CSRF-Token': csrfToken,
+        },
+    })
+    .then((response) => {
+        if (response.ok) {
+            return true;
+        } else {
+            return false;
+        }
+    })
+    .then(function (data) {
+        if (data === true) {
+            window.location.reload();
+        } else {
+            // show error message if needed
+            alert('Request was unsuccessful. Try again later...');
+        }
+    });
 
     deleteModal.classList.add('hidden');
 });

@@ -1,5 +1,5 @@
 @extends('base')
-@section('title', 'Enquiries')
+@section('title', 'Enquiry details')
 
 @section('main-content')
 
@@ -179,7 +179,7 @@
                 <input id="deleteFollowUpId" type="hidden" value="" />
             </div>
             <div class="flex justify-end items-center w-100 border-t p-3">
-                <button class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-delete-modal focus:outline-none">
+                <button class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-delete-btn-modal focus:outline-none">
                     Cancel
                 </button>
                 <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white delete-follow-up-modal focus:outline-none">

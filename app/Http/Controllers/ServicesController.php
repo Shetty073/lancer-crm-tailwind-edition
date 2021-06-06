@@ -39,14 +39,13 @@ class ServicesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'price' => 'required',
+            'cost' => 'required',
         ]);
 
         $service = Service::create([
             'name' => $request->input('name'),
-            'price' => $request->input('price'),
+            'cost' => $request->input('cost'),
         ]);
-        $service->save();
 
         return redirect(route('services.index'));
     }
@@ -75,13 +74,13 @@ class ServicesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'price' => 'required',
+            'cost' => 'required',
         ]);
 
         $service = Service::findorfail($id);
         $service->update([
             'name' => $request->input('name'),
-            'price' => $request->input('price'),
+            'cost' => $request->input('cost'),
         ]);
 
         return redirect(route('services.index'));

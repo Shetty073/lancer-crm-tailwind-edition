@@ -30,12 +30,40 @@
             </div>
             <div class="flex justify-end items-center w-100 border-t p-3">
                 <button
-                    class="close-delete-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
+                    class="close-delete-btn-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
                     Cancel
                 </button>
                 <button
                     class="delete-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
                     Mark lost
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Transfer enquiry modal --}}
+    <div
+        class="transfer-modal z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        <!-- modal -->
+        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
+            <!-- modal header -->
+            <div class="border-b px-4 py-2 flex justify-between items-center">
+                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
+                    Are you sure you want to transfer this enquiry to client? You can not undo this.
+                </h3>
+            </div>
+            <!-- modal body -->
+            <div class="p-3">
+                <input id="transferEntryId" type="hidden" value="" />
+            </div>
+            <div class="flex justify-end items-center w-100 border-t p-3">
+                <button
+                    class="close-transfer-btn-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
+                    Cancel
+                </button>
+                <button
+                    class="transfer-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
+                    Yes, transfer
                 </button>
             </div>
         </div>
@@ -87,7 +115,7 @@
                                 <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
                                     @if (!$enquiry->is_lost)
                                         <li>
-                                            <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                            <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-green-500 text-green-400 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                 View
                                             </a>
                                         </li>
@@ -101,6 +129,7 @@
                                                 Transfer to Client
                                             </button>
                                         </li>
+                                        <input type="hidden" id="transfer{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
                                         <li id="{{ $enquiry->id }}">
                                             <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                 Mark as lost
@@ -128,6 +157,7 @@
 
     </div>
 
+    <input type="hidden" id="transferRedirectUrl" value="{{ route('clients.index') }}">
 </main>
 
 @endsection

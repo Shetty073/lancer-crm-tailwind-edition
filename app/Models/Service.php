@@ -11,20 +11,15 @@ class Service extends Model
 
     protected $fillable = [
         'name',
-        'price',
+        'cost',
     ];
 
     protected $casts = [
-        'price' => 'double'
+        'cost' => 'double'
     ];
 
     public function projects()
     {
         return $this->belongsToMany(Project::class);
-    }
-
-    public function enquiries()
-    {
-        return $this->belongsToMany(Enquiry::class);
     }
 }

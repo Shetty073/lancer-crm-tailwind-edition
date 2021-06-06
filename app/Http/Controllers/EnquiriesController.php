@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Lancer\Utilities;
+use App\Models\Client;
 use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
 use App\Models\Service;
@@ -60,7 +61,6 @@ class EnquiriesController extends Controller
             'email' => 'unique:enquiries,email',
             'contact_no' => 'unique:enquiries,contact_no|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
-            'services' => 'required',
             'enquiry_status' => 'required',
         ]);
 
@@ -76,7 +76,7 @@ class EnquiriesController extends Controller
         $enquiry->enquiry_status()->associate($status);
         $enquiry->save();
 
-        $enquiry->services()->attach($request->input('services'));
+        // $enquiry->services()->attach($request->input('services'));
 
         return redirect(route('enquiries.index'));
     }
@@ -135,7 +135,6 @@ class EnquiriesController extends Controller
             'email' => 'email',
             'contact_no' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
-            'services' => 'required',
             'enquiry_status' => 'required',
         ]);
 
@@ -152,16 +151,30 @@ class EnquiriesController extends Controller
         $enquiry->save();
 
         // remove all previously attached services
-        $enquiry->services()->detach();
+        // $enquiry->services()->detach();
         // attach newly selected services
-        $enquiry->services()->attach($request->input('services'));
+        // $enquiry->services()->attach($request->input('services'));
 
         return redirect(route('enquiries.index'));
     }
 
-    public function transfer($request, $id)
+    public function transfer(Request $request, $id)
     {
-        // TODO: Implement this next
+        $enquiry = Enquiry::findorfail($id);
+
+        Client::create([
+            'name' => $enquiry->name,
+            'business_name' => $enquiry->business_name,
+            'email' => $enquiry->email,
+            'contact_no' => $enquiry->contact_no,
+            'subject' => $enquiry->subject,
+        ]);
+
+        $enquiry->update([
+            'status' => 5,
+        ]);
+
+        return back();
     }
 
     /**

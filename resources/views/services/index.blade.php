@@ -29,7 +29,7 @@
             </div>
             <div class="flex justify-end items-center w-100 border-t p-3">
                 <button
-                    class="close-delete-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
+                    class="close-delete-btn-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
                     Cancel
                 </button>
                 <button
@@ -48,7 +48,7 @@
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         Service Name</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
-                        Price</th>
+                        Cost</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions
                     </th>
                 </tr>
@@ -57,7 +57,7 @@
                 @foreach ($services as $service)
                     <tr class="h-12">
                         <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">{{ $service->name }}</td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $service->price }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $service->cost }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
 
                             <div class="dropdown inline-block relative p-2">

@@ -8,25 +8,25 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">full name</label>
                     <input type="text" name="name"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Firstname Lastname" value="@if(isset($enquiry)){{ $enquiry->name }}@else{{ old('name') }}@endif" required>
+                        placeholder="Firstname Lastname" value="@if(isset($client)){{ $client->name }}@else{{ old('name') }}@endif" required>
                 </div>
                 <div class="flex flex-col mr-4 w-full md:w-3/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">business name</label>
                     <input type="text" name="business_name"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Company Inc." value="@if(isset($enquiry)){{ $enquiry->business_name }}@else{{ old('business_name') }}@endif">
+                        placeholder="Company Inc." value="@if(isset($client)){{ $client->business_name }}@else{{ old('business_name') }}@endif">
                 </div>
                 <div class="flex flex-col mr-4 w-full md:w-3/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">email</label>
                     <input type="email" name="email"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="user@example.com" value="@if(isset($enquiry)){{ $enquiry->email }}@else{{ old('email') }}@endif">
+                        placeholder="user@example.com" value="@if(isset($client)){{ $client->email }}@else{{ old('email') }}@endif">
                 </div>
                 <div class="flex flex-col w-full md:w-3/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">contact number</label>
                     <input type="tel" name="contact_no"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="+910123456789" value="@if(isset($enquiry)){{ $enquiry->contact_no }}@else{{ old('contact_no') }}@endif">
+                        placeholder="+910123456789" value="@if(isset($client)){{ $client->contact_no }}@else{{ old('contact_no') }}@endif">
                 </div>
             </div>
 
@@ -34,13 +34,13 @@
                 <div class="flex flex-col mr-4 w-full md:w-4/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">Subject</label>
                     <textarea name="subject" class="h-20 px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Subject" required>@if(isset($enquiry)){{ $enquiry->subject }}@else{{ old('subject') }}@endif</textarea>
+                        placeholder="Subject" required>@if(isset($client)){{ $client->subject }}@else{{ old('subject') }}@endif</textarea>
                 </div>
                 <div class="flex flex-col mr-4 w-full md:w-4/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">status</label>
-                    <select name="enquiry_status" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
-                        @foreach ($enquiry_statuses as $status)
-                            <option value="{{ $status->id }}" @if(isset($enquiry)) @if($status->id == $enquiry->enquiry_status->id) selected @endif @endif>{{ $status->status }}</option>
+                    <select name="client_status" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
+                        @foreach ($client_statuses as $status)
+                            <option value="{{ $status->id }}" @if(isset($client)) @if($status->id == $client->client_status->id) selected @endif @endif>{{ $status->status }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="flex flex-row">
                 <button type="submit" class="w-6/12 md:w-2/12 px-1 py-2 rounded bg-green-500 hover:bg-green-700 text-white focus:outline-none mr-2">
-                    @if(isset($enquiry))
+                    @if(isset($client))
                         Update
                     @else
                         Create

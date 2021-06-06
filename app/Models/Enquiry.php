@@ -22,11 +22,6 @@ class Enquiry extends Model
         'is_lost' => 'boolean'
     ];
 
-    public function services()
-    {
-        return $this->belongsToMany(Service::class);
-    }
-
     public function follow_ups()
     {
         return $this->hasMany(FollowUp::class);

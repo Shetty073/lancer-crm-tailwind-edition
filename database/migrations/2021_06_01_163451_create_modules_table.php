@@ -17,7 +17,7 @@ class CreateModulesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 2048);
-            $table->decimal('price');
+            $table->decimal('cost');
             $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->timestamps();
         });

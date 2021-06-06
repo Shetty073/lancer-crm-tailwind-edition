@@ -12,11 +12,11 @@ class Module extends Model
     protected $fillable = [
         'name',
         'description',
-        'price',
+        'cost',
     ];
 
     protected $casts = [
-        'price' => 'double'
+        'cost' => 'double'
     ];
 
     public function project()

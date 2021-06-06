@@ -64,6 +64,12 @@ Route::group(['prefix' => '/followups', 'middleware' => 'auth'], function () {
 // clients routes
 Route::group(['prefix' => '/clients', 'middleware' => 'auth'], function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
+    Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
+    Route::post('/store', [ClientsController::class, 'store'])->name('clients.store');
+    Route::get('/{id}/edit', [ClientsController::class, 'edit'])->name('clients.edit');
+    Route::post('/{id}/update', [ClientsController::class, 'update'])->name('clients.update');
+    Route::get('/{id}/show', [ClientsController::class, 'show'])->name('clients.show');
+    Route::post('/{id}/destroy', [ClientsController::class, 'destroy'])->name('clients.destroy');
 });
 
 // projects routes
