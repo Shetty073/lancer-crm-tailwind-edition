@@ -20,7 +20,7 @@
             <!-- modal header -->
             <div class="border-b px-4 py-2 flex justify-between items-center">
                 <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to delete this client? You cannot undo this.
+                    Are you sure you want to change the status of this client?
                 </h3>
             </div>
             <!-- modal body -->
@@ -34,20 +34,20 @@
                 </button>
                 <button
                     class="delete-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
-                    Yes, delete!
+                    Yes
                 </button>
             </div>
         </div>
     </div>
 
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         #</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left w-full md:w-72">
                         Name</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
                         Business Name</th>
@@ -97,9 +97,15 @@
                                             </a>
                                         </li>
                                         <li id="{{ $client->id }}">
-                                            <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                                Delete
-                                            </button>
+                                            @if($client->is_active)
+                                                <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Mark as inactive
+                                                </button>
+                                            @else
+                                                <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Mark as active
+                                                </button>
+                                            @endif
                                         </li>
                                     @endif
                                 </ul>

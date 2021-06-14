@@ -24,7 +24,7 @@ closeEnquiryDeleteModal.forEach((close) => {
 showEnquiryDeleteBtnModal.addEventListener('click', function () {
     // delete the enquiry
     let enquiryId = document.querySelector('#deleteEnquiryId').value;
-    let url = `/enquiries/${enquiryId}/destroy`;
+    let url = document.querySelector('#deleteEnquiryUrl').value;
     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {

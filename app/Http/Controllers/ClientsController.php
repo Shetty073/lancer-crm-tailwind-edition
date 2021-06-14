@@ -132,9 +132,16 @@ class ClientsController extends Controller
     public function destroy($id)
     {
         $client = Client::findorfail($id);
-        $client->update([
-            'is_active' => 0,
-        ]);
+
+        if($client->is_active) {
+            $client->update([
+                'is_active' => false,
+            ]);
+        } else {
+            $client->update([
+                'is_active' => true,
+            ]);
+        }
 
         return back();
     }
