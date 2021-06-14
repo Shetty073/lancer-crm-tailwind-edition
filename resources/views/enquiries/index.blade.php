@@ -119,22 +119,24 @@
                                                 View
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                                Edit
-                                            </a>
-                                        </li>
-                                        <li id="{{ $enquiry->id }}">
-                                            <button class="transfer-to-client-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                                Transfer to Client
-                                            </button>
-                                        </li>
-                                        <input type="hidden" id="transfer{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
-                                        <li id="{{ $enquiry->id }}">
-                                            <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                                Mark as lost
-                                            </button>
-                                        </li>
+                                        @if($enquiry->enquiry_status->id < 4)
+                                            <li>
+                                                <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Edit
+                                                </a>
+                                            </li>
+                                            <li id="{{ $enquiry->id }}">
+                                                <button class="transfer-to-client-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Transfer to Client
+                                                </button>
+                                            </li>
+                                            <input type="hidden" id="transfer{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
+                                            <li id="{{ $enquiry->id }}">
+                                                <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Mark as lost
+                                                </button>
+                                            </li>
+                                        @endif
                                     @endif
                                 </ul>
                             </div>

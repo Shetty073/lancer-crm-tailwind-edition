@@ -11,12 +11,14 @@
             <a href="{{ route('enquiries.create') }}" class="uppercase rounded bg-green-500 hover:bg-green-600 text-white outline-none h-9 px-2 py-2 mt-4 mr-2 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-plus"></i> add new enquiry
             </a>
-            <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
-                <i class="fas fa-edit"></i> edit this enquiry
-            </a>
-            <button type="button" class="enquiry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
-                <i class="fas fa-trash-alt"></i> Mark this as lost
-            </button>
+            @if($enquiry->enquiry_status->id < 4)
+                <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
+                    <i class="fas fa-edit"></i> edit this enquiry
+                </a>
+                <button type="button" class="enquiry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
+                    <i class="fas fa-trash-alt"></i> Mark this as lost
+                </button>
+            @endif
         </div>
     </div>
 
@@ -67,17 +69,6 @@
                         Subject
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">{{ $enquiry->subject }}</td>
-                </tr>
-                <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
-                        Services
-                    </th>
-                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-14 break-words">
-                        @foreach ($enquiry->services as $service)
-                            {{ $service->name }}@if(!$loop->last),@endif
-                        @endforeach
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -214,12 +205,25 @@
         </div>
     </div>
 
+    <div class="pt-3 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-5">
+        <div class="flex justify-between">
+            <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Status</h2>
+        </div>
+        <div class="relative w-max mx-1">
+            <div class="{{ App\Lancer\Utilities::getEnquiryStatusStyle($enquiry->enquiry_status->id) }} text-xl">
+                {{ $enquiry->enquiry_status->status }}
+            </div>
+        </div>
+    </div>
+
     <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-20">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
-            <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 mt-0 mb-4 sm:mt-1 sm:mb-5 block md:inline">
-                <i class="fas fa-plus"></i> add follow up
-            </button>
+            @if($enquiry->enquiry_status->id < 4)
+                <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 mt-0 mb-4 sm:mt-1 sm:mb-5 block md:inline">
+                    <i class="fas fa-plus"></i> add follow up
+                </button>
+            @endif
         </div>
 
         <div class="relative w-100 m-1">

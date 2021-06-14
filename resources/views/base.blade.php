@@ -25,7 +25,7 @@
         </div>
         <div class="flex justify-end">
             <a class="hidden lg:block rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 border-opacity-100" href='{{ route('useraccount.index') }}'>
-                <img height="42" width="42" src='/storage/profile_picture/{{ auth()->user()->photo_url }}' alt='profile photo'
+                <img height="42" width="42" src="{{ asset('storage/profile_picture/' . auth()->user()->photo_url) }}" alt='profile photo'
                     class="inline rounded-full w-9 h-9 pr-1" />
                 <span class="text-white text-base">{{ auth()->user()->firstName() }}</span>
             </a>

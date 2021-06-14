@@ -69,7 +69,7 @@
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $client->business_name }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $client->email }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $client->contact_no }}</td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
                             <span class="{{ App\Lancer\Utilities::getClientStatusStyle($client->is_active) }}">
                                 {{ App\Lancer\Utilities::getClientStatus($client->is_active) }}
                             </span>
