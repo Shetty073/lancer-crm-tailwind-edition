@@ -41,7 +41,7 @@
     </div>
 
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-auto">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
