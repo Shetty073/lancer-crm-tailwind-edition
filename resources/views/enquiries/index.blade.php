@@ -78,7 +78,7 @@
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left w-full md:w-72">
                         Name</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
-                        Business Name</th>
+                        Subject</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
                         Email</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
@@ -94,7 +94,7 @@
                     <tr class="h-12">
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $enquiry->id }}</td>
                         <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">{{ $enquiry->name }}</td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->business_name }}</td>
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->subject }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->email }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">{{ $enquiry->contact_no }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">

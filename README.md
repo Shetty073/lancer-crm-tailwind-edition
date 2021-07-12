@@ -1,8 +1,8 @@
 # lancer-crm
 
-Laravel based CRM web app for individual freelancers for client management.
+Laravel based CRM for real estate channel partners for client management.
 
-Selft hosted | Single User
+Self hosted
 
 ### Running seeder is necessary for two tables
 

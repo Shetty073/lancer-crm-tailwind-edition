@@ -5,7 +5,7 @@
         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
             <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col mr-4 w-full md:w-3/12">
-                    <label class="leading-loose capitalize font-semibold text-indigo-600">full name</label>
+                    <label class="leading-loose capitalize font-semibold text-indigo-600">name</label>
                     <input type="text" name="name"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Firstname Lastname" value="@if(isset($enquiry)){{ $enquiry->name }}@else{{ old('name') }}@endif" required>
@@ -31,12 +31,20 @@
             </div>
 
             <div class="flex flex-col md:flex-row">
-                <div class="flex flex-col mr-4 w-full md:w-4/12">
+                <div class="flex flex-col mr-4 w-full md:w-3/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">Subject</label>
                     <textarea name="subject" class="h-20 px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Subject" required>@if(isset($enquiry)){{ $enquiry->subject }}@else{{ old('subject') }}@endif</textarea>
                 </div>
-                <div class="flex flex-col mr-4 w-full md:w-4/12">
+                <div class="flex flex-col mr-4 w-full md:w-3/12">
+                    <label class="leading-loose capitalize font-semibold text-indigo-600">project</label>
+                    <select name="project_id" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
+                        @foreach ($projects as $project)
+                            <option value="{{ $project->id }}" @if(isset($enquiry)) @if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex flex-col mr-4 w-full md:w-3/12">
                     <label class="leading-loose capitalize font-semibold text-indigo-600">status</label>
                     <select name="enquiry_status" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($enquiry_statuses as $status)

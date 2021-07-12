@@ -30,9 +30,9 @@ use App\Http\Controllers\UserAccountController;
 // signup
 Route::group(['prefix' => '/account'], function () {
     Route::get('signin', [AccountsController::class, 'index'])->name('signin.index');
-    Route::get('signup', [AccountsController::class, 'signup'])->name('signup.index');
+    Route::get('signup', [AccountsController::class, 'signup'])->name('signup.index')->middleware('auth');
     Route::post('signin', [AccountsController::class, 'signin'])->name('signin');
-    Route::post('signup', [AccountsController::class, 'signup'])->name('signup');
+    Route::post('signup', [AccountsController::class, 'signup'])->name('signup')->middleware('auth');
     Route::post('signout', [AccountsController::class, 'signout'])->name('signout')->middleware('auth');
 });
 
@@ -49,6 +49,7 @@ Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::get('/{id}/edit', [EnquiriesController::class, 'edit'])->name('enquiries.edit');
     Route::post('/store', [EnquiriesController::class, 'store'])->name('enquiries.store');
     Route::post('/{id}/update', [EnquiriesController::class, 'update'])->name('enquiries.update');
+    Route::post('/{id}/update/status', [EnquiriesController::class, 'updateStatus'])->name('enquiries.updateStatus');
     Route::post('/{id}/destroy', [EnquiriesController::class, 'destroy'])->name('enquiries.destroy');
 
     Route::post('/{id}/transfer', [EnquiriesController::class, 'transfer'])->name('enquiries.transfer');
@@ -75,16 +76,12 @@ Route::group(['prefix' => '/clients', 'middleware' => 'auth'], function () {
 // projects routes
 Route::group(['prefix' => '/projects', 'middleware' => 'auth'], function () {
     Route::get('/', [ProjectsController::class, 'index'])->name('projects.index');
-});
-
-// services routes
-Route::group(['prefix' => '/services', 'middleware' => 'auth'], function () {
-    Route::get('/', [ServicesController::class, 'index'])->name('services.index');
-    Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
-    Route::get('/{id}/edit', [ServicesController::class, 'edit'])->name('services.edit');
-    Route::post('/store', [ServicesController::class, 'store'])->name('services.store');
-    Route::post('/{id}/update', [ServicesController::class, 'update'])->name('services.update');
-    Route::post('/{id}/destroy', [ServicesController::class, 'destroy'])->name('services.destroy');
+    Route::get('/create', [ProjectsController::class, 'create'])->name('projects.create');
+    Route::post('/store', [ProjectsController::class, 'store'])->name('projects.store');
+    Route::get('/{id}/edit', [ProjectsController::class, 'edit'])->name('projects.edit');
+    Route::post('/{id}/update', [ProjectsController::class, 'update'])->name('projects.update');
+    Route::get('/{id}/show', [ProjectsController::class, 'show'])->name('projects.show');
+    Route::post('/{id}/destroy', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 });
 
 // dues routes
@@ -95,11 +92,6 @@ Route::group(['prefix' => '/dues', 'middleware' => 'auth'], function () {
 // bankaccount routes
 Route::group(['prefix' => '/payments', 'middleware' => 'auth'], function () {
     Route::get('/', [PaymentsController::class, 'index'])->name('payments.index');
-});
-
-// invoices routes
-Route::group(['prefix' => '/invoices', 'middleware' => 'auth'], function () {
-    Route::get('/', [InvoicesController::class, 'index'])->name('invoices.index');
 });
 
 // expenses routes

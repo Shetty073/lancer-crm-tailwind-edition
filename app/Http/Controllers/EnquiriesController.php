@@ -6,6 +6,7 @@ use App\Lancer\Utilities;
 use App\Models\Client;
 use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
+use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -41,10 +42,10 @@ class EnquiriesController extends Controller
      */
     public function create()
     {
-        $enquiry_statuses = EnquiryStatus::all();
-        $services = Service::all();
+        $enquiry_statuses = EnquiryStatus::paginate(3);
+        $projects = Project::all();
 
-        return view('enquiries.create', compact('enquiry_statuses', 'services'));
+        return view('enquiries.create', compact('enquiry_statuses', 'projects'));
     }
 
     /**
@@ -57,12 +58,16 @@ class EnquiriesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'business_name' => 'required',
-            'email' => 'unique:enquiries,email',
-            'contact_no' => 'unique:enquiries,contact_no|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+            'contact_no' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
             'enquiry_status' => 'required',
         ]);
+
+        if ($request->input('email')) {
+            $this->validate($request, [
+                'email' => 'email',
+            ]);
+        }
 
         $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
 
@@ -74,6 +79,9 @@ class EnquiriesController extends Controller
         $enquiry->subject = $request->input('subject');
 
         $enquiry->enquiry_status()->associate($status);
+
+        $project = Project::where('id', $request->input('project_id'))->first();
+        $enquiry->project()->associate($project);
         $enquiry->save();
 
         // $enquiry->services()->attach($request->input('services'));
@@ -96,8 +104,10 @@ class EnquiriesController extends Controller
         }
 
         $followups = $enquiry->follow_ups;
+        $projects = Project::all();
+        $enquiry_statuses = EnquiryStatus::paginate(3);
 
-        return view('enquiries.show', compact('enquiry', 'followups'));
+        return view('enquiries.show', compact('enquiry', 'followups', 'projects', 'enquiry_statuses'));
     }
 
     /**
@@ -114,10 +124,10 @@ class EnquiriesController extends Controller
             return redirect(route('enquiries.index'));
         }
 
-        $enquiry_statuses = EnquiryStatus::all();
-        $services = Service::all();
+        $enquiry_statuses = EnquiryStatus::paginate(3);
+        $projects = Project::all();
 
-        return view('enquiries.edit', compact('enquiry', 'enquiry_statuses', 'services'));
+        return view('enquiries.edit', compact('enquiry', 'enquiry_statuses', 'projects'));
     }
 
     /**
@@ -148,14 +158,29 @@ class EnquiriesController extends Controller
         $enquiry->subject = $request->input('subject');
 
         $enquiry->enquiry_status()->associate($status);
+
+        $project = Project::where('id', $request->input('project_id'))->first();
+        $enquiry->project()->associate($project);
         $enquiry->save();
 
-        // remove all previously attached services
-        // $enquiry->services()->detach();
-        // attach newly selected services
-        // $enquiry->services()->attach($request->input('services'));
-
         return redirect(route('enquiries.index'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $this->validate($request, [
+            'project_id' => 'required',
+            'enquiry_status' => 'required',
+        ]);
+
+        $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
+        $project = Project::where('id', $request->input('project_id'))->first();
+        $enquiry = Enquiry::findorfail($id);
+        $enquiry->enquiry_status()->associate($status);
+        $enquiry->project()->associate($project);
+        $enquiry->save();
+
+        return redirect(route('enquiries.show', ['id' => $id]));
     }
 
     public function transfer(Request $request, $id)
@@ -168,6 +193,7 @@ class EnquiriesController extends Controller
             'email' => $enquiry->email,
             'contact_no' => $enquiry->contact_no,
             'subject' => $enquiry->subject,
+            'project_id' =>$enquiry->project_id,
         ]);
 
         $enquiry->update([

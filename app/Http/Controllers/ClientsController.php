@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller
@@ -26,7 +27,9 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        $projects = Project::all();
+
+        return view('clients.create', compact('projects'));
     }
 
     /**
@@ -80,8 +83,9 @@ class ClientsController extends Controller
     public function edit($id)
     {
         $client = Client::findorfail($id);
+        $projects = Project::all();
 
-        return view('clients.edit', compact('client'));
+        return view('clients.edit', compact('client', 'projects'));
     }
 
     /**

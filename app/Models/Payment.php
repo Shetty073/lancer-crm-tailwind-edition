@@ -14,11 +14,6 @@ class Payment extends Model
         'remark',
     ];
 
-    public function invoice()
-    {
-        return $this->belongsTo(Invoice::class);
-    }
-
     public function payment_mode()
     {
         return $this->belongsTo(PaymentMode::class);

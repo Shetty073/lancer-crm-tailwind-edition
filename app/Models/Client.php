@@ -23,8 +23,8 @@ class Client extends Model
         'is_active' => 'boolean',
     ];
 
-    public function projects()
+    public function project()
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsTo(Project::class);
     }
 }

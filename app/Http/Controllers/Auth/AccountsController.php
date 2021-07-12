@@ -82,13 +82,6 @@ class AccountsController extends Controller
             return redirect()->to('/');
         }
 
-        // Only one user can signup to this applicaation.
-        // If one user exists then redirect to signin page.
-        $users = User::all();
-        if (count($users) >= 1) {
-            return redirect()->route('signin.index');
-        }
-
         $request->flashExcept(['password', 'password_confirmation']);
         return view('signup.index');
     }

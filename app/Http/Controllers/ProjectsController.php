@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -13,7 +14,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        return view('projects.index');
+        $projects = Project::all();
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -34,7 +37,17 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'details' => 'required',
+        ]);
+
+        Project::create([
+            'name' => $request->input('name'),
+            'details' => $request->input('details'),
+        ]);
+
+        return redirect(route('projects.index'));
     }
 
     /**
@@ -45,7 +58,9 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findorfail($id);
+
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -56,7 +71,9 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::findorfail($id);
+
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -68,7 +85,19 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'details' => 'required',
+        ]);
+
+        $project = Project::findorfail($id);
+
+        $project->update([
+            'name' => $request->input('name'),
+            'details' => $request->input('details'),
+        ]);
+
+        return redirect(route('projects.show', ['id' => $project->id]));
     }
 
     /**
@@ -79,6 +108,9 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findorfail($id);
+        $project->delete();
+
+        return redirect(route('projects.index'));
     }
 }

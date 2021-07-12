@@ -31,4 +31,9 @@ class Enquiry extends Model
     {
         return $this->belongsTo(EnquiryStatus::class);
     }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

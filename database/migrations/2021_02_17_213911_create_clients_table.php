@@ -17,12 +17,13 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('business_name', 100)->nullable();
-            $table->string('email', 100)->unique()->nullable();
-            $table->string('contact_no', 22)->unique()->nullable();
+            $table->string('email', 100)->nullable();
+            $table->string('contact_no', 22)->nullable();
             $table->string('subject', 2048)->nullable();
             $table->boolean('is_active')->default(1);
-            $table->integer('rating', 100)->nullable();
+            $table->integer('rating')->nullable();
             $table->string('remark', 200)->nullable();
+            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

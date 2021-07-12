@@ -72,12 +72,6 @@
                                 Projects
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('services*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
-                            <a href="{{ route('services.index') }}">
-                                <i class="fas fa-cubes fa-sm"></i>
-                                Services
-                            </a>
-                        </li>
                         <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dues.index') }}">
                                 <i class="fas fa-file-invoice"></i>
@@ -88,12 +82,6 @@
                             <a href="{{ route('payments.index') }}">
                                 <i class="fas fa-cash-register fa-xs"></i>
                                 Payments
-                            </a>
-                        </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('invoices*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
-                            <a href="{{ route('invoices.index') }}">
-                                <i class="fas fa-file-invoice-dollar"></i>
-                                Invoices
                             </a>
                         </li>
                         <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('expenses*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
