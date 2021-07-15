@@ -31,8 +31,13 @@ class Client extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function assignedTo()
+    public function closedBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'closed_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

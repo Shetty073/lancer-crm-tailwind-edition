@@ -18,6 +18,7 @@ class CreateBankAccountsTable extends Migration
             $table->string('name', 100);
             $table->double('initial_balance', 12, 2);
             $table->double('current_balance', 12, 2);
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

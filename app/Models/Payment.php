@@ -30,4 +30,9 @@ class Payment extends Model
     {
         return $this->hasOne(ChequeDetail::class);
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

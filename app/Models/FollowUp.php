@@ -25,4 +25,9 @@ class FollowUp extends Model
     {
         return $this->belongsTo(Enquiry::class, 'enquiry_id');
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

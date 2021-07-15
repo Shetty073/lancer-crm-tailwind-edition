@@ -17,6 +17,7 @@ class CreateDigitalDetailsTable extends Migration
             $table->id();
             $table->string('ref_id', 16);
             $table->foreignId('payment_id')->nullable()->constrained('payments')->onDelete('cascade');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

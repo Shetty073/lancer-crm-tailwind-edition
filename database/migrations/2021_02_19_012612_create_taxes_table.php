@@ -17,6 +17,7 @@ class CreateTaxesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->double('tax_percent', 5, 2);
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

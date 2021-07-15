@@ -19,4 +19,9 @@ class DigitalDetail extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

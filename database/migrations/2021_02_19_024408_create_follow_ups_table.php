@@ -19,6 +19,7 @@ class CreateFollowUpsTable extends Migration
             $table->string('remark', 100)->nullable();
             $table->string('outcome', 150)->nullable();
             $table->foreignId('enquiry_id')->nullable()->constrained('enquiries')->onDelete('cascade');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->double('amount', 12, 2);
             $table->string('remark', 150)->nullable();
             $table->foreignId('payment_mode_id')->nullable()->constrained('payment_modes')->onDelete('restrict');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

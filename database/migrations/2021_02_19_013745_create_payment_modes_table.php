@@ -19,6 +19,7 @@ class CreatePaymentModesTable extends Migration
             $table->boolean('is_cash')->default(0);
             $table->boolean('is_cheque')->default(0);
             $table->boolean('is_digital')->default(0);
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

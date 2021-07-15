@@ -20,4 +20,9 @@ class ExpenseCategory extends Model
     {
         return $this->hasMany(Expense::class, 'expense_category_id');
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

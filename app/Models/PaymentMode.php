@@ -28,4 +28,9 @@ class PaymentMode extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

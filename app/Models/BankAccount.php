@@ -16,4 +16,9 @@ class BankAccount extends Model
         'initial_balance',
         'current_balance',
     ];
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

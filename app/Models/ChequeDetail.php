@@ -25,4 +25,9 @@ class ChequeDetail extends Model
     {
         return $this->belongsTo(ChequeStatus::class);
     }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
 }

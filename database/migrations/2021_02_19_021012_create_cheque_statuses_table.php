@@ -16,6 +16,7 @@ class CreateChequeStatusesTable extends Migration
         Schema::create('cheque_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('status', 50);
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->softDeletes();
         });
     }
