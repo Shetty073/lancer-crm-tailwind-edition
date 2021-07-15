@@ -18,6 +18,7 @@ class CreateExpenseCategoriesTable extends Migration
             $table->string('name', 100);
             $table->string('remark', 250)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -16,6 +16,7 @@ class CreateEnquiryStatusesTable extends Migration
         Schema::create('enquiry_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('status', 50);
+            $table->softDeletes();
         });
     }
 

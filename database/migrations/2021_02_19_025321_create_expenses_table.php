@@ -19,6 +19,7 @@ class CreateExpensesTable extends Migration
             $table->double('amount_paid', 12, 2);
             $table->foreignId('expense_category_id')->nullable()->constrained('expense_categories')->onDelete('restrict');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

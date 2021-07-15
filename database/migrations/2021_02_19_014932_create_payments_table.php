@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('remark', 150)->nullable();
             $table->foreignId('payment_mode_id')->nullable()->constrained('payment_modes')->onDelete('restrict');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

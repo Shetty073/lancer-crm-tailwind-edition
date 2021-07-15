@@ -19,6 +19,7 @@ class CreateBankAccountsTable extends Migration
             $table->double('initial_balance', 12, 2);
             $table->double('current_balance', 12, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

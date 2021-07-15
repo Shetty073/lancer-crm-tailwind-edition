@@ -17,13 +17,13 @@ class EnquiryStatusSeeder extends Seeder
         // Insert the default statuses
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Hot',
+                'status' => 'Oppurtunity',
             )
         );
 
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Mild',
+                'status' => 'Suspect',
             )
         );
 
@@ -41,7 +41,7 @@ class EnquiryStatusSeeder extends Seeder
 
         DB::table('enquiry_statuses')->insert(
             array(
-                'status' => 'Client',
+                'status' => 'Closed',
             )
         );
     }

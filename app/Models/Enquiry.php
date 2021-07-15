@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Enquiry extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'enquiries';
 
     protected $fillable = [
@@ -16,6 +18,7 @@ class Enquiry extends Model
         'contact_no',
         'subject',
         'is_lost',
+        'lost_remark',
     ];
 
     protected $casts = [
@@ -35,5 +38,10 @@ class Enquiry extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -18,6 +18,7 @@ class CreateTaxesTable extends Migration
             $table->string('name', 100);
             $table->double('tax_percent', 5, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

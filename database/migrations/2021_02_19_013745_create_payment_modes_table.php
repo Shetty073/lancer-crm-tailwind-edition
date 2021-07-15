@@ -20,6 +20,7 @@ class CreatePaymentModesTable extends Migration
             $table->boolean('is_cheque')->default(0);
             $table->boolean('is_digital')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
