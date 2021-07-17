@@ -1,3 +1,4 @@
+// TODO: Replace all custom swal dialog boxes with sweetalert2
 // client delete button event
 const showClientDeleteModal = document.querySelector('.client-delete-modal');
 const closeClientDeleteModal = document.querySelectorAll(
