@@ -132,7 +132,7 @@
     </div>
 
 
-    <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-20">
+    <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-2 lg:pb-20">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
             @if($enquiry->enquiry_status->id < 4)
@@ -152,7 +152,14 @@
                 <input type="hidden" id="outcome{{ $followup->id }}" value="{{ $followup->outcome }}">
                 <li class="mb-10">
                     <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
+                        @if($followup->date_time->format('d-m-Y') < Carbon\Carbon::now()->format('d-m-Y'))
+                            <div class="bg-yellow-400 rounded-full h-8 w-8"></div>
+                        @elseif ($followup->date_time->format('d-m-Y') === Carbon\Carbon::now()->format('d-m-Y'))
+                            <div class="bg-green-400 z-10 rounded-full h-8 w-8"></div>
+                        @else
+                            <div class="bg-gray-900 z-10 rounded-full h-8 w-8"></div>
+                        @endif
+
                         <div class="flex-1 ml-4 font-medium">{{ $followup->date_time->format('d M, Y') }} -
                             {{ $followup->remark }}</div>
                     </div>
@@ -180,6 +187,8 @@
         </div>
 
     </div>
+
+    <br>
 
     {{-- Required for mark delete action --}}
     <input type="hidden" id="deleteUrl{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
