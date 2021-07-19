@@ -16,9 +16,8 @@
                 class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-edit"></i> edit this project
             </a>
-            <input type="hidden" id="deleteProjectUrl" value="{{ route('projects.destroy', ['id' => $project->id]) }}">
             <button type="button"
-                class="project-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
+                class="entry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                 <i class="fas fa-trash-alt"></i> Delete this project
             </button>
         </div>
@@ -52,37 +51,16 @@
 
     </div>
 
-    {{-- Delete project modal --}}
-    <div
-        class="z-10 project-delete-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to delete this project? You can not undo this.
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="deleteProjectId" type="hidden" value="{{ $project->id }}" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-project-delete-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="project-delete-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white project-delete-btn-modal focus:outline-none">
-                    Yes delete!
-                </button>
-            </div>
-        </div>
-    </div>
+    {{-- Required for delete action --}}
+    <input type="hidden" id="deleteUrl{{ $project->id }}" value="{{ route('projects.destroy', ['id' => $project->id]) }}">
+    <input type="hidden" id="closedRedirectUrl" value="{{ route('projects.index') }}">
+    <input type="hidden" id="deletedBtnText" value="Yes, delete it!">
+    <input type="hidden" id="deletedTitle" value="Deleted!">
+    <input type="hidden" id="deletedMsg" value="The selected project was successfully deleted.">
 
 </main>
 
 @endsection
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/projects_swal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
 @endsection

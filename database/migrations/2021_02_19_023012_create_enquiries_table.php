@@ -23,7 +23,7 @@ class CreateEnquiriesTable extends Migration
             $table->boolean('is_lost')->default(0);
             $table->string('lost_remark')->nullable();
             $table->foreignId('enquiry_status_id')->nullable()->constrained('enquiry_statuses')->onDelete('restrict');
-            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
+            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('restrict');
             $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();

@@ -15,45 +15,17 @@
                 class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-edit"></i> edit this client
             </a>
-            <input type="hidden" id="deleteClientUrl" value="{{ route('clients.destroy', ['id' => $client->id]) }}">
             @if($client->is_active)
                 <button type="button"
-                    class="client-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
+                    class="entry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                     <i class="fas fa-trash-alt"></i> mark as inactive
                 </button>
             @else
                 <button type="button"
-                    class="client-delete-btn ml-2 uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
+                    class="entry-delete-btn ml-2 uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                     <i class="fas fa-trash-restore"></i> mark as active
                 </button>
             @endif
-        </div>
-    </div>
-
-    {{-- Delete client modal --}}
-    <div class="z-10 client-delete-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-    <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to mark this client as @if($client->active)inactive? @else active?@endif
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="deleteClientId" type="hidden" value="{{ $client->id }}" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-client-delete-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="client-delete-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white client-delete-btn-modal focus:outline-none">
-                    Yes, mark!
-                </button>
-            </div>
         </div>
     </div>
 
@@ -156,10 +128,15 @@
         </table>
     </div>
 
-    {{-- // TODO: Implement create project in this page --}}
+    {{-- Required for mark inactive/active action --}}
+    <input type="hidden" id="deleteUrl{{ $client->id }}" value="{{ route('clients.destroy', ['id' => $client->id]) }}">
+    <input type="hidden" id="deletedBtnText" value="Yes, mark it!">
+    <input type="hidden" id="deletedTitle" value="Marked!">
+    <input type="hidden" id="deletedMsg" value="Your request has been successfully completed.">
+
 </main>
 
 @endsection
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/clients_swal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
 @endsection

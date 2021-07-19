@@ -141,9 +141,7 @@ class EnquiriesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'business_name' => 'required',
-            'email' => 'email',
-            'contact_no' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+            'contact_no' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
             'enquiry_status' => 'required',
         ]);
@@ -183,7 +181,7 @@ class EnquiriesController extends Controller
         return redirect(route('enquiries.show', ['id' => $id]));
     }
 
-    public function transfer(Request $request, $id)
+    public function transfer($id)
     {
         $enquiry = Enquiry::findorfail($id);
 
@@ -196,9 +194,9 @@ class EnquiriesController extends Controller
             'project_id' =>$enquiry->project_id,
         ]);
 
-        $enquiry->update([
-            'status' => 5,
-        ]);
+        $status = EnquiryStatus::where('id', 5)->first();
+        $enquiry->enquiry_status()->associate($status);
+        $enquiry->save();
 
         return back();
     }

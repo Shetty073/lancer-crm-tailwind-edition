@@ -13,62 +13,6 @@
         </a>
     </div>
 
-    {{-- Delete enquiry modal --}}
-    <div
-        class="delete-modal z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to mark this enquiry as lost? You can not undo this.
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="deleteEntryId" type="hidden" value="" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="close-delete-btn-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="delete-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
-                    Mark lost
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{-- Transfer enquiry modal --}}
-    <div
-        class="transfer-modal z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to transfer this enquiry to client? You can not undo this.
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="transferEntryId" type="hidden" value="" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="close-transfer-btn-modal bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="transfer-btn-modal bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white focus:outline-none">
-                    Yes, transfer
-                </button>
-            </div>
-        </div>
-    </div>
-
     <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
@@ -126,11 +70,11 @@
                                                 </a>
                                             </li>
                                             <li id="{{ $enquiry->id }}">
-                                                <button class="transfer-to-client-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
-                                                    Transfer to Client
+                                                <button class="close-deal-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                    Close deal
                                                 </button>
                                             </li>
-                                            <input type="hidden" id="transfer{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
+                                            <input type="hidden" id="close{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
                                             <li id="{{ $enquiry->id }}">
                                                 <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                     Mark as lost
@@ -143,8 +87,15 @@
 
                         </td>
                     </tr>
-                    <input type="hidden" id="delete{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
+                    <input type="hidden" id="deleteUrl{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
                 @endforeach
+                {{-- Required for mark delete action --}}
+                <input type="hidden" id="deletedBtnText" value="Yes, delete it!">
+                <input type="hidden" id="deletedTitle" value="Deleted!">
+                <input type="hidden" id="deletedMsg" value="The selected enquiry has been successfully deleted.">
+
+                {{-- Required for close deal action --}}
+                <input type="hidden" id="closedRedirectUrl" value="{{ route('clients.index') }}">
 
             </tbody>
         </table>
@@ -159,12 +110,11 @@
 
     </div>
 
-    <input type="hidden" id="transferRedirectUrl" value="{{ route('clients.index') }}">
 </main>
 
 @endsection
 
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/index_swal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/transferToClient.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/close_deal.js') }}"></script>
 @endsection

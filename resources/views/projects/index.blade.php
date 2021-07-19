@@ -90,8 +90,13 @@
 
                         </td>
                     </tr>
-                    <input type="hidden" id="delete{{ $project->id }}" value="{{ route('projects.destroy', ['id' => $project->id]) }}">
+                    <input type="hidden" id="deleteUrl{{ $project->id }}" value="{{ route('projects.destroy', ['id' => $project->id]) }}">
                 @endforeach
+
+                {{-- Required for delete action --}}
+                <input type="hidden" id="deletedBtnText" value="Yes, delete it!">
+                <input type="hidden" id="deletedTitle" value="Deleted!">
+                <input type="hidden" id="deletedMsg" value="The selected project was successfully deleted.">
 
             </tbody>
         </table>
@@ -112,6 +117,5 @@
 @endsection
 
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/index_swal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/transferToClient.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
 @endsection

@@ -17,9 +17,8 @@
                     class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
                     <i class="fas fa-edit"></i> edit this enquiry
                 </a>
-                <input type="hidden" id="deleteEnquiryUrl" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
                 <button type="button"
-                    class="enquiry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
+                    class="entry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                     <i class="fas fa-trash-alt"></i> Mark this as lost
                 </button>
             @endif
@@ -88,148 +87,6 @@
         </table>
     </div>
 
-    {{-- Add followup modal --}}
-    <div
-        class="z-10 add-followup-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-2xl font-bold">Add Follow Up</h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Date & Time</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="addFollowupDateTime" type="datetime-local" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Remark</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="addFollowupRemark" type="text" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Outcome</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="addFollowupOutcome" type="text" />
-                </div>
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 add-followup-close-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white submit-add-follow-up-modal focus:outline-none">
-                    Submit
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{-- Edit followup modal --}}
-    <div
-        class="z-10 modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-2xl font-bold">Edit Follow Up</h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="followUpId" type="hidden" value="" />
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Date & Time</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="followupDateTime" type="datetime-local" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Remark</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="followupRemark" type="text" />
-                </div>
-                <div class="py-1 bg-indigo-100 mb-1 rounded">
-                    <label class="block text-indigo-700 font-bold px-2">Outcome</label>
-                    <input
-                        class="w-11/12 px-2 py-1 mx-3 bg-indigo-100 border-b-2 border-gray-500 focus:border-indigo-700 outline-none"
-                        id="followupOutcome" type="text" />
-                </div>
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white submit-follow-up-modal focus:outline-none">
-                    Submit
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{-- Delete followup modal --}}
-    <div
-        class="z-10 delete-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to delete this follow up? You can not recover this once deleted.
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="deleteFollowUpId" type="hidden" value="" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-delete-btn-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white delete-follow-up-modal focus:outline-none">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{-- Delete enquiry modal --}}
-    <div
-        class="z-10 enquiry-delete-modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-11/12 sm:w-1/3">
-            <!-- modal header -->
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-indigo-700 text-lg font-bold">
-                    Are you sure you want to mark this enquiry as lost? You can not undo this.
-                </h3>
-            </div>
-            <!-- modal body -->
-            <div class="p-3">
-                <input id="deleteEnquiryId" type="hidden" value="{{ $enquiry->id }}" />
-            </div>
-            <div class="flex justify-end items-center w-100 border-t p-3">
-                <button
-                    class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white mr-1 close-enquiry-delete-modal focus:outline-none">
-                    Cancel
-                </button>
-                <button
-                    class="enquiry-delete-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white enquiry-delete-btn-modal focus:outline-none">
-                    Mark lost
-                </button>
-            </div>
-        </div>
-    </div>
 
     <div class="pt-3 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-5">
         <div class="flex justify-between">
@@ -274,6 +131,7 @@
 
     </div>
 
+
     <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-10 lg:pb-20">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
@@ -308,6 +166,8 @@
                             class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
+                        <input type="hidden" id="editfollowupurl{{ $followup->id }}" value="{{ route('followups.update', ['id' => $followup->id]) }}">
+                        <input type="hidden" id="deletefollowupurl{{ $followup->id }}" value="{{ route('followups.destroy', ['id' => $followup->id]) }}">
                         <button type="button"
                             class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
                             Delete
@@ -321,9 +181,23 @@
 
     </div>
 
+    {{-- Required for mark delete action --}}
+    <input type="hidden" id="deleteUrl{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
+    <input type="hidden" id="deletedBtnText" value="Yes, delete it!">
+    <input type="hidden" id="deletedTitle" value="Deleted!">
+    <input type="hidden" id="deletedMsg" value="The selected data has been successfully deleted.">
+
+    {{-- Required for close deal action --}}
+    <input type="hidden" id="closedRedirectUrl" value="{{ route('clients.index') }}">
+
+    {{-- Required for followup related actions --}}
+    <input type="hidden" id="addfollowupurl" value="{{ route('followups.store') }}">
+    <input type="hidden" id="enquiryid" value="{{ $enquiry->id }}">
+
 </main>
 
 @endsection
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/enquiries_swal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/followups_swal.js') }}"></script>
 @endsection
