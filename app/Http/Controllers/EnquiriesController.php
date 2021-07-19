@@ -207,14 +207,17 @@ class EnquiriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $data = json_decode($request->getContent());
+
         $enquiry = Enquiry::findorfail($id);
         $status = EnquiryStatus::where('id', 4)->first();
         $enquiry->update([
             'is_lost' => true,
         ]);
         $enquiry->enquiry_status()->associate($status);
+        $enquiry->lost_remark = $data->lost_remark;
         $enquiry->save();
 
         return back();

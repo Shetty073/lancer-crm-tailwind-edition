@@ -90,12 +90,12 @@
                     <input type="hidden" id="deleteUrl{{ $enquiry->id }}" value="{{ route('enquiries.destroy', ['id' => $enquiry->id]) }}">
                 @endforeach
                 {{-- Required for mark delete action --}}
-                <input type="hidden" id="deletedBtnText" value="Yes, delete it!">
-                <input type="hidden" id="deletedTitle" value="Deleted!">
-                <input type="hidden" id="deletedMsg" value="The selected enquiry has been successfully deleted.">
+                <input type="hidden" id="deletedBtnText" value="Yes, mark it!">
+                <input type="hidden" id="deletedTitle" value="Marked as lost!">
+                <input type="hidden" id="deletedMsg" value="The selected enquiry has been successfully marked as lost.">
 
                 {{-- Required for close deal action --}}
-                <input type="hidden" id="closedRedirectUrl" value="{{ route('clients.index') }}">
+                <input type="hidden" id="closedRedirectUrl" value="{{ route('enquiries.index') }}">
 
             </tbody>
         </table>
@@ -115,6 +115,6 @@
 @endsection
 
 @section('footer-scripts')
-    <script type="text/javascript" src="{{ asset('js/delete_entry.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/enquiry_lost.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/close_deal.js') }}"></script>
 @endsection
