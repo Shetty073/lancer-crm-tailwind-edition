@@ -22,6 +22,8 @@
         @include('projects.form')
     </form>
 
+    <br>
+    <br>
 </main>
 
 @endsection

@@ -128,6 +128,68 @@
         </table>
     </div>
 
+    <div class="flex flex-col lg:flex-row mb-10 px-5 py-6 rounded shadow-lg bg-indigo-100">
+        <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mr-0 lg:mr-5">
+            <tbody>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Project
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $client->project->name }}</td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Configuration</th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $client->configuration->name }}</td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Carpet
+                        Area</th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $client->carpet_area }} Sq. Ft.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mt-5 lg:mt-0">
+            <tbody>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Agreement Value
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
+                        ₹ {{ $client->agreement_value }}
+                    </td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Booking Amount
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
+                        ₹ {{ $client->booking_amount }}
+                    </td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Payment Mode
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
+                        <div class="mb-1 pt-1 rounded mr-4" id="ratingDisplayDiv">
+                            {{ $client->payment_mode->name }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     {{-- Required for mark inactive/active action --}}
     <input type="hidden" id="deleteUrl{{ $client->id }}" value="{{ route('clients.destroy', ['id' => $client->id]) }}">
     <input type="hidden" id="deletedBtnText" value="Yes, mark it!">

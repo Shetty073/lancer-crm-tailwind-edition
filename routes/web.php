@@ -52,7 +52,7 @@ Route::group(['prefix' => '/enquiries', 'middleware' => 'auth'], function () {
     Route::post('/{id}/update/status', [EnquiriesController::class, 'updateStatus'])->name('enquiries.updateStatus');
     Route::post('/{id}/destroy', [EnquiriesController::class, 'destroy'])->name('enquiries.destroy');
 
-    Route::post('/{id}/transfer', [EnquiriesController::class, 'transfer'])->name('enquiries.transfer');
+    Route::get('/{id}/close', [EnquiriesController::class, 'close'])->name('enquiries.close');
 });
 
 // followups routes

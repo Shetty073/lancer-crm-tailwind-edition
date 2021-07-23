@@ -22,10 +22,13 @@
         @include('clients.form')
     </form>
 
+    <br>
+    <br>
 </main>
 
 @endsection
 
 @section('footer-scripts')
     <script type="text/javascript" src="{{ asset('js/star.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/brokerage_calculator.js') }}"></script>
 @endsection

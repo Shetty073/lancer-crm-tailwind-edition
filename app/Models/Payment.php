@@ -14,11 +14,24 @@ class Payment extends Model
     protected $fillable = [
         'amount',
         'remark',
+        'due_date',
+        'date_of_payment',
+    ];
+
+    protected $casts = [
+        'amount' => 'double',
+        'due_date' => 'date',
+        'date_of_payment' => 'date',
     ];
 
     public function payment_mode()
     {
         return $this->belongsTo(PaymentMode::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
     public function digital_details()

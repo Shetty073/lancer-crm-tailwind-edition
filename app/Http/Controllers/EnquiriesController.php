@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Lancer\Utilities;
+use App\Models\BudgetRange;
 use App\Models\Client;
+use App\Models\Configuration;
 use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
+use App\Models\PaymentMode;
 use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -44,8 +47,10 @@ class EnquiriesController extends Controller
     {
         $enquiry_statuses = EnquiryStatus::paginate(3);
         $projects = Project::all();
+        $configurations = Configuration::all();
+        $budget_ranges = BudgetRange::all();
 
-        return view('enquiries.create', compact('enquiry_statuses', 'projects'));
+        return view('enquiries.create', compact('enquiry_statuses', 'projects', 'configurations', 'budget_ranges'));
     }
 
     /**
@@ -69,22 +74,27 @@ class EnquiriesController extends Controller
             ]);
         }
 
+        $enquiry = Enquiry::create([
+            'name' => $request->input('name'),
+            'business_name' => $request->input('business_name'),
+            'email' => $request->input('email'),
+            'contact_no' => $request->input('contact_no'),
+            'subject' => $request->input('subject'),
+        ]);
+
         $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
-
-        $enquiry = new Enquiry();
-        $enquiry->name = $request->input('name');
-        $enquiry->business_name = $request->input('business_name');
-        $enquiry->email = $request->input('email');
-        $enquiry->contact_no = $request->input('contact_no');
-        $enquiry->subject = $request->input('subject');
-
         $enquiry->enquiry_status()->associate($status);
 
         $project = Project::where('id', $request->input('project_id'))->first();
         $enquiry->project()->associate($project);
-        $enquiry->save();
 
-        // $enquiry->services()->attach($request->input('services'));
+        $configuration = Configuration::where('id', $request->input('configuration'))->first();
+        $enquiry->configuration()->associate($configuration);
+
+        $budget_range = BudgetRange::where('id', $request->input('budget_range'))->first();
+        $enquiry->budget_range()->associate($budget_range);
+
+        $enquiry->save();
 
         return redirect(route('enquiries.index'));
     }
@@ -126,8 +136,10 @@ class EnquiriesController extends Controller
 
         $enquiry_statuses = EnquiryStatus::paginate(3);
         $projects = Project::all();
+        $configurations = Configuration::all();
+        $budget_ranges = BudgetRange::all();
 
-        return view('enquiries.edit', compact('enquiry', 'enquiry_statuses', 'projects'));
+        return view('enquiries.edit', compact('enquiry', 'enquiry_statuses', 'projects', 'configurations', 'budget_ranges'));
     }
 
     /**
@@ -146,19 +158,27 @@ class EnquiriesController extends Controller
             'enquiry_status' => 'required',
         ]);
 
-        $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
-
         $enquiry = Enquiry::where('id', $id)->first();
-        $enquiry->name = $request->input('name');
-        $enquiry->business_name = $request->input('business_name');
-        $enquiry->email = $request->input('email');
-        $enquiry->contact_no = $request->input('contact_no');
-        $enquiry->subject = $request->input('subject');
+        $enquiry->update([
+            'name' => $request->input('name'),
+            'business_name' => $request->input('business_name'),
+            'email' => $request->input('email'),
+            'contact_no' => $request->input('contact_no'),
+            'subject' => $request->input('subject'),
+        ]);
 
+        $status = EnquiryStatus::where('id', $request->input('enquiry_status'))->first();
         $enquiry->enquiry_status()->associate($status);
 
         $project = Project::where('id', $request->input('project_id'))->first();
         $enquiry->project()->associate($project);
+
+        $configuration = Configuration::where('id', $request->input('configuration'))->first();
+        $enquiry->configuration()->associate($configuration);
+
+        $budget_range = BudgetRange::where('id', $request->input('budget_range'))->first();
+        $enquiry->budget_range()->associate($budget_range);
+
         $enquiry->save();
 
         return redirect(route('enquiries.index'));
@@ -181,24 +201,19 @@ class EnquiriesController extends Controller
         return redirect(route('enquiries.show', ['id' => $id]));
     }
 
-    public function transfer($id)
+    public function close($id)
     {
         $enquiry = Enquiry::findorfail($id);
-
-        Client::create([
-            'name' => $enquiry->name,
-            'business_name' => $enquiry->business_name,
-            'email' => $enquiry->email,
-            'contact_no' => $enquiry->contact_no,
-            'subject' => $enquiry->subject,
-            'project_id' =>$enquiry->project_id,
-        ]);
 
         $status = EnquiryStatus::where('id', 5)->first();
         $enquiry->enquiry_status()->associate($status);
         $enquiry->save();
 
-        return back();
+        $projects = Project::all();
+        $payment_modes = PaymentMode::all();
+        $configurations = Configuration::all();
+
+        return view('clients.create', compact('enquiry', 'projects', 'payment_modes', 'configurations'));
     }
 
     /**

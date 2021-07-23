@@ -23,7 +23,12 @@ class CreateClientsTable extends Migration
             $table->boolean('is_active')->default(1);
             $table->integer('rating')->nullable();
             $table->string('remark', 200)->nullable();
+            $table->decimal('carpet_area', 10, 2)->nullable();
+            $table->decimal('agreement_value', 20, 2)->nullable();
+            $table->decimal('booking_amount', 20, 2)->nullable();
             $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('restrict');
+            $table->foreignId('configuration_id')->nullable()->constrained('configurations')->onDelete('set null');
+            $table->foreignId('payment_mode_id')->nullable()->constrained('payment_modes')->onDelete('restrict');
             $table->foreignId('closed_by')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();

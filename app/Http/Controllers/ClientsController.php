@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Configuration;
+use App\Models\Payment;
+use App\Models\PaymentMode;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -28,8 +31,10 @@ class ClientsController extends Controller
     public function create()
     {
         $projects = Project::all();
+        $payment_modes = PaymentMode::all();
+        $configurations = Configuration::all();
 
-        return view('clients.create', compact('projects'));
+        return view('clients.create', compact('projects', 'payment_modes', 'configurations'));
     }
 
     /**
@@ -42,21 +47,42 @@ class ClientsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'business_name' => 'required',
-            'email' => 'unique:clients,email',
-            'contact_no' => 'unique:enquiries,contact_no|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+            'contact_no' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
-            'remark' => 'remark',
         ]);
 
-        Client::create([
+        $client = Client::create([
             'name' => $request->input('name'),
             'business_name' => $request->input('business_name'),
             'email' => $request->input('email'),
             'contact_no' => $request->input('contact_no'),
             'subject' => $request->input('subject'),
+            'carpet_area' => $request->input('carpet_area'),
+            'agreement_value' => $request->input('agreement_value'),
+            'booking_amount' => $request->input('booking_amount'),
             'remark' => $request->input('remark'),
+            'rating' => $request->input('rating'),
         ]);
+
+        $project = Project::where('id', $request->input('project_id'))->first();
+        $client->project()->associate($project);
+
+        $configuration = Configuration::where('id', $request->input('configuration'))->first();
+        $client->configuration()->associate($configuration);
+
+        $payment_mode = PaymentMode::where('id', $request->input('payment_mode'))->first();
+        $client->payment_mode()->associate($payment_mode);
+
+        $client->closedBy()->associate(auth()->user());
+
+        $client->save();
+
+        $payment = Payment::create([
+            'amount' => $request->input('brokerage_amount'),
+            'due_date' => $request->input('due_date'),
+            'remark' => $request->input('brokerage_remark'),
+        ]);
+        $payment->client()->associate($client);
 
         return redirect(route('clients.index'));
     }
@@ -84,8 +110,10 @@ class ClientsController extends Controller
     {
         $client = Client::findorfail($id);
         $projects = Project::all();
+        $payment_modes = PaymentMode::all();
+        $configurations = Configuration::all();
 
-        return view('clients.edit', compact('client', 'projects'));
+        return view('clients.edit', compact('client', 'projects', 'payment_modes', 'configurations'));
     }
 
     /**
@@ -99,9 +127,7 @@ class ClientsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'business_name' => 'required',
-            'email' => 'email',
-            'contact_no' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+            'contact_no' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
             'subject' => 'required',
         ]);
 
@@ -112,9 +138,21 @@ class ClientsController extends Controller
             'email' => $request->input('email'),
             'contact_no' => $request->input('contact_no'),
             'subject' => $request->input('subject'),
-            'rating' => $request->input('rating'),
+            'carpet_area' => $request->input('carpet_area'),
+            'agreement_value' => $request->input('agreement_value'),
+            'booking_amount' => $request->input('booking_amount'),
             'remark' => $request->input('remark'),
+            'rating' => $request->input('rating'),
         ]);
+
+        $project = Project::where('id', $request->input('project_id'))->first();
+        $client->project()->associate($project);
+
+        $configuration = Configuration::where('id', $request->input('configuration'))->first();
+        $client->configuration()->associate($configuration);
+
+        $payment_mode = PaymentMode::where('id', $request->input('payment_mode'))->first();
+        $client->payment_mode()->associate($payment_mode);
 
         if($request->has('is_active')) {
             $client->is_active = true;
@@ -136,16 +174,8 @@ class ClientsController extends Controller
     public function destroy($id)
     {
         $client = Client::findorfail($id);
-
-        if($client->is_active) {
-            $client->update([
-                'is_active' => false,
-            ]);
-        } else {
-            $client->update([
-                'is_active' => true,
-            ]);
-        }
+        // ! TODO: create deletedBy entry
+        $client->delete();
 
         return back();
     }

@@ -22,6 +22,8 @@
         @include('enquiries.form')
     </form>
 
+    <br>
+    <br>
 </main>
 
 @endsection

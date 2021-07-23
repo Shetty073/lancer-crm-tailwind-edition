@@ -55,11 +55,6 @@
                         Email</th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->email }}</td>
                 </tr>
-            </tbody>
-        </table>
-
-        <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mt-5 lg:mt-0">
-            <tbody>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
@@ -67,6 +62,11 @@
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->contact_no }}</td>
                 </tr>
+            </tbody>
+        </table>
+
+        <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mt-5 lg:mt-0">
+            <tbody>
                 <tr>
                     <th
                         class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
@@ -82,6 +82,22 @@
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
                         {{ $enquiry->project->name }}</td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Configuration
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
+                        {{ $enquiry->configuration->name }}</td>
+                </tr>
+                <tr>
+                    <th
+                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                        Budget Range
+                    </th>
+                    <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
+                        ₹ {{ $enquiry->budget_range->range }}</td>
                 </tr>
             </tbody>
         </table>

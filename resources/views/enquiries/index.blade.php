@@ -70,11 +70,10 @@
                                                 </a>
                                             </li>
                                             <li id="{{ $enquiry->id }}">
-                                                <button class="close-deal-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
+                                                <a href="{{ route('enquiries.close', ['id' => $enquiry->id]) }}" class="close-deal-btn uppercase text-sm font-semibold w-full bg-white text-green-600 hover:bg-green-600 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                     Close deal
-                                                </button>
+                                                </a>
                                             </li>
-                                            <input type="hidden" id="close{{ $enquiry->id }}" value="{{ route('enquiries.transfer', ['id' => $enquiry->id]) }}">
                                             <li id="{{ $enquiry->id }}">
                                                 <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                     Mark as lost
@@ -93,9 +92,6 @@
                 <input type="hidden" id="deletedBtnText" value="Yes, mark it!">
                 <input type="hidden" id="deletedTitle" value="Marked as lost!">
                 <input type="hidden" id="deletedMsg" value="The selected enquiry has been successfully marked as lost.">
-
-                {{-- Required for close deal action --}}
-                <input type="hidden" id="closedRedirectUrl" value="{{ route('enquiries.index') }}">
 
             </tbody>
         </table>

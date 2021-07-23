@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(ConfigurationSeeder::class);
         $this->call(BudgetRangeSeeder::class);
+        $this->call(PaymentModeSeeder::class);
+        $this->call(ProjectSeeder::class);
     }
 }

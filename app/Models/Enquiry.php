@@ -40,6 +40,16 @@ class Enquiry extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public function configuration()
+    {
+        return $this->belongsTo(Configuration::class, 'configuration_id');
+    }
+
+    public function budget_range()
+    {
+        return $this->belongsTo(BudgetRange::class, 'budget_range_id');
+    }
+
     public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_to');

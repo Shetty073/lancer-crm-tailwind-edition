@@ -5,7 +5,13 @@
 
 <main class="px-1 lg:px-4 py-2 mx-2 ls:mx-10 my-5 h-screen">
     <div class="flex md:justify-between">
-        <h1 class="text-3xl font-bold mb-6 text-indigo-600 hidden sm:inline">Create client</h1>
+        <h1 class="text-3xl font-bold mb-6 text-indigo-600 hidden sm:inline">
+            @if(isset($enquiry))
+                Close deal
+            @else
+                Create client
+            @endif
+        </h1>
     </div>
 
     @if ($errors->any())
@@ -22,10 +28,13 @@
         @include('clients.form')
     </form>
 
+    <br>
+    <br>
 </main>
 
 @endsection
 
 @section('footer-scripts')
     <script type="text/javascript" src="{{ asset('js/star.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/brokerage_calculator.js') }}"></script>
 @endsection

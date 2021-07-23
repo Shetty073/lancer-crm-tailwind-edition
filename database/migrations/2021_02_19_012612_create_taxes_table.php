@@ -16,7 +16,7 @@ class CreateTaxesTable extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->double('tax_percent', 5, 2);
+            $table->decimal('tax_percent', 5, 2);
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
