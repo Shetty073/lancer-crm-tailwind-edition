@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lancer\Utilities;
 use App\Models\Client;
 use App\Models\Configuration;
 use App\Models\Payment;
@@ -77,12 +78,18 @@ class ClientsController extends Controller
 
         $client->save();
 
+        $payment_mode = PaymentMode::findorfail($request->input('due_payment_mode'));
+
         $payment = Payment::create([
             'amount' => $request->input('brokerage_amount'),
             'due_date' => $request->input('due_date'),
             'remark' => $request->input('brokerage_remark'),
+            'payer' => $project->name,
         ]);
+        $payment->payment_mode()->associate($payment_mode);
         $payment->client()->associate($client);
+        $payment->createdBy()->associate(auth()->user());
+        $payment->save();
 
         return redirect(route('clients.index'));
     }

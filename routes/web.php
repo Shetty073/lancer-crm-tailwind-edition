@@ -87,16 +87,32 @@ Route::group(['prefix' => '/projects', 'middleware' => 'auth'], function () {
 // dues routes
 Route::group(['prefix' => '/dues', 'middleware' => 'auth'], function () {
     Route::get('/', [DuesController::class, 'index'])->name('dues.index');
+    Route::get('/create', [DuesController::class, 'create'])->name('dues.create');
+    Route::post('/store', [DuesController::class, 'store'])->name('dues.store');
+    Route::get('/{id}/edit', [DuesController::class, 'edit'])->name('dues.edit');
+    Route::post('/{id}/update', [DuesController::class, 'update'])->name('dues.update');
+    Route::post('/{id}/pay', [DuesController::class, 'pay'])->name('dues.pay');
+    Route::post('/{id}/destroy', [DuesController::class, 'destroy'])->name('dues.destroy');
 });
 
 // bankaccount routes
 Route::group(['prefix' => '/payments', 'middleware' => 'auth'], function () {
     Route::get('/', [PaymentsController::class, 'index'])->name('payments.index');
+    Route::get('/create', [PaymentsController::class, 'create'])->name('payments.create');
+    Route::post('/store', [PaymentsController::class, 'store'])->name('payments.store');
+    Route::get('/{id}/edit', [PaymentsController::class, 'edit'])->name('payments.edit');
+    Route::post('/{id}/update', [PaymentsController::class, 'update'])->name('payments.update');
+    Route::post('/{id}/destroy', [PaymentsController::class, 'destroy'])->name('payments.destroy');
 });
 
 // expenses routes
 Route::group(['prefix' => '/expenses', 'middleware' => 'auth'], function () {
     Route::get('/', [ExpensesController::class, 'index'])->name('expenses.index');
+    Route::get('/create', [ExpensesController::class, 'create'])->name('expenses.create');
+    Route::post('/store', [ExpensesController::class, 'store'])->name('expenses.store');
+    Route::get('/{id}/edit', [ExpensesController::class, 'edit'])->name('expenses.edit');
+    Route::post('/{id}/update', [ExpensesController::class, 'update'])->name('expenses.update');
+    Route::post('/{id}/destroy', [ExpensesController::class, 'destroy'])->name('expenses.destroy');
 });
 
 // reports routes

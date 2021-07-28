@@ -97,7 +97,7 @@
                         Budget Range
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        ₹ {{ $enquiry->budget_range->range }}</td>
+                        {{ App\Lancer\Utilities::CURRENCY_SYMBOL }} {{ $enquiry->budget_range->range }}</td>
                 </tr>
             </tbody>
         </table>

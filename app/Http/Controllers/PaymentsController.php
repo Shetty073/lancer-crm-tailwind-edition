@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Models\PaymentMode;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -13,7 +16,9 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        return view('payments.index');
+        $payments = Payment::whereNotNull('date_of_payment')->get();
+
+        return view('payments.index', compact('payments'));
     }
 
     /**
@@ -23,7 +28,9 @@ class PaymentsController extends Controller
      */
     public function create()
     {
-        //
+        $payment_modes = PaymentMode::all();
+
+        return view('payments.create', compact('payment_modes'));
     }
 
     /**
@@ -34,19 +41,27 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'payer' => 'required',
+            'amount' => 'required',
+            'date_of_payment' => 'required',
+        ]);
+
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $payment = Payment::create([
+            'payer' => $request->input('payer'),
+            'amount' => $request->input('amount'),
+            'remark' => $request->input('remark'),
+            'date_of_payment' => $request->input('date_of_payment'),
+        ]);
+        $payment->createdBy()->associate(auth()->user());
+        $payment->payment_mode()->associate($payment_mode);
+        $payment->save();
+
+        return redirect(route('payments.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +71,10 @@ class PaymentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $payment = Payment::findorfail($id);
+        $payment_modes = PaymentMode::all();
+
+        return view('payments.edit', compact('payment', 'payment_modes'));
     }
 
     /**
@@ -68,7 +86,26 @@ class PaymentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'payer' => 'required',
+            'amount' => 'required',
+            'date_of_payment' => 'required',
+        ]);
+
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $payment = Payment::findorfail($id);
+        $payment->update([
+            'payer' => $request->input('payer'),
+            'amount' => $request->input('amount'),
+            'remark' => $request->input('remark'),
+            'date_of_payment' => $request->input('date_of_payment'),
+        ]);
+        $payment->payment_mode()->associate($payment_mode);
+        $payment->lastEditedBy()->associate(auth()->user());
+        $payment->save();
+
+        return redirect(route('payments.index'));
     }
 
     /**
@@ -79,6 +116,11 @@ class PaymentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $payment = Payment::findorfail($id);
+        $payment->deletedBy()->associate(auth()->user());
+        $payment->save();
+        $payment->delete();
+
+        return back();
     }
 }

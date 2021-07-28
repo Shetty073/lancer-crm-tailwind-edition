@@ -12,6 +12,7 @@ class Payment extends Model
     protected $table = 'payments';
 
     protected $fillable = [
+        'payer',
         'amount',
         'remark',
         'due_date',
@@ -34,14 +35,24 @@ class Payment extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function digital_details()
+    // public function digital_details()
+    // {
+    //     return $this->hasOne(DigitalDetail::class);
+    // }
+
+    // public function cheque_details()
+    // {
+    //     return $this->hasOne(ChequeDetail::class);
+    // }
+
+    public function createdBy()
     {
-        return $this->hasOne(DigitalDetail::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function cheque_details()
+    public function lastEditedBy()
     {
-        return $this->hasOne(ChequeDetail::class);
+        return $this->belongsTo(User::class, 'last_edited_by');
     }
 
     public function deletedBy()

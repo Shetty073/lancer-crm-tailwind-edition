@@ -4,6 +4,9 @@ namespace App\Lancer;
 
 class Utilities
 {
+    public const ORG_NAME = 'Proprays Realtors';
+    public const CURRENCY_SYMBOL = '₹';
+
     public static function getEnquiryStatusStyle($status)
     {
         $enquiryStatusStyle = '';

@@ -163,7 +163,7 @@
                         Agreement Value
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        ₹ {{ $client->agreement_value }}
+                        {{ App\Lancer\Utilities::CURRENCY_SYMBOL }} {{ $client->agreement_value }}
                     </td>
                 </tr>
                 <tr>
@@ -172,7 +172,7 @@
                         Booking Amount
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        ₹ {{ $client->booking_amount }}
+                        {{ App\Lancer\Utilities::CURRENCY_SYMBOL }} {{ $client->booking_amount }}
                     </td>
                 </tr>
                 <tr>

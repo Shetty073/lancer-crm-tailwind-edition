@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Models\PaymentMode;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -14,7 +17,10 @@ class DuesController extends Controller
      */
     public function index()
     {
-        return view('dues.index');
+        // due payments are the ones with `date_of_payment` set to null
+        $dues = Payment::whereNull('date_of_payment')->get();
+
+        return view('dues.index', compact('dues'));
     }
 
     /**
@@ -24,7 +30,9 @@ class DuesController extends Controller
      */
     public function create()
     {
-        //
+        $payment_modes = PaymentMode::all();
+
+        return view('dues.create', compact('payment_modes'));
     }
 
     /**
@@ -35,18 +43,25 @@ class DuesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'payer' => 'required',
+            'amount' => 'required',
+            'due_date' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $due = Payment::create([
+            'payer' => $request->input('payer'),
+            'amount' => $request->input('amount'),
+            'remark' => $request->input('remark'),
+            'due_date' => $request->input('due_date'),
+        ]);
+        $due->payment_mode()->associate($payment_mode);
+        $due->createdBy()->associate(auth()->user());
+        $due->save();
+
+        return redirect(route('dues.index'));
     }
 
     /**
@@ -57,7 +72,26 @@ class DuesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $due = Payment::findorfail($id);
+        $payment_modes = PaymentMode::all();
+
+        return view('dues.edit', compact('due', 'payment_modes'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function pay($id)
+    {
+        $due = Payment::findorfail($id);
+        $due->update([
+            'date_of_payment' => Carbon::now(),
+        ]);
+
+        return back();
     }
 
     /**
@@ -69,7 +103,26 @@ class DuesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'payer' => 'required',
+            'amount' => 'required',
+            'due_date' => 'required',
+        ]);
+
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $due = Payment::findorfail($id);
+        $due->update([
+            'payer' => $request->input('payer'),
+            'amount' => $request->input('amount'),
+            'remark' => $request->input('remark'),
+            'due_date' => $request->input('due_date'),
+        ]);
+        $due->payment_mode()->associate($payment_mode);
+        $due->lastEditedBy()->associate(auth()->user());
+        $due->save();
+
+        return redirect(route('dues.index'));
     }
 
     /**
@@ -80,6 +133,11 @@ class DuesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $due = Payment::findorfail($id);
+        $due->deletedBy()->associate(auth()->user());
+        $due->save();
+        $due->delete();
+
+        return back();
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
+use App\Models\ExpenseCategory;
+use App\Models\PaymentMode;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -13,7 +16,9 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        return view('expenses.index');
+        $expenses = Expense::all();
+
+        return view('expenses.index', compact('expenses'));
     }
 
     /**
@@ -23,7 +28,10 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        //
+        $expense_categories = ExpenseCategory::all();
+        $payment_modes = PaymentMode::all();
+
+        return view('expenses.create', compact('expense_categories', 'payment_modes'));
     }
 
     /**
@@ -34,18 +42,30 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'payment_mode' => 'required',
+            'expense_category' => 'required',
+            'payee' => 'required',
+            'amount_paid' => 'required',
+            'date_of_payment' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $expense_category = ExpenseCategory::findorfail($request->input('expense_category'));
+
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $expense = Expense::create([
+            'payee' => $request->input('payee'),
+            'amount_paid' => $request->input('amount_paid'),
+            'date_of_payment' => $request->input('date_of_payment'),
+            'remark' => $request->input('remark'),
+        ]);
+        $expense->expense_category()->associate($expense_category);
+        $expense->payment_mode()->associate($payment_mode);
+        $expense->createdBy()->associate(auth()->user());
+        $expense->save();
+
+        return redirect(route('expenses.index'));
     }
 
     /**
@@ -56,7 +76,11 @@ class ExpensesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $expense = Expense::findorfail($id);
+        $expense_categories = ExpenseCategory::all();
+        $payment_modes = PaymentMode::all();
+
+        return view('expenses.edit', compact('expense', 'expense_categories', 'payment_modes'));
     }
 
     /**
@@ -68,7 +92,31 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'payment_mode' => 'required',
+            'expense_category' => 'required',
+            'payee' => 'required',
+            'amount_paid' => 'required',
+            'date_of_payment' => 'required',
+        ]);
+
+        $expense_category = ExpenseCategory::findorfail($request->input('expense_category'));
+
+        $payment_mode = PaymentMode::findorfail($request->input('payment_mode'));
+
+        $expense = Expense::findorfail($id);
+        $expense->update([
+            'payee' => $request->input('payee'),
+            'amount_paid' => $request->input('amount_paid'),
+            'date_of_payment' => $request->input('date_of_payment'),
+            'remark' => $request->input('remark'),
+        ]);
+        $expense->expense_category()->associate($expense_category);
+        $expense->payment_mode()->associate($payment_mode);
+        $expense->lastEditedBy()->associate(auth()->user());
+        $expense->save();
+
+        return redirect(route('expenses.index'));
     }
 
     /**
@@ -79,6 +127,11 @@ class ExpensesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expense = Expense::findorfail($id);
+        $expense->deletedBy()->associate(auth()->user());
+        $expense->save();
+        $expense->delete();
+
+        return back();
     }
 }

@@ -78,8 +78,12 @@
                     @if(isset($enquiry))
                         <input type='checkbox' name='is_active' checked disabled />
                     @else
-                        <input type='checkbox' name='is_active'
-                        @if(isset($client->is_active))@if($client->is_active)checked @else @endif @endif />
+                        @if(isset($client))
+                            <input type='checkbox' name='is_active'
+                            @if(isset($client->is_active))@if($client->is_active)checked @else @endif @endif />
+                        @else
+                            <input type='checkbox' name='is_active' checked />
+                        @endif
                     @endif
                     <label for='is_active' class='inline text-indigo-600 text-sm font-bold mb-4 ml-1'>
                         Is Active?
@@ -171,7 +175,7 @@
                 </div>
 
                 <div class="flex flex-col mr-4 w-full md:w-3/12">
-                    <label class="leading-loose capitalize font-semibold text-indigo-600">Agreement Value (₹)</label>
+                    <label class="leading-loose capitalize font-semibold text-indigo-600">Agreement Value ({{ App\Lancer\Utilities::CURRENCY_SYMBOL }})</label>
                     <input type="number" step="0.01" name="agreement_value"
                             class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                             placeholder="Agreement value" @if(isset($client))value="{{ $client->agreement_value }}"@endif>
@@ -180,7 +184,7 @@
 
             <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col mr-4 w-full md:w-3/12">
-                    <label class="leading-loose capitalize font-semibold text-indigo-600">Booking amount (₹)</label>
+                    <label class="leading-loose capitalize font-semibold text-indigo-600">Booking amount ({{ App\Lancer\Utilities::CURRENCY_SYMBOL }})</label>
                     <input type="number" step="0.01" id="booking_amount" name="booking_amount"
                             class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                             placeholder="booking amount" @if(isset($client))value="{{ $client->booking_amount }}"@endif>
@@ -211,7 +215,7 @@
                     </div>
 
                     <div class="flex flex-col mr-4 w-full md:w-3/12">
-                        <label class="leading-loose capitalize font-semibold text-indigo-600">Brokerage due (₹)</label>
+                        <label class="leading-loose capitalize font-semibold text-indigo-600">Brokerage due ({{ App\Lancer\Utilities::CURRENCY_SYMBOL }})</label>
                         <input type="number" step="0.01" name="brokerage_amount" id="brokerage_amount"
                         class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Amount due from developer">
@@ -221,9 +225,20 @@
                         <label class="leading-loose capitalize font-semibold text-indigo-600">Due date</label>
                         <input type="date" step="0.01" name="due_date"
                                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                value="{{ \Carbon\Carbon::now()->addDays(45)->format('Y-m-d') }}">
+                                value="{{ \Carbon\Carbon::now()->addDays(7)->format('Y-m-d') }}">
                     </div>
 
+                    <div class="flex flex-col mr-4 w-full md:w-3/12">
+                        <label class="leading-loose capitalize font-semibold text-indigo-600">Payment Mode</label>
+                        <select name="due_payment_mode" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
+                            @foreach ($payment_modes as $payment_mode)
+                                <option value="{{ $payment_mode->id }}">{{ $payment_mode->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row">
                     <div class="flex flex-col mr-4 w-full md:w-3/12">
                         <label class="leading-loose capitalize font-semibold text-indigo-600">Remark</label>
                         <input type="text" step="0.01" name="brokerage_remark"
