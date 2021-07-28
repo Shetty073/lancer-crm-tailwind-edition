@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ProjectSeeder extends Seeder
 {
@@ -14,11 +14,12 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('projects')->insert(
-            array(
+        Project::insert([
+            [
                 'name' => 'Example Project',
                 'details' => 'An example project created by the seeder',
-            )
-        );
+            ],
+        ]);
+
     }
 }

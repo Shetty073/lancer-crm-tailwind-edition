@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
@@ -14,12 +16,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
-            array(
-                'name' => 'Admin',
-                'email' => 'admin@admin.com',
-                'password' => bcrypt('admin123'),
-            )
-        );
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => '',
+        ]);
+        $user->setPasswordAttribute('admin123');
+        $user->save();
+
+        // Give admin rle to the user
+        $role = Role::where(['name' => 'Admin'])->first();
+        $user->assignRole($role);
     }
 }

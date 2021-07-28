@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ExpenseCategory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ExpenseCategorySeeder extends Seeder
 {
@@ -14,26 +14,20 @@ class ExpenseCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('expense_categories')->insert(
-            array(
+        ExpenseCategory::insert([
+            [
                 'name' => 'IT Cost',
-                'remark' => 'IT development + maintenance costs',
-            )
-        );
-
-        DB::table('expense_categories')->insert(
-            array(
+                'remark' => 'IT development + maintenance costs'
+            ],
+            [
                 'name' => 'Marketing Cost',
                 'remark' => 'Ad campaigning costs',
-            )
-        );
-
-        DB::table('expense_categories')->insert(
-            array(
+            ],
+            [
                 'name' => 'Travelling/Logistics',
                 'remark' => 'Travelling or logistics costs',
-            )
-        );
+            ],
+        ]);
 
     }
 }

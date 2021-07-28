@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Configuration;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ConfigurationSeeder extends Seeder
 {
@@ -14,46 +14,15 @@ class ConfigurationSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('configurations')->insert(
-            array(
-                'name' => '1 BHK',
-            )
-        );
+        Configuration::insert([
+            ['name' => '1 BHK'],
+            ['name' => '2 BHK'],
+            ['name' => '3 BHK'],
+            ['name' => '4 BHK'],
+            ['name' => 'Plot'],
+            ['name' => 'Commercial'],
+            ['name' => 'Other'],
+        ]);
 
-        DB::table('configurations')->insert(
-            array(
-                'name' => '2 BHK',
-            )
-        );
-
-        DB::table('configurations')->insert(
-            array(
-                'name' => '3 BHK',
-            )
-        );
-
-        DB::table('configurations')->insert(
-            array(
-                'name' => '4 BHK',
-            )
-        );
-
-        DB::table('configurations')->insert(
-            array(
-                'name' => 'Plot',
-            )
-        );
-
-        DB::table('configurations')->insert(
-            array(
-                'name' => 'Commercial',
-            )
-        );
-
-        DB::table('configurations')->insert(
-            array(
-                'name' => 'Other',
-            )
-        );
     }
 }

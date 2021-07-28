@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\PaymentMode;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class PaymentModeSeeder extends Seeder
 {
@@ -14,37 +14,28 @@ class PaymentModeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('payment_modes')->insert(
-            array(
-                'name' => 'Credit/Debit swipe',
-                'is_digital' => true,
-            )
-        );
+        PaymentMode::create([
+            'name' => 'Credit/Debit swipe',
+            'is_digital' => true,
+        ]);
 
-        DB::table('payment_modes')->insert(
-            array(
-                'name' => 'Cheque',
-                'is_cheque' => true,
-            )
-        );
+        PaymentMode::create([
+            'name' => 'Cheque',
+            'is_cheque' => true,
+        ]);
 
-        DB::table('payment_modes')->insert(
-            array(
-                'name' => 'Cash',
-                'is_cash' => true,
-            )
-        );
+        PaymentMode::create([
+            'name' => 'Cash',
+            'is_cash' => true,
+        ]);
 
-        DB::table('payment_modes')->insert(
-            array(
-                'name' => 'Bank transfer',
-            )
-        );
+        PaymentMode::create([
+            'name' => 'Bank transfer',
+        ]);
 
-        DB::table('payment_modes')->insert(
-            array(
-                'name' => 'Other',
-            )
-        );
+        PaymentMode::create([
+            'name' => 'Other',
+        ]);
+
     }
 }

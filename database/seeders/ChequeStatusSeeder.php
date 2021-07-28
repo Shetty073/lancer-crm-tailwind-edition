@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ChequeStatus;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ChequeStatusSeeder extends Seeder
 {
@@ -14,29 +14,12 @@ class ChequeStatusSeeder extends Seeder
      */
     public function run()
     {
-        // Insert the default statuses
-        DB::table('cheque_statuses')->insert(
-            array(
-                'status' => 'Received',
-            )
-        );
+        ChequeStatus::insert([
+            ['status' => 'Received'],
+            ['status' => 'Desposited'],
+            ['status' => 'Cleared'],
+            ['status' => 'Bounced'],
+        ]);
 
-        DB::table('cheque_statuses')->insert(
-            array(
-                'status' => 'Desposited',
-            )
-        );
-
-        DB::table('cheque_statuses')->insert(
-            array(
-                'status' => 'Cleared',
-            )
-        );
-
-        DB::table('cheque_statuses')->insert(
-            array(
-                'status' => 'Bounced',
-            )
-        );
     }
 }
