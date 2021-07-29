@@ -23,6 +23,38 @@ class Expense extends Model
         'date_of_payment' => 'date',
     ];
 
+    // update BankAccount on events
+    protected static function booted()
+    {
+        static::saved(function ($expense) {
+            if($expense->date_of_payment !== null) {
+                $bankaccount = BankAccount::first();
+
+                $current_balance = $bankaccount->current_balance;
+                $new_balance = $current_balance + $expense->amount_paid;
+
+                $bankaccount->update([
+                    'last_balance' => $current_balance,
+                    'current_balance' => $new_balance,
+                ]);
+            }
+        });
+
+        static::updating(function ($expense) {
+            if($expense->date_of_payment !== null) {
+                $bankaccount = BankAccount::first();
+
+                $current_balance = $bankaccount->current_balance;
+                $new_balance = $current_balance - $expense->amount_paid;
+
+                $bankaccount->update([
+                    'last_balance' => $new_balance,
+                    'current_balance' => $new_balance,
+                ]);
+            }
+        });
+    }
+
     public function payment_mode()
     {
         return $this->belongsTo(PaymentMode::class);

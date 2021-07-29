@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankAccount;
 use Illuminate\Http\Request;
 
 class BankAccountsController extends Controller
@@ -13,7 +14,9 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        return view('bankaccounts.index');
+        $bank_account = BankAccount::first();
+
+        return view('bankaccounts.index', compact('bank_account'));
     }
 
     /**

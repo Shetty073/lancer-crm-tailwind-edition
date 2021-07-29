@@ -13,7 +13,7 @@ class BankAccount extends Model
 
     protected $fillable = [
         'name',
-        'initial_balance',
+        'last_balance',
         'current_balance',
     ];
 

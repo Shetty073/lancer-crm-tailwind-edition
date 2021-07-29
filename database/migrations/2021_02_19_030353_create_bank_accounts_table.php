@@ -16,7 +16,7 @@ class CreateBankAccountsTable extends Migration
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->decimal('initial_balance', 12, 2);
+            $table->decimal('last_balance', 12, 2);
             $table->decimal('current_balance', 12, 2);
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
