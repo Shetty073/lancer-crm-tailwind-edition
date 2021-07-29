@@ -14,7 +14,7 @@ class UserAccountController extends Controller
      */
     public function index()
     {
-        return view('useraccount.index');
+        //
     }
 
     /**

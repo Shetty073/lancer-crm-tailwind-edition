@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -93,5 +94,65 @@ class AccountsController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('signin.index');
+    }
+
+    public function myAccount()
+    {
+        return view('myaccount.index');
+    }
+
+    public function updateMyPersonalDetails(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email',
+            'photo' => 'image|max:1999',
+        ]);
+
+        $user = User::findorfail($id);
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
+        // handle image if its present
+        if ($request->hasFile('photo')) {
+            // delete old photo if present
+            if($user->photo_url !== null) {
+                $file_path = public_path('storage/profile_picture/' . $user->photo_url);
+                @unlink($file_path);
+            }
+
+            // now add enw photo
+            $fileName = $request->file('photo')->getClientOriginalName();
+            $fileExtension = $request->file('photo')->getClientOriginalExtension();
+            $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
+            $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
+            $user->photo_url = $fileNameToStore;
+            $user->save();
+        }
+
+        return back()->with('success', 'You have successfully changed your personal details.');
+    }
+
+    public function changeMyPassword(Request $request, $id)
+    {
+        $this->validate($request, [
+            'current_password' => 'required|current_password',
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = User::findorfail($id);
+        $user->setPasswordAttribute($request->input('password'));
+        $user->save();
+
+        // if(Hash::check($request->input('current_password'), $user->password)) {
+
+        // } else {
+        //     return back()->withErrors();
+        // }
+
+        return back()->with('success', 'You have successfully changed your password.');
     }
 }

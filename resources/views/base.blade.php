@@ -24,9 +24,15 @@
             </h5>
         </div>
         <div class="flex justify-end">
-            <a class="hidden lg:block rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 border-opacity-100" href='{{ route('useraccount.index') }}'>
-                <img height="42" width="42" src="{{ asset('storage/profile_picture/' . auth()->user()->photo_url) }}" alt='profile photo'
+            <a class="hidden lg:block rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 border-opacity-100" href='{{ route('myaccount.index') }}'>
+                @if (isset(auth()->user()->photo_url))
+                    <img height="42" width="42" src="{{ asset('storage/profile_picture/' . auth()->user()->photo_url) }}" alt='profile photo'
                     class="inline rounded-full w-9 h-9 pr-1" />
+                @else
+                    <span class="text-white">
+                        <i class="fas fa-user-circle fa-lg"></i>
+                    </span>
+                @endif
                 <span class="text-white text-base">{{ auth()->user()->firstName() }}</span>
             </a>
             <form method="POST" action="{{ route('signout') }}" class="p-0 m-0">
@@ -48,58 +54,64 @@
             <div id="navbarWrapper" class="h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:bg-transparent overflow-hidden lg:top-18 bg-white mr-24 lg:mr-0">
                 <nav id="nav" class="px-1 pt-6 overflow-y-auto font-medium text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
                     <ul>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('/')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('/')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dashboard.index') }}">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-chart-line fa-fw"></i>
                                 Dashboard
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('enquiries*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('enquiries*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('enquiries.index') }}">
-                                <i class="fas fa-question-circle"></i>
+                                <i class="fas fa-question-circle fa-fw"></i>
                                 Enquiries
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('clients*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('clients*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('clients.index') }}">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-user fa-fw"></i>
                                 Clients
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('projects.index') }}">
-                                <i class="fas fa-project-diagram fa-xs"></i>
+                                <i class="fas fa-project-diagram fa-fw"></i>
                                 Projects
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dues.index') }}">
-                                <i class="fas fa-file-invoice"></i>
+                                <i class="fas fa-file-invoice fa-fw"></i>
                                 Dues
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('payments*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('payments*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('payments.index') }}">
-                                <i class="fas fa-cash-register fa-xs"></i>
+                                <i class="fas fa-cash-register fa-fw"></i>
                                 Payments
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('expenses*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('expenses*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('expenses.index') }}">
-                                <i class="fas fa-money-bill-alt fa-xs"></i>
+                                <i class="fas fa-money-bill fa-fw"></i>
                                 Expenses
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('reports*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('reports*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('reports.index') }}">
-                                <i class="fas fa-receipt"></i>
+                                <i class="fas fa-receipt fa-fw"></i>
                                 Reports
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('transactions.index') }}">
-                                <i class="fas fa-piggy-bank fa-xs"></i>
+                                <i class="fas fa-piggy-bank fa-fw"></i>
                                 Transactions
+                            </a>
+                        </li>
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('myaccount*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('myaccount.index') }}">
+                                <i class="fas fa-user-circle fa-fw"></i>
+                                My Account
                             </a>
                         </li>
                     </ul>
@@ -110,7 +122,7 @@
         <div id="mobileNavBar" class="bg-indigo-700 z-10 h-screen hidden">
             {{-- innerHTML will be dynamically copied from above navbar/sidebar --}}
             <div class="flex justify-between">
-                <a class="inline rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 w-2/6 border-opacity-100" href='{{ route('useraccount.index') }}'>
+                <a class="inline rounded border border-gray-100 mx-1 my-1 px-2 py-1 pt-2 w-2/6 border-opacity-100" href='{{ route('myaccount.index') }}'>
                     <img height="42" width="42" src='/storage/profile_picture/{{ auth()->user()->photo_url }}' alt='profile image placeholder'
                         class="inline rounded-full h-8 w-8 pr-1" />
                     <span class="text-white text-base">{{ auth()->user()->firstName() }}</span>
@@ -126,6 +138,7 @@
 
         <div id="contentWrapper" class="min-w-0 w-full flex-auto lg:static lg:max-h-screen overflow-y-scroll">
             @section('main-content')
+                {{-- Child pages content will be shown here --}}
 
             @show
         </div>
@@ -137,8 +150,8 @@
     @show
 
     <script type="text/javascript" src="{{ asset('fa/all.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('swal/sweetalert2.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/mobile_nav.js') }}"></script>
+    <script rel="prefetch" type="text/javascript" src="{{ asset('swal/sweetalert2.js') }}"></script>
+    <script rel="prefetch" type="text/javascript" src="{{ asset('js/mobile_nav.js') }}"></script>
     @section('footer-scripts')
     @show
 </body>

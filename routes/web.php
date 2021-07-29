@@ -122,8 +122,10 @@ Route::group(['prefix' => '/reports', 'middleware' => 'auth'], function () {
 });
 
 // useraccount routes
-Route::group(['prefix' => '/useraccount', 'middleware' => 'auth'], function () {
-    Route::get('/', [UserAccountController::class, 'index'])->name('useraccount.index');
+Route::group(['prefix' => '/myaccount', 'middleware' => 'auth'], function () {
+    Route::get('/', [AccountsController::class, 'myAccount'])->name('myaccount.index');
+    Route::post('/{id}/update', [AccountsController::class, 'updateMyPersonalDetails'])->name('myaccount.update');
+    Route::post('/{id}/password/change', [AccountsController::class, 'changeMyPassword'])->name('myaccount.changepassword');
 });
 
 // transactions route
