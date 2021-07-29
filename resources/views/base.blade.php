@@ -96,10 +96,10 @@
                                 Reports
                             </a>
                         </li>
-                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('bankaccounts*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
-                            <a href="{{ route('bankaccounts.index') }}">
+                        <li class="px-3 py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('transactions.index') }}">
                                 <i class="fas fa-piggy-bank fa-xs"></i>
-                                Bank Accounts
+                                Transactions
                             </a>
                         </li>
                     </ul>

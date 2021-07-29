@@ -57,7 +57,7 @@ class PaymentsController extends Controller
         ]);
         $payment->createdBy()->associate(auth()->user());
         $payment->payment_mode()->associate($payment_mode);
-        $payment->save();
+        $payment->saveQuietly();
 
         return redirect(route('payments.index'));
     }
@@ -103,7 +103,7 @@ class PaymentsController extends Controller
         ]);
         $payment->payment_mode()->associate($payment_mode);
         $payment->lastEditedBy()->associate(auth()->user());
-        $payment->save();
+        $payment->saveQuietly();
 
         return redirect(route('payments.index'));
     }
@@ -118,7 +118,7 @@ class PaymentsController extends Controller
     {
         $payment = Payment::findorfail($id);
         $payment->deletedBy()->associate(auth()->user());
-        $payment->save();
+        $payment->saveQuietly();
         $payment->delete();
 
         return back();

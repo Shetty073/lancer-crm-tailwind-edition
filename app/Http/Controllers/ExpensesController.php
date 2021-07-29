@@ -63,7 +63,7 @@ class ExpensesController extends Controller
         $expense->expense_category()->associate($expense_category);
         $expense->payment_mode()->associate($payment_mode);
         $expense->createdBy()->associate(auth()->user());
-        $expense->save();
+        $expense->saveQuietly();
 
         return redirect(route('expenses.index'));
     }
@@ -114,7 +114,7 @@ class ExpensesController extends Controller
         $expense->expense_category()->associate($expense_category);
         $expense->payment_mode()->associate($payment_mode);
         $expense->lastEditedBy()->associate(auth()->user());
-        $expense->save();
+        $expense->saveQuietly();
 
         return redirect(route('expenses.index'));
     }
@@ -129,7 +129,7 @@ class ExpensesController extends Controller
     {
         $expense = Expense::findorfail($id);
         $expense->deletedBy()->associate(auth()->user());
-        $expense->save();
+        $expense->saveQuietly();
         $expense->delete();
 
         return back();

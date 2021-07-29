@@ -35,7 +35,7 @@
                     <tr class="h-12">
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $payment->id }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
-                            {{ App\Lancer\Utilities::CURRENCY_SYMBOL }} {{ $payment->amount }}
+                            {{ App\Lancer\Utilities::CURRENCY_SYMBOL }}{{ $payment->amount }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
                             {{ $payment->payer }}

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BankAccount;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class BankAccountsController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        $bank_account = BankAccount::first();
+        $transactions = Transaction::all()->reverse();
 
-        return view('bankaccounts.index', compact('bank_account'));
+        return view('transactions.index', compact('transactions'));
     }
 
     /**

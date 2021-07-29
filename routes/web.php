@@ -14,6 +14,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserAccountController;
 
 /*
@@ -125,7 +126,7 @@ Route::group(['prefix' => '/useraccount', 'middleware' => 'auth'], function () {
     Route::get('/', [UserAccountController::class, 'index'])->name('useraccount.index');
 });
 
-// bankaccount routes
-Route::group(['prefix' => '/bankaccounts', 'middleware' => 'auth'], function () {
-    Route::get('/', [BankAccountsController::class, 'index'])->name('bankaccounts.index');
+// transactions route
+Route::group(['prefix' => '/transactions', 'middleware' => 'auth'], function () {
+    Route::get('/', [TransactionsController::class, 'index'])->name('transactions.index');
 });

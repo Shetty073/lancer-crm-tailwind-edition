@@ -59,7 +59,7 @@ class DuesController extends Controller
         ]);
         $due->payment_mode()->associate($payment_mode);
         $due->createdBy()->associate(auth()->user());
-        $due->save();
+        $due->saveQuietly();
 
         return redirect(route('dues.index'));
     }
@@ -120,7 +120,7 @@ class DuesController extends Controller
         ]);
         $due->payment_mode()->associate($payment_mode);
         $due->lastEditedBy()->associate(auth()->user());
-        $due->save();
+        $due->saveQuietly();
 
         return redirect(route('dues.index'));
     }
@@ -135,7 +135,7 @@ class DuesController extends Controller
     {
         $due = Payment::findorfail($id);
         $due->deletedBy()->associate(auth()->user());
-        $due->save();
+        $due->saveQuietly();
         $due->delete();
 
         return back();

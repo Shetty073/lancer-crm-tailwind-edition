@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Lancer\Utilities;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,31 +29,45 @@ class Payment extends Model
     // update BankAccount on certain events
     protected static function booted()
     {
-        static::saved(function ($payment) {
+        static::created(function ($payment) {
             if($payment->date_of_payment !== null) {
-                $bankaccount = BankAccount::first();
-
-                $current_balance = $bankaccount->current_balance;
-                $new_balance = $current_balance + $payment->amount;
-
-                $bankaccount->update([
-                    'last_balance' => $current_balance,
-                    'current_balance' => $new_balance,
+                $user = auth()->user();
+                $message = $user->name . ' created payment for ' . Utilities::CURRENCY_SYMBOL . $payment->amount;
+                $transaction = Transaction::create([
+                    'details' => $message,
                 ]);
+                $transaction->createdBy()->associate($user);
+                $transaction->save();
+            } else {
+                $user = auth()->user();
+                $message = $user->name . ' created due for ' . Utilities::CURRENCY_SYMBOL . $payment->amount;
+                $transaction = Transaction::create([
+                    'details' => $message,
+                ]);
+                $transaction->createdBy()->associate($user);
+                $transaction->save();
             }
         });
 
         static::updating(function ($payment) {
             if($payment->date_of_payment !== null) {
-                $bankaccount = BankAccount::first();
-
-                $current_balance = $bankaccount->current_balance;
-                $new_balance = $current_balance - $payment->amount;
-
-                $bankaccount->update([
-                    'last_balance' => $new_balance,
-                    'current_balance' => $new_balance,
+                $user = auth()->user();
+                $message = $user->name . ' updated payment entry from ' . Utilities::CURRENCY_SYMBOL . $payment->getOriginal('amount')
+                 . ' to ' . Utilities::CURRENCY_SYMBOL . $payment->amount;
+                $transaction = Transaction::create([
+                    'details' => $message,
                 ]);
+                $transaction->createdBy()->associate($user);
+                $transaction->save();
+            } else {
+                $user = auth()->user();
+                $message = $user->name . ' updated due entry from ' . Utilities::CURRENCY_SYMBOL . $payment->getOriginal('amount')
+                 . ' to ' . Utilities::CURRENCY_SYMBOL . $payment->amount;
+                $transaction = Transaction::create([
+                    'details' => $message,
+                ]);
+                $transaction->createdBy()->associate($user);
+                $transaction->save();
             }
         });
     }

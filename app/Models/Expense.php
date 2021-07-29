@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Lancer\Utilities;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,32 +27,24 @@ class Expense extends Model
     // update BankAccount on events
     protected static function booted()
     {
-        static::saved(function ($expense) {
-            if($expense->date_of_payment !== null) {
-                $bankaccount = BankAccount::first();
-
-                $current_balance = $bankaccount->current_balance;
-                $new_balance = $current_balance + $expense->amount_paid;
-
-                $bankaccount->update([
-                    'last_balance' => $current_balance,
-                    'current_balance' => $new_balance,
-                ]);
-            }
+        static::created(function ($expense) {
+            $user = auth()->user();
+            $message = $user->name . ' created expense for ' . Utilities::CURRENCY_SYMBOL . $expense->amount_paid;
+            $transaction = Transaction::create([
+                'details' => $message,
+            ]);
+            $transaction->createdBy()->associate($user);
+            $transaction->save();
         });
 
         static::updating(function ($expense) {
-            if($expense->date_of_payment !== null) {
-                $bankaccount = BankAccount::first();
-
-                $current_balance = $bankaccount->current_balance;
-                $new_balance = $current_balance - $expense->amount_paid;
-
-                $bankaccount->update([
-                    'last_balance' => $new_balance,
-                    'current_balance' => $new_balance,
-                ]);
-            }
+            $user = auth()->user();
+            $message = $user->name . ' updated expense entry from ' . Utilities::CURRENCY_SYMBOL . $expense->getOriginal('amount') . ' to ' . $expense->amount;
+            $transaction = Transaction::create([
+                'details' => $message,
+            ]);
+            $transaction->createdBy()->associate($user);
+            $transaction->save();
         });
     }
 

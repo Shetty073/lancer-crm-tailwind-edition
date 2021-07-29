@@ -89,7 +89,7 @@ class ClientsController extends Controller
         $payment->payment_mode()->associate($payment_mode);
         $payment->client()->associate($client);
         $payment->createdBy()->associate(auth()->user());
-        $payment->save();
+        $payment->saveQuietly();
 
         return redirect(route('clients.index'));
     }
