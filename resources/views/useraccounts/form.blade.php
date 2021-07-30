@@ -21,6 +21,17 @@
                     <input type="file" name="photo" accept="image/png, image/jpeg"
                     class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 focus:outline-none text-gray-600">
                 </div>
+                <div class="flex flex-col mr-4 w-full md:w-3/12">
+                    <label class="leading-loose capitalize font-semibold text-indigo-600">Current Photo</label>
+                    @if (isset($user->photo_url))
+                        <img height="42" width="42" src="{{ asset('storage/profile_picture/' . $user->photo_url) }}" alt='profile photo'
+                        class="inline w-9 h-9 pr-1" />
+                    @else
+                        <span class="border border-red-500">
+                            No photo provided.
+                        </span>
+                    @endif
+                </div>
             </div>
 
             <div class="flex flex-col md:flex-row">

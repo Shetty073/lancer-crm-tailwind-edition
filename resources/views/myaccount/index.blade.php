@@ -65,7 +65,7 @@
                             <label class="leading-loose capitalize font-semibold text-indigo-600">Current Photo</label>
                             @if (isset(auth()->user()->photo_url))
                                 <img height="42" width="42" src="{{ asset('storage/profile_picture/' . auth()->user()->photo_url) }}" alt='profile photo'
-                                class="inline rounded-full w-9 h-9 pr-1" />
+                                class="inline w-9 h-9 pr-1" />
                             @else
                                 <span class="border border-red-500">
                                     No photo provided.

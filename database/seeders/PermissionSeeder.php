@@ -73,6 +73,8 @@ class PermissionSeeder extends Seeder
 
             'report_access',
             'bankaccount_access',
+            'transaction_access',
+            'useraccounts_access',
         ];
 
         foreach ($permissions as $permission)   {
