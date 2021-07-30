@@ -46,45 +46,6 @@ class AccountsController extends Controller
         ]);
     }
 
-    public function signup(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            # register the user
-            $this->validate(request(), [
-                'name' => 'required',
-                'email' => 'required|unique:users,email|email',
-                'password' => 'required|confirmed',
-                'photo' => 'image|max:1999',
-            ]);
-
-            // create user
-            $user = User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => '',
-            ]);
-            $user->setPasswordAttribute($request->input('password'));
-            $user->saveQuietly();
-
-            // handle image if its present
-            if ($request->hasFile('photo')) {
-                $fileName = $request->file('photo')->getClientOriginalName();
-                $fileExtension = $request->file('photo')->getClientOriginalExtension();
-                $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
-                $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
-                $user->photo_url = $fileNameToStore;
-                $user->saveQuietly();
-            }
-
-            // login the user and redirect to dashboard
-            Auth::login($user);
-            return redirect()->to('/');
-        }
-
-        $request->flashExcept(['password', 'password_confirmation']);
-        return view('signup.index');
-    }
-
     public function signout(Request $request)
     {
         Auth::logout();

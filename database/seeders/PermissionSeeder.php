@@ -21,8 +21,6 @@ class PermissionSeeder extends Seeder
 
         // create permissions
         $permissions = [
-            'user_management_access',
-
             'permission_create',
             'permission_edit',
             'permission_show',
@@ -72,9 +70,8 @@ class PermissionSeeder extends Seeder
             'payment_access',
 
             'report_access',
-            'bankaccount_access',
             'transaction_access',
-            'useraccounts_access',
+            'user_management_access',
         ];
 
         foreach ($permissions as $permission)   {
@@ -127,7 +124,7 @@ class PermissionSeeder extends Seeder
             'payment_access',
 
             'report_access',
-            'bankaccount_access',
+            'transaction_access',
         ];
 
         foreach ($executivePermissions as $permission)   {

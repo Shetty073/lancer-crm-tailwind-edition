@@ -78,6 +78,7 @@
                                 Projects
                             </a>
                         </li>
+                        @can('payment_access')
                         <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dues.index') }}">
                                 <i class="fas fa-file-invoice fa-fw"></i>
@@ -96,24 +97,31 @@
                                 Expenses
                             </a>
                         </li>
+                        @endcan
+                        @can('report_access')
                         <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('reports*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('reports.index') }}">
                                 <i class="fas fa-receipt fa-fw"></i>
                                 Reports
                             </a>
                         </li>
+                        @endcan
+                        @can('transaction_access')
                         <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('transactions.index') }}">
                                 <i class="fas fa-piggy-bank fa-fw"></i>
                                 Transactions
                             </a>
                         </li>
+                        @endcan
+                        @can('user_management_access')
                         <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('useraccount*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('useraccounts.index') }}">
                                 <i class="fas fa-users fa-fw"></i>
                                 Manage Users
                             </a>
                         </li>
+                        @endcan
                         <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('myaccount*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('myaccount.index') }}">
                                 <i class="fas fa-user-circle fa-fw"></i>

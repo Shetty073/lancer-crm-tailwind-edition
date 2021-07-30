@@ -181,7 +181,8 @@ class ClientsController extends Controller
     public function destroy($id)
     {
         $client = Client::findorfail($id);
-        // ! TODO: create deletedBy entry
+        $client->deletedBy()->associate(auth()->user());
+        $client->saveQuietly();
         $client->delete();
 
         return back();

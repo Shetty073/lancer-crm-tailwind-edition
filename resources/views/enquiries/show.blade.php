@@ -8,10 +8,13 @@
     <div class="flex md:justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600 hidden sm:inline">Enquiry details</h1>
         <div id="{{ $enquiry->id }}" class="mt-5 mr-5 mb-5 md:mt-0 md:mr-0 md:mb-0">
+            @can('enquiry_show')
             <a href="{{ route('enquiries.create') }}"
                 class="uppercase rounded bg-green-500 hover:bg-green-600 text-white outline-none h-9 px-2 py-2 mt-4 mr-2 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-plus"></i> add new enquiry
             </a>
+            @endcan
+            @can('enquiry_edit')
             @if($enquiry->enquiry_status->id < 4)
                 <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}"
                     class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
@@ -22,6 +25,7 @@
                     <i class="fas fa-trash-alt"></i> Mark this as lost
                 </button>
             @endif
+            @endcan
         </div>
     </div>
 
@@ -114,6 +118,7 @@
             </div>
         </div>
 
+        @can('enquiry_edit')
         <div>
             <h2 class="text-2xl font-semibold text-indigo-600">Update status or project</h2>
         </div>
@@ -144,18 +149,21 @@
             </div>
 
         </form>
+        @endcan
 
     </div>
 
-
+    @can('followup_show')
     <div class="pt-3 pb-2 px-5 rounded shadow-lg bg-indigo-100 mb-2 lg:pb-20">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-6 text-indigo-600">Follow ups</h2>
+            @can('followup_create')
             @if($enquiry->enquiry_status->id < 4)
                 <button class="add-followup-btn uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none px-2 mt-0 mb-4 sm:mt-1 sm:mb-5 block md:inline">
                     <i class="fas fa-plus"></i> add follow up
                 </button>
             @endif
+            @endcan
         </div>
 
         <div class="relative w-100 m-1">
@@ -185,16 +193,20 @@
                         @endif
                     </div>
                     <div id="{{ $followup->id }}" class="ml-12">
+                        @can('followup_edit')
                         <button type="button"
                             class="follow-up-edit-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-blue-500 broder border-blue-500 text-white hover:bg-blue-600 focus:outline-none">
                             Edit
                         </button>
                         <input type="hidden" id="editfollowupurl{{ $followup->id }}" value="{{ route('followups.update', ['id' => $followup->id]) }}">
+                        @endcan
+                        @can('followup_delete')
                         <input type="hidden" id="deletefollowupurl{{ $followup->id }}" value="{{ route('followups.destroy', ['id' => $followup->id]) }}">
                         <button type="button"
                             class="follow-up-delete-btn px-3 py-1 uppercase font-semibold text-xs rounded bg-red-500 broder border-red-500 text-white hover:bg-red-600 focus:outline-none">
                             Delete
                         </button>
+                        @endcan
                     </div>
                 </li>
                 @endforeach
@@ -203,6 +215,7 @@
         </div>
 
     </div>
+    @endcan
 
     <br>
 

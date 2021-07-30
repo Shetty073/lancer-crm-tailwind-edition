@@ -8,18 +8,24 @@
     <div class="flex md:justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600 hidden sm:inline">Project details</h1>
         <div id="{{ $project->id }}" class="mt-5 mr-5 mb-5 md:mt-0 md:mr-0 md:mb-0">
+            @can('project_create')
             <a href="{{ route('projects.create') }}"
                 class="uppercase rounded bg-green-500 hover:bg-green-600 text-white outline-none h-9 px-2 py-2 mt-4 mr-2 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-plus"></i> add new project
             </a>
+            @endcan
+            @can('project_edit')
             <a href="{{ route('projects.edit', ['id' => $project->id]) }}"
                 class="uppercase rounded bg-blue-500 hover:bg-blue-600 text-white outline-none h-9 px-2 py-2 mt-4 block md:inline ml-2 sm:ml-0">
                 <i class="fas fa-edit"></i> edit this project
             </a>
+            @endcan
+            @can('project_delete')
             <button type="button"
                 class="entry-delete-btn ml-2 uppercase rounded bg-red-500 hover:bg-red-600 text-white focus:outline-none h-9 px-2 py-1 block mt-5 md:inline md:mt-0">
                 <i class="fas fa-trash-alt"></i> Delete this project
             </button>
+            @endcan
         </div>
     </div>
 

@@ -7,10 +7,12 @@
 
     <div class="flex justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600">Expenses</h1>
+        @can('payment_create')
         <a href="{{ route('expenses.create') }}"
             class="uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none h-8 px-2 pt-1">
             <i class="fas fa-plus"></i> add new expense
         </a>
+        @endcan
     </div>
 
     <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
@@ -56,16 +58,20 @@
                                     </svg>
                                 </button>
                                 <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
+                                    @can('payment_edit')
                                     <li>
                                         <a href="{{ route('expenses.edit', ['id' => $expense->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                             Edit
                                         </a>
                                     </li>
+                                    @endcan
+                                    @can('payment_delete')
                                     <li id="{{ $expense->id }}">
                                         <button class="entry-delete-btn uppercase text-sm font-semibold w-full bg-white text-red-600 hover:bg-red-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                             Delete
                                         </button>
                                     </li>
+                                    @endcan
                                 </ul>
                             </div>
 

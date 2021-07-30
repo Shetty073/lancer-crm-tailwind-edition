@@ -7,10 +7,12 @@
 
     <div class="flex justify-between">
         <h1 class="text-3xl font-bold mb-6 text-indigo-600">Enquiries</h1>
+        @can('enquiry_create')
         <a href="{{ route('enquiries.create') }}"
             class="uppercase rounded bg-green-500 hover:bg-green-600 text-white focus:outline-none h-8 px-2 pt-1">
             <i class="fas fa-plus"></i> add new enquiry
         </a>
+        @endcan
     </div>
 
     <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
@@ -58,11 +60,14 @@
                                 </button>
                                 <ul class="rounded z-10 dropdown-menu absolute hidden text-blue-400 pt-1 w-28 border border-blue-400">
                                     @if (!$enquiry->is_lost)
+                                        @can('enquiry_show')
                                         <li>
                                             <a href="{{ route('enquiries.show', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full rounded-t bg-white hover:bg-green-500 text-green-400 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
                                                 View
                                             </a>
                                         </li>
+                                        @endcan
+                                        @can('enquiry_edit')
                                         @if($enquiry->enquiry_status->id < 4)
                                             <li>
                                                 <a href="{{ route('enquiries.edit', ['id' => $enquiry->id]) }}" class="uppercase text-sm font-semibold w-full bg-white hover:bg-blue-500 hover:text-white py-2 px-4 block whitespace-no-wrap focus:outline-none">
@@ -80,6 +85,7 @@
                                                 </button>
                                             </li>
                                         @endif
+                                        @endcan
                                     @endif
                                 </ul>
                             </div>

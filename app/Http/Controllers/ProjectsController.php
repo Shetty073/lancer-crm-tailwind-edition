@@ -109,6 +109,8 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         $project = Project::findorfail($id);
+        $project->deletedBy()->associate(auth()->user());
+        $project->saveQuietly();
         $project->delete();
 
         return redirect(route('projects.index'));

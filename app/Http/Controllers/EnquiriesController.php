@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Lancer\Utilities;
 use App\Models\BudgetRange;
-use App\Models\Client;
 use App\Models\Configuration;
 use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
 use App\Models\PaymentMode;
 use App\Models\Project;
-use App\Models\Service;
 use Illuminate\Http\Request;
 
 class EnquiriesController extends Controller
