@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 class UserAccountController extends Controller
 {
@@ -14,7 +15,9 @@ class UserAccountController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('useraccounts.index', compact('users'));
     }
 
     /**
@@ -24,7 +27,9 @@ class UserAccountController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+
+        return view('useraccounts.create', compact('roles'));
     }
 
     /**
@@ -35,7 +40,35 @@ class UserAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email',
+            'password' => 'required|confirmed',
+            'role' => 'required',
+        ]);
+
+        $role = Role::findorfail($request->input('role'));
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => '',
+        ]);
+        $user->setPasswordAttribute($request->input('password'));
+        $user->assignRole($role);
+        $user->saveQuietly();
+
+        // handle image if its present
+        if ($request->hasFile('photo')) {
+            $fileName = $request->file('photo')->getClientOriginalName();
+            $fileExtension = $request->file('photo')->getClientOriginalExtension();
+            $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
+            $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
+            $user->photo_url = $fileNameToStore;
+            $user->saveQuietly();
+        }
+
+        return redirect(route('useraccounts.index'));
     }
 
     /**
@@ -46,7 +79,9 @@ class UserAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findorfail($id);
+
+        return view('useraccounts.show', compact('user'));
     }
 
     /**
@@ -57,7 +92,10 @@ class UserAccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findorfail($id);
+        $roles = Role::all();
+
+        return view('useraccounts.edit', compact('user', 'roles'));
     }
 
     /**
@@ -69,7 +107,43 @@ class UserAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email',
+            'password' => 'required|confirmed',
+            'role' => 'required',
+        ]);
+
+        $role = Role::findorfail($request->input('role'));
+        $user = User::findorfail($id);
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => '',
+        ]);
+        $user->setPasswordAttribute($request->input('password'));
+        $user->assignRole($role);
+        $user->saveQuietly();
+
+        // handle image if its present
+        if ($request->hasFile('photo')) {
+            // delete old photo if present
+            if($user->photo_url !== null) {
+                $file_path = public_path('storage/profile_picture/' . $user->photo_url);
+                @unlink($file_path);
+            }
+
+            // now add new photo
+            $fileName = $request->file('photo')->getClientOriginalName();
+            $fileExtension = $request->file('photo')->getClientOriginalExtension();
+            $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
+            $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
+            $user->photo_url = $fileNameToStore;
+            $user->saveQuietly();
+        }
+
+        return redirect(route('useraccounts.index'));
     }
 
     /**
@@ -80,6 +154,11 @@ class UserAccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findorfail($id);
+        $user->deletedBy()->associate(auth()->user());
+        $user->saveQuietly();
+        $user->delete();
+
+        return back();
     }
 }

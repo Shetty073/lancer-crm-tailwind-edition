@@ -58,8 +58,7 @@
                         <div class="flex flex-col mr-4 w-full md:w-3/12">
                             <label class="leading-loose capitalize font-semibold text-indigo-600">Photo</label>
                             <input type="file" name="photo" accept="image/png, image/jpeg"
-                                class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 focus:outline-none text-gray-600"
-                                >
+                                class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 focus:outline-none text-gray-600">
                         </div>
 
                         <div class="flex flex-col mr-4 w-full md:w-3/12">

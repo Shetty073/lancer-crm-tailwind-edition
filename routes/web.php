@@ -121,11 +121,22 @@ Route::group(['prefix' => '/reports', 'middleware' => 'auth'], function () {
     Route::get('/', [ReportsController::class, 'index'])->name('reports.index');
 });
 
-// useraccount routes
+// myaccount routes
 Route::group(['prefix' => '/myaccount', 'middleware' => 'auth'], function () {
     Route::get('/', [AccountsController::class, 'myAccount'])->name('myaccount.index');
     Route::post('/{id}/update', [AccountsController::class, 'updateMyPersonalDetails'])->name('myaccount.update');
     Route::post('/{id}/password/change', [AccountsController::class, 'changeMyPassword'])->name('myaccount.changepassword');
+});
+
+// useraccount routes
+Route::group(['prefix' => '/useraccount', 'middleware' => 'auth'], function () {
+    Route::get('/', [UserAccountController::class, 'index'])->name('useraccounts.index');
+    Route::get('/{id}/show', [UserAccountController::class, 'show'])->name('useraccounts.show');
+    Route::get('/create', [UserAccountController::class, 'create'])->name('useraccounts.create');
+    Route::post('/store', [UserAccountController::class, 'store'])->name('useraccounts.store');
+    Route::get('/{id}/edit', [UserAccountController::class, 'edit'])->name('useraccounts.edit');
+    Route::post('/{id}/update', [UserAccountController::class, 'update'])->name('useraccounts.update');
+    Route::post('/{id}/destroy', [UserAccountController::class, 'destroy'])->name('useraccounts.destroy');
 });
 
 // transactions route

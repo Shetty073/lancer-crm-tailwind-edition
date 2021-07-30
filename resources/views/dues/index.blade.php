@@ -44,7 +44,7 @@
                             {{ $due->due_date->format('d-M-Y') }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
-                            {{ $payment->remark }}
+                            {{ $due->remark }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
                             <div class="dropdown inline-block relative p-2">

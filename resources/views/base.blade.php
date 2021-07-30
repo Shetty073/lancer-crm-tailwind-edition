@@ -54,61 +54,67 @@
             <div id="navbarWrapper" class="h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:bg-transparent overflow-hidden lg:top-18 bg-white mr-24 lg:mr-0">
                 <nav id="nav" class="px-1 pt-6 overflow-y-auto font-medium text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
                     <ul>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('/')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('/')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dashboard.index') }}">
                                 <i class="fas fa-chart-line fa-fw"></i>
                                 Dashboard
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('enquiries*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('enquiries*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('enquiries.index') }}">
                                 <i class="fas fa-question-circle fa-fw"></i>
                                 Enquiries
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('clients*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('clients*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('clients.index') }}">
                                 <i class="fas fa-user fa-fw"></i>
                                 Clients
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('projects*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('projects.index') }}">
                                 <i class="fas fa-project-diagram fa-fw"></i>
                                 Projects
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('dues*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('dues.index') }}">
                                 <i class="fas fa-file-invoice fa-fw"></i>
                                 Dues
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('payments*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('payments*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('payments.index') }}">
                                 <i class="fas fa-cash-register fa-fw"></i>
                                 Payments
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('expenses*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('expenses*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('expenses.index') }}">
                                 <i class="fas fa-money-bill fa-fw"></i>
                                 Expenses
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('reports*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('reports*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('reports.index') }}">
                                 <i class="fas fa-receipt fa-fw"></i>
                                 Reports
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('transactions*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('transactions.index') }}">
                                 <i class="fas fa-piggy-bank fa-fw"></i>
                                 Transactions
                             </a>
                         </li>
-                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('myaccount*')) text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('useraccount*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
+                            <a href="{{ route('useraccounts.index') }}">
+                                <i class="fas fa-users fa-fw"></i>
+                                Manage Users
+                            </a>
+                        </li>
+                        <li class="py-2 text-xl transition-colors duration-200 relative block hover:text-white text-indigo-200 @if(request()->is('myaccount*')) pl-2 text-indigo-700 hover:text-indigo-500 bg-white rounded pr-0 mr-0 @endif">
                             <a href="{{ route('myaccount.index') }}">
                                 <i class="fas fa-user-circle fa-fw"></i>
                                 My Account
@@ -150,8 +156,8 @@
     @show
 
     <script type="text/javascript" src="{{ asset('fa/all.min.js') }}"></script>
-    <script rel="prefetch" type="text/javascript" src="{{ asset('swal/sweetalert2.js') }}"></script>
-    <script rel="prefetch" type="text/javascript" src="{{ asset('js/mobile_nav.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('swal/sweetalert2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/mobile_nav.js') }}"></script>
     @section('footer-scripts')
     @show
 </body>

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -65,7 +64,7 @@ class AccountsController extends Controller
                 'password' => '',
             ]);
             $user->setPasswordAttribute($request->input('password'));
-            $user->save();
+            $user->saveQuietly();
 
             // handle image if its present
             if ($request->hasFile('photo')) {
@@ -74,7 +73,7 @@ class AccountsController extends Controller
                 $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
                 $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
                 $user->photo_url = $fileNameToStore;
-                $user->save();
+                $user->saveQuietly();
             }
 
             // login the user and redirect to dashboard
@@ -124,13 +123,13 @@ class AccountsController extends Controller
                 @unlink($file_path);
             }
 
-            // now add enw photo
+            // now add new photo
             $fileName = $request->file('photo')->getClientOriginalName();
             $fileExtension = $request->file('photo')->getClientOriginalExtension();
             $fileNameToStore = $fileName . '_' . $user->id . '_' . time() . '.' . $fileExtension;
             $path = $request->file('photo')->storeAs('public/profile_picture', $fileNameToStore);
             $user->photo_url = $fileNameToStore;
-            $user->save();
+            $user->saveQuietly();
         }
 
         return back()->with('success', 'You have successfully changed your personal details.');
