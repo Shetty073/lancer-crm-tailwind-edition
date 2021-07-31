@@ -106,7 +106,7 @@
         @endif
 
         <div class="mt-4">
-            {{ $enquiries->links() }}
+            {{ $users->links() }}
         </div>
 
     </div>

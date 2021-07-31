@@ -88,7 +88,7 @@
         @endif
 
         <div class="mt-4">
-            {{ $enquiries->links() }}
+            {{ $projects->links() }}
         </div>
 
     </div>
