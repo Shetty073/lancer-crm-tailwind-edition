@@ -4,10 +4,13 @@ Laravel based CRM for real estate channel partners for client management.
 
 Self hosted
 
-### Running seeder is necessary for two tables
+## Setup
 
--   `php artisan migrate:fresh --seed`
+- `composer install`
+- `npm install`
+- `npm run dev`
+- `php artisan migrate:fresh --seed`
 
-### Screenshots
+## Screenshots
 
-![Enquiries Index Page](https://i.imgur.com/BhhypkH.png)
+![Enquiries Index Page](https://i.imgur.com/GJxY5oz.png)
