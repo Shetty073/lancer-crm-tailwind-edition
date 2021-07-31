@@ -15,7 +15,7 @@
         @endcan
     </div>
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
@@ -23,11 +23,11 @@
                         #</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left w-full md:w-72">
                         Amount</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Payer</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Date of Payment</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Remark</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions</th>
                 </tr>
@@ -39,19 +39,18 @@
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{ App\Lancer\Utilities::CURRENCY_SYMBOL }}{{ $payment->amount }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $payment->payer }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $payment->date_of_payment->format('d-M-Y') }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $payment->remark }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
                             <div class="dropdown inline-block relative p-2">
-                                <button
-                                    class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
+                                <button class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
                                     <span class="mr-1 uppercase text-xs md:text-sm">Actions</span>
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />

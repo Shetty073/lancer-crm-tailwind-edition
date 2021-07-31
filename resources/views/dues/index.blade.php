@@ -15,7 +15,7 @@
         @endcan
     </div>
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
@@ -23,11 +23,11 @@
                         #</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left w-full md:w-72">
                         Amount</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Payer</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Due Date</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Remark</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions</th>
                 </tr>
@@ -39,13 +39,13 @@
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{ App\Lancer\Utilities::CURRENCY_SYMBOL }}{{ $due->amount }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $due->payer }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $due->due_date->format('d-M-Y') }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $due->remark }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">

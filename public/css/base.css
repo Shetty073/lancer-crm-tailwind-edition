@@ -3,24 +3,38 @@
     src: url('/fonts/Pacifico-Regular.ttf') format('truetype');
 }
 
-/* width */
-::-webkit-scrollbar {
-    width: 2px;
+/* customized body scroll bar  */
+body::-webkit-scrollbar {
+    width: 2px !important;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: #c6c1ff;
+body::-webkit-scrollbar-track {
+    background: #c6c1ff !important;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #4d41da;
+body::-webkit-scrollbar-thumb {
+    background: #4d41da !important;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #DB2777;
+body::-webkit-scrollbar-thumb:hover {
+    background: #DB2777 !important;
+}
+
+/* customized main content scroll bar  */
+#contentWrapper::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+#contentWrapper::-webkit-scrollbar-track {
+    background: #c6c1ff !important;
+}
+
+#contentWrapper::-webkit-scrollbar-thumb {
+    background: #4d41da !important;
+}
+
+#contentWrapper::-webkit-scrollbar-thumb:hover {
+    background: #DB2777 !important;
 }
 
 /* dropdown btn */

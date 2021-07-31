@@ -8,7 +8,7 @@
         <h1 class="text-3xl font-bold mb-6 text-indigo-600">Transactions</h1>
     </div>
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
@@ -24,13 +24,13 @@
             <tbody>
                 @foreach ($transactions as $transaction)
                     <tr class="h-12">
-                        <td class="w-1/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">
                             {{ $transaction->id }}
                         </td>
-                        <td class="w-9/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{  $transaction->details }}
                         </td>
-                        <td class="w-2/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{  $transaction->created_at->format('d-M-Y') }} at {{ $transaction->created_at->format('g:i A') }}
                         </td>
                         {{-- <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">

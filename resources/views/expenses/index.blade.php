@@ -15,7 +15,7 @@
         @endcan
     </div>
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
@@ -23,11 +23,11 @@
                         #</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left w-full md:w-72">
                         Payee</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Amount Paid</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Date of Payment</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Remark</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions</th>
                 </tr>
@@ -36,16 +36,16 @@
                 @foreach ($expenses as $expense)
                     <tr class="h-12">
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">{{ $expense->id }}</td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $expense->payee }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{ App\Lancer\Utilities::CURRENCY_SYMBOL }}{{ $expense->amount_paid }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $expense->date_of_payment->format('d-M-Y') }}
                         </td>
-                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left hidden md:table-cell">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">
                             {{ $expense->remark }}
                         </td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">

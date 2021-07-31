@@ -12,19 +12,19 @@
         </a>
     </div>
 
-    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100">
+    <div class="px-5 py-5 mb-5 rounded shadow-lg bg-indigo-100 overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-indigo-800 text-xs md:text-base">
             <thead class="bg-indigo-600">
                 <tr>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left">
                         #</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Name</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Email</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Photo</th>
-                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left hidden md:table-cell">
+                    <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase text-left md:table-cell">
                         Role</th>
                     <th class="px-1 md:px-3 border-collapse border border-indigo-800 text-white font-extrabold uppercase">Actions</th>
                 </tr>
@@ -32,16 +32,16 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr class="h-12">
-                        <td class="w-1/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left">
                             {{ $user->id }}
                         </td>
-                        <td class="w-3/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{  $user->name }}
                         </td>
-                        <td class="w-3/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{  $user->email }}
                         </td>
-                        <td class="w-1/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             @if (isset($user->photo_url))
                                 <a href="{{ asset('storage/profile_picture/' . $user->photo_url) }}" target="_blank" rel="noopener noreferrer">
                                     <img height="42" width="42" src="{{ asset('storage/profile_picture/' . $user->photo_url) }}" alt='profile photo'
@@ -53,10 +53,10 @@
                                 </span>
                             @endif
                         </td>
-                        <td class="w-1/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">
                             {{ implode(', ', $user->roles->pluck('name')->toArray()) }}
                         </td>
-                        <td class="w-2/12 px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
+                        <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
                             <div class="dropdown inline-block relative p-2">
                                 <button
                                     class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
