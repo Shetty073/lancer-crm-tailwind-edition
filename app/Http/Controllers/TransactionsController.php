@@ -14,7 +14,7 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all()->reverse();
+        $transactions = Transaction::all()->reverse()->paginate(15);
 
         return view('transactions.index', compact('transactions'));
     }

@@ -18,7 +18,7 @@ class DuesController extends Controller
     public function index()
     {
         // due payments are the ones with `date_of_payment` set to null
-        $dues = Payment::whereNull('date_of_payment')->get();
+        $dues = Payment::whereNull('date_of_payment')->paginate(15);
 
         return view('dues.index', compact('dues'));
     }

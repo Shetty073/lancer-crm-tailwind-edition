@@ -16,7 +16,7 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::whereNotNull('date_of_payment')->get();
+        $payments = Payment::whereNotNull('date_of_payment')->paginate(15);
 
         return view('payments.index', compact('payments'));
     }

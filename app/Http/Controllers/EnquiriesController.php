@@ -31,7 +31,7 @@ class EnquiriesController extends Controller
         // Reference to the Utilities class
         $utilities = $this->utilities;
 
-        $enquiries = Enquiry::all();
+        $enquiries = Enquiry::paginate(15);
 
         return view('enquiries.index', compact('enquiries', 'utilities'));
     }

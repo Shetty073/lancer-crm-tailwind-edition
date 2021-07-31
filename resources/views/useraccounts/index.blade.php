@@ -105,7 +105,9 @@
             </div>
         @endif
 
-        {{-- TODO: Add Pagination --}}
+        <div class="mt-4">
+            {{ $enquiries->links() }}
+        </div>
 
     </div>
 </main>

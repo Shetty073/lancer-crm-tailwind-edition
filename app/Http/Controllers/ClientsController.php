@@ -19,7 +19,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::paginate(15);
 
         return view('clients.index', compact('clients'));
     }
