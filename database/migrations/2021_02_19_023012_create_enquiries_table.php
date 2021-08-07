@@ -18,7 +18,7 @@ class CreateEnquiriesTable extends Migration
             $table->string('name', 50);
             $table->string('business_name', 100)->nullable();
             $table->string('email', 100)->nullable();
-            $table->string('contact_no', 22)->nullable();
+            $table->string('contact_no', 22);
             $table->string('subject', 2048);
             $table->boolean('is_lost')->default(0);
             $table->string('lost_remark')->nullable();

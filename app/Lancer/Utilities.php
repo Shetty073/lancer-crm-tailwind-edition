@@ -7,26 +7,30 @@ class Utilities
     public const ORG_NAME = 'Proprays Realtors';
     public const CURRENCY_SYMBOL = '₹';
 
+    public static function getLeadDetailsEndpoint($leadgen_id) {
+        return 'https://graph.facebook.com/v11.0/' . $leadgen_id . '?access_token=' . env('FB_ACCESS_TOKEN');
+    }
+
     public static function getEnquiryStatusStyle($status)
     {
         $enquiryStatusStyle = '';
 
         switch ($status) {
             case 1:
-                $enquiryStatusStyle = 'rounded-full bg-yellow-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-yellow-500 text-white py-1 px-2';
                 break;
             case 2:
-                $enquiryStatusStyle = 'rounded-full bg-blue-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-blue-500 text-white py-1 px-2';
                 break;
             case 3:
-                $enquiryStatusStyle = 'rounded-full bg-gray-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-gray-500 text-white py-1 px-2';
                 break;
             case 4:
-                $enquiryStatusStyle = 'rounded-full bg-red-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-red-500 text-white py-1 px-2';
                 break;
 
             default:
-                $enquiryStatusStyle = 'rounded-full bg-green-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-green-500 text-white py-1 px-2';
                 break;
         }
 
@@ -56,11 +60,11 @@ class Utilities
 
         switch ($status) {
             case 1:
-                $enquiryStatusStyle = 'rounded-full bg-green-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-green-500 text-white py-1 px-2';
                 break;
 
             default:
-                $enquiryStatusStyle = 'rounded-full bg-red-600 text-white py-1 px-2';
+                $enquiryStatusStyle = 'rounded-full bg-red-500 text-white py-1 px-2';
                 break;
         }
 

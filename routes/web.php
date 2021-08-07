@@ -40,6 +40,12 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
+// facebook leads retrieval route
+Route::group(['prefix' => '/fb'], function () {
+    Route::get('/webhook', [EnquiriesController::class, 'retrievefbleadwebhook'])->name('enquiries.retrievefbleadwebhook');
+    Route::post('/webhook', [EnquiriesController::class, 'retrievefbleadwebhook'])->name('enquiries.retrievefbleadwebhook');
+});
+
 // enquiries routes
 Route::group(['prefix' => '/enquiries', 'middleware' => ['auth', 'can:enquiry_access']], function () {
     Route::get('/', [EnquiriesController::class, 'index'])->name('enquiries.index');

@@ -9,7 +9,11 @@ use App\Models\Enquiry;
 use App\Models\EnquiryStatus;
 use App\Models\PaymentMode;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class EnquiriesController extends Controller
 {
@@ -97,6 +101,62 @@ class EnquiriesController extends Controller
         return redirect(route('enquiries.index'));
     }
 
+    public function retrievefbleadwebhook(Request $request)
+    {
+        if($request->isMethod('get')) {
+            $challenge = $request->hub_challenge;
+            $verify_token = $request->hub_verify_token;
+
+            if ($verify_token === env('FB_WEBHOOK_VERIFY_TOKEN')) {
+                echo $challenge;
+            }
+        } else {
+            $input = json_decode($request->getContent());
+
+            $entry = $input->entry[0];
+            // $entry_id = $entry->id;
+            $change = $entry->changes[0]->value;
+
+            // $form_id = $change->form_id;
+            // $page_id = $change->page_id;
+            $leadgen_id = $change->leadgen_id;
+
+            try {
+                $lead_response = Http::get(Utilities::getLeadDetailsEndpoint($leadgen_id));
+                $lead_data = $lead_response->object();
+                $created_time = $lead_data->created_time;
+                $field_data = $lead_data->field_data;
+
+                $name = '';
+                $contact_no = '';
+
+                foreach ($field_data as $lead) {
+                    if($lead->name === 'full_name') {
+                        $name = $lead->values[0];
+                    }
+
+                    if($lead->name === 'phone_number') {
+                        $contact_no = $lead->values[0];
+                    }
+                }
+
+                $enquiry = Enquiry::create([
+                    'name' => $name,
+                    'contact_no' => $contact_no,
+                    'subject' => 'Lead generated automatically from fb campaign',
+                ]);
+
+                $status = EnquiryStatus::where('id', 1)->first();
+                $enquiry->enquiry_status()->associate($status);
+                $enquiry->saveQuietly();
+
+            } catch (Exception $e) {
+                Log::error(print_r($e, true));
+            }
+
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -105,6 +165,7 @@ class EnquiriesController extends Controller
      */
     public function show($id)
     {
+        $utilities = $this->utilities;
         $enquiry = Enquiry::where('id', $id)->first();
 
         if($enquiry->enquiry_status->id === 4) {
@@ -115,7 +176,7 @@ class EnquiriesController extends Controller
         $projects = Project::all();
         $enquiry_statuses = EnquiryStatus::paginate(3);
 
-        return view('enquiries.show', compact('enquiry', 'followups', 'projects', 'enquiry_statuses'));
+        return view('enquiries.show', compact('enquiry', 'followups', 'projects', 'enquiry_statuses', 'utilities'));
     }
 
     /**

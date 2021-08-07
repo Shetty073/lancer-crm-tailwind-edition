@@ -33,35 +33,30 @@
         <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mr-0 lg:mr-5">
             <tbody>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         #
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->id }}</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Name</th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->name }}</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Business
                         Name</th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->business_name }}
                     </td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Email</th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->email }}</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Contact No.
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold">{{ $enquiry->contact_no }}</td>
@@ -72,36 +67,34 @@
         <table class="w-100 lg:w-1/2 table-auto border-collapse border border-indigo-300 mt-5 lg:mt-0">
             <tbody>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Subject
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
                         {{ $enquiry->subject }}</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Project
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        {{ $enquiry->project->name }}</td>
+                        @if(isset($enquiry->project->name)){{ $enquiry->project->name }}@endif</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Configuration
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        {{ $enquiry->configuration->name }}</td>
+                        @if(isset($enquiry->configuration->name)){{ $enquiry->configuration->name }}@endif</td>
                 </tr>
                 <tr>
-                    <th
-                        class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
+                    <th class="px-1 border-collapse border border-indigo-300 text-white font-extrabold bg-indigo-400 w-2/12 uppercase">
                         Budget Range
                     </th>
                     <td class="px-3 border-collapse border border-indigo-300 font-bold h-12 break-words">
-                        {{ App\Lancer\Utilities::CURRENCY_SYMBOL }}{{ $enquiry->budget_range->range }}</td>
+                        @if(isset($enquiry->budget_range->range))
+                            {{ $utilities::CURRENCY_SYMBOL }}{{ $enquiry->budget_range->range }}
+                        @endif</td>
                 </tr>
             </tbody>
         </table>
@@ -113,7 +106,7 @@
             <h2 class="text-2xl font-semibold mb-2 text-indigo-600">Status</h2>
         </div>
         <div class="relative w-max mx-1 mb-10">
-            <div class="{{ App\Lancer\Utilities::getEnquiryStatusStyle($enquiry->enquiry_status->id) }} text-xl">
+            <div class="{{ $utilities->getEnquiryStatusStyle($enquiry->enquiry_status->id) }} text-xl">
                 {{ $enquiry->enquiry_status->status }}
             </div>
         </div>
@@ -129,7 +122,7 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">status</label>
                     <select name="enquiry_status" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($enquiry_statuses as $status)
-                            <option value="{{ $status->id }}" @if(isset($enquiry)) @if($status->id == $enquiry->enquiry_status->id) selected @endif @endif>{{ $status->status }}</option>
+                            <option value="{{ $status->id }}" @if(isset($enquiry->enquiry_status->id)) @if($status->id == $enquiry->enquiry_status->id) selected @endif @endif>{{ $status->status }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -137,7 +130,7 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">project</label>
                     <select name="project_id" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($projects as $project)
-                            <option value="{{ $project->id }}" @if(isset($enquiry)) @if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
+                            <option value="{{ $project->id }}" @if(isset($enquiry->project->id)) @if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -44,7 +44,7 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">project</label>
                     <select name="project_id" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($projects as $project)
-                            <option value="{{ $project->id }}" @if(isset($enquiry)) @if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
+                            <option value="{{ $project->id }}" @if(isset($enquiry->project->id)) @if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -53,7 +53,7 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">configuration</label>
                     <select name="configuration" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($configurations as $configuration)
-                            <option value="{{ $configuration->id }}" @if(isset($enquiry)) @if($configuration->id == $enquiry->configuration->id) selected @endif @endif>{{ $configuration->name }}</option>
+                            <option value="{{ $configuration->id }}" @if(isset($enquiry->configuration->id)) @if($configuration->id == $enquiry->configuration->id) selected @endif @endif>{{ $configuration->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -62,7 +62,7 @@
                     <label class="leading-loose capitalize font-semibold text-indigo-600">budget range</label>
                     <select name="budget_range" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @foreach ($budget_ranges as $budget_range)
-                            <option value="{{ $budget_range->id }}" @if(isset($enquiry)) @if($budget_range->id == $enquiry->budget_range->id) selected @endif @endif>{{ $budget_range->range }}</option>
+                            <option value="{{ $budget_range->id }}" @if(isset($enquiry->budget_range->id)) @if($budget_range->id == $enquiry->budget_range->id) selected @endif @endif>{{ $budget_range->range }}</option>
                         @endforeach
                     </select>
                 </div>
