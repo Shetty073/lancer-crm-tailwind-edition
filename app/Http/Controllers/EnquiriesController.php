@@ -13,6 +13,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class EnquiriesController extends Controller
@@ -124,7 +125,7 @@ class EnquiriesController extends Controller
             try {
                 $lead_response = Http::get(Utilities::getLeadDetailsEndpoint($leadgen_id));
                 $lead_data = $lead_response->object();
-                $created_time = $lead_data->created_time;
+                // $created_time = $lead_data->created_time;
                 $field_data = $lead_data->field_data;
 
                 $name = '';
@@ -150,6 +151,13 @@ class EnquiriesController extends Controller
                 $enquiry->enquiry_status()->associate($status);
                 $enquiry->saveQuietly();
 
+                // Send email to sales team regarding the new lead
+                $data = [
+                    'enquiry' => $enquiry,
+                ];
+                Mail::send('emails.newfblead', $data, function($message) use ($enquiry) {
+                    $message->to(Utilities::SALES_EMAIL, Utilities::SALES_RECEIVER_NAME)->subject('New lead from facebook ad campaign');
+                });
             } catch (Exception $e) {
                 Log::error(print_r($e, true));
             }

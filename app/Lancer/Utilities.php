@@ -6,6 +6,8 @@ class Utilities
 {
     public const ORG_NAME = 'Proprays Realtors';
     public const CURRENCY_SYMBOL = '₹';
+    public const SALES_EMAIL = 'sales@proprays.com';
+    public const SALES_RECEIVER_NAME = 'Proprays Sales';
 
     public static function getLeadDetailsEndpoint($leadgen_id) {
         return 'https://graph.facebook.com/v11.0/' . $leadgen_id . '?access_token=' . env('FB_ACCESS_TOKEN');
