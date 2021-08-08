@@ -142,7 +142,7 @@
                     <select name="project_id" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @if(isset($enquiry))
                             @foreach ($projects as $project)
-                                <option value="{{ $project->id }}" @if($project->id == $enquiry->project->id) selected @endif>{{ $project->name }}</option>
+                                <option value="{{ $project->id }}" @if(isset($enquiry->project->id))@if($project->id == $enquiry->project->id) selected @endif @endif>{{ $project->name }}</option>
                             @endforeach
                         @else
                             @foreach ($projects as $project)
@@ -157,7 +157,7 @@
                     <select name="configuration" class="px-4 py-2 border focus:ring-indigo-400 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required>
                         @if(isset($enquiry))
                             @foreach ($configurations as $configuration)
-                                <option value="{{ $configuration->id }}" @if($configuration->id == $enquiry->configuration->id) selected @endif>{{ $configuration->name }}</option>
+                                <option value="{{ $configuration->id }}" @if(isset($enquiry->configuration->id))@if($configuration->id == $enquiry->configuration->id) selected @endif @endif>{{ $configuration->name }}</option>
                             @endforeach
                         @else
                             @foreach ($configurations as $configuration)

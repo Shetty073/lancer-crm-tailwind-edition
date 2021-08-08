@@ -57,7 +57,7 @@ Route::group(['prefix' => '/enquiries', 'middleware' => ['auth', 'can:enquiry_ac
     Route::post('/{id}/update/status', [EnquiriesController::class, 'updateStatus'])->name('enquiries.updateStatus')->middleware('can:enquiry_edit');
     Route::post('/{id}/destroy', [EnquiriesController::class, 'destroy'])->name('enquiries.destroy')->middleware('can:enquiry_delete');
 
-    Route::get('/{id}/close', [EnquiriesController::class, 'close'])->name('enquiries.close')->middleware('can:enquiry_delete');
+    Route::get('/{id}/close', [EnquiriesController::class, 'close'])->name('enquiries.close')->middleware('can:client_create');
 });
 
 // followups routes
