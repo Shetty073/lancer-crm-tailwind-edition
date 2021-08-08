@@ -166,6 +166,7 @@
     <script type="text/javascript" src="{{ asset('fa/all.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('swal/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/mobile_nav.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
     @section('footer-scripts')
     @show
 </body>

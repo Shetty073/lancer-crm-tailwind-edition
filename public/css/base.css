@@ -36,8 +36,3 @@ body::-webkit-scrollbar-thumb:hover {
 #contentWrapper::-webkit-scrollbar-thumb:hover {
     background: #DB2777 !important;
 }
-
-/* dropdown btn */
-.dropdown:focus-within .dropdown-menu {
-    display: block;
-}

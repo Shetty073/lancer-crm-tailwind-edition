@@ -51,8 +51,7 @@
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
 
                             <div class="dropdown inline-block relative p-2">
-                                <button
-                                    class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
+                                <button class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
                                     <span class="mr-1 uppercase text-xs md:text-sm">Actions</span>
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -120,5 +119,4 @@
 
 @section('footer-scripts')
 <script type="text/javascript" src="{{ asset('js/enquiry_lost.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/close_deal.js') }}"></script>
 @endsection
