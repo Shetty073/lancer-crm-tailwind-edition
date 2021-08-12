@@ -1,6 +1,6 @@
-# lancer-crm
+# lancer-crm-tailwind-edition
 
-Laravel based CRM for real estate channel partners for client management.
+Laravel based CRM for real estate channel partners for client management. This one uses tailwind CSS for frontend styling.
 
 Self hosted
 
