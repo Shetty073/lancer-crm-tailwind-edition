@@ -35,7 +35,7 @@
                         <td style="max-width: 100px;" class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center md:text-left break-words">{{ $project->name }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-left md:table-cell">{{ $project->details }}</td>
                         <td class="px-1 md:px-3 border-collapse border border-indigo-800 font-bold text-center">
-                            <div class="dropdown inline-block relative p-2">
+                            <div class="dropdown inline-block relative p-2 z-10">
                                 <button
                                     class="bg-blue-500 text-white font-semibold py-1 px-4 rounded inline-flex items-center focus:outline-none">
                                     <span class="mr-1 uppercase text-xs md:text-sm">Actions</span>

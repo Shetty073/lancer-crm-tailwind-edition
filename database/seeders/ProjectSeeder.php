@@ -16,8 +16,8 @@ class ProjectSeeder extends Seeder
     {
         Project::insert([
             [
-                'name' => 'Example Project',
-                'details' => 'An example project created by the seeder',
+                'name' => 'Piramal Vaikunth',
+                'details' => 'Balkum | 32 acres | 12 towers',
             ],
         ]);
 
